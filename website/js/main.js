@@ -197,6 +197,26 @@
         });
     });
 
+    // Manage required attributes: disable required on hidden pillar steps
+    function updateRequiredFields() {
+        document.querySelectorAll('.pillar-step').forEach(step => {
+            const isActive = step.classList.contains('active');
+            step.querySelectorAll('[data-required]').forEach(field => {
+                if (isActive) {
+                    field.setAttribute('required', '');
+                } else {
+                    field.removeAttribute('required');
+                }
+            });
+        });
+    }
+
+    // On load: convert all required fields in pillar steps to data-required and remove required
+    document.querySelectorAll('.pillar-step [required]').forEach(field => {
+        field.setAttribute('data-required', 'true');
+        field.removeAttribute('required');
+    });
+
     function goToStep(step) {
         if (step < 1 || step > totalSteps) return;
 
@@ -216,6 +236,9 @@
                 genericStep.classList.add('active');
             }
         }
+
+        // Update required fields based on active pillar
+        updateRequiredFields();
 
         // Update progress indicators
         progressSteps.forEach(ps => {
