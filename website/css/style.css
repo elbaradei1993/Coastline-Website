@@ -768,6 +768,14 @@ body {
     padding: 32px;
 }
 
+.project-logo {
+    height: 56px;
+    width: auto;
+    display: block;
+    margin-bottom: 16px;
+    object-fit: contain;
+}
+
 .project-title {
     font-size: 1.8rem;
     font-weight: 300;
