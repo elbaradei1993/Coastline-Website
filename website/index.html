@@ -172,7 +172,7 @@
                     </div>
                     <h3>Market Analysis</h3>
                     <p>Uncover the gaps your competitors can't see. Data-driven frustration mining and competitive intelligence that reveals exactly where the opportunity is.</p>
-                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                    <a href="#contact" class="btn btn-outline" data-pillar="market-analysis">Contact Us</a>
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon">
@@ -183,7 +183,7 @@
                     </div>
                     <h3>Digital Solutions</h3>
                     <p>Custom-built tools to solve your #1 frustration. From web applications to process automation, engineered to close the gap that matters most.</p>
-                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                    <a href="#contact" class="btn btn-outline" data-pillar="digital-solutions">Contact Us</a>
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon">
@@ -194,7 +194,7 @@
                     </div>
                     <h3>Business Consultancy</h3>
                     <p>Expert guidance and strategic advice to grow your business. We help you navigate challenges, optimise operations, and turn market insights into action.</p>
-                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                    <a href="#contact" class="btn btn-outline" data-pillar="consultancy">Contact Us</a>
                 </div>
                 <div class="service-card reveal">
                     <div class="service-icon">
@@ -205,7 +205,7 @@
                     </div>
                     <h3>Business Training</h3>
                     <p>Fundamental business courses and on-demand training tailored to your needs. Equip your team with the knowledge to identify opportunities and drive results.</p>
-                    <a href="#contact" class="btn btn-outline">Contact Us</a>
+                    <a href="#contact" class="btn btn-outline" data-pillar="training">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -271,8 +271,8 @@
         <div class="container">
             <div class="section-header">
                 <p class="section-label reveal">Get In Touch</p>
-                <h2 class="section-title reveal">Let's find your<br>market's missing piece.</h2>
-                <p class="section-subtitle reveal">Tell us about your business and the challenge you're facing. We'll get back to you within 24 hours.</p>
+                <h2 class="section-title reveal" id="contact-title">Let's find your<br>market's missing piece.</h2>
+                <p class="section-subtitle reveal" id="contact-subtitle">Select a service below and tell us about your challenge. We'll get back to you within 24 hours.</p>
             </div>
             <div class="form-wrapper reveal">
                 <div class="form-progress">
@@ -284,8 +284,62 @@
                     </div>
                 </div>
                 <form id="contact-form" action="#" method="POST">
-                    <!-- Step 1: About You -->
+                    <input type="hidden" id="selected-service" name="service" value="">
+
+                    <!-- Step 1: Choose Your Service -->
                     <div class="form-step active" data-step="1">
+                        <h3 class="form-step-title">Choose Your Service</h3>
+                        <div class="pillar-selector">
+                            <button type="button" class="pillar-card" data-pillar="market-analysis">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Market Analysis</span>
+                                <span class="pillar-card-desc">Uncover gaps & opportunities</span>
+                            </button>
+                            <button type="button" class="pillar-card" data-pillar="digital-solutions">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Digital Solutions</span>
+                                <span class="pillar-card-desc">Custom tools & automation</span>
+                            </button>
+                            <button type="button" class="pillar-card" data-pillar="consultancy">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Business Consultancy</span>
+                                <span class="pillar-card-desc">Strategy & growth guidance</span>
+                            </button>
+                            <button type="button" class="pillar-card" data-pillar="training">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 12 3 12 0v-5"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Business Training</span>
+                                <span class="pillar-card-desc">Courses & team upskilling</span>
+                            </button>
+                            <button type="button" class="pillar-card pillar-card-general" data-pillar="general">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Not Sure Yet</span>
+                                <span class="pillar-card-desc">Help me decide</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: About You (shared) -->
+                    <div class="form-step" data-step="2">
                         <h3 class="form-step-title">About You</h3>
                         <div class="form-group">
                             <label for="name">Full Name</label>
@@ -310,72 +364,256 @@
                             </select>
                         </div>
                         <div class="form-nav">
-                            <div></div>
-                            <button type="button" class="btn btn-primary form-next">Next</button>
-                        </div>
-                    </div>
-                    <!-- Step 2: Your Challenge -->
-                    <div class="form-step" data-step="2">
-                        <h3 class="form-step-title">Your Challenge</h3>
-                        <div class="form-group">
-                            <label for="industry">What industry are you in?</label>
-                            <input type="text" id="industry" name="industry" placeholder="e.g., Property Management, Construction, Retail...">
-                        </div>
-                        <div class="form-group">
-                            <label for="challenge">What's your biggest business challenge right now?</label>
-                            <textarea id="challenge" name="challenge" rows="4" placeholder="Tell us what's keeping you up at night..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="complaint">Have you identified a specific customer complaint you want to solve?</label>
-                            <textarea id="complaint" name="complaint" rows="3" placeholder="e.g., Customers always say our response time is too slow..."></textarea>
-                        </div>
-                        <div class="form-nav">
                             <button type="button" class="btn btn-ghost form-prev">Back</button>
                             <button type="button" class="btn btn-primary form-next">Next</button>
                         </div>
                     </div>
-                    <!-- Step 3: How Can We Help -->
-                    <div class="form-step" data-step="3">
-                        <h3 class="form-step-title">How Can We Help?</h3>
+
+                    <!-- Step 3: Pillar-Specific Diagnostic -->
+                    <!-- Market Analysis Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="market-analysis">
+                        <h3 class="form-step-title">Market Analysis — Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your competitive landscape so we can identify the #1 gap your market is missing.</p>
                         <div class="form-group">
-                            <label>Which services are you interested in?</label>
-                            <div class="checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="services" value="market-analysis">
-                                    <span class="checkmark"></span>
-                                    Market Analysis
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="services" value="digital-solutions">
-                                    <span class="checkmark"></span>
-                                    Digital Solutions
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="services" value="consultancy">
-                                    <span class="checkmark"></span>
-                                    Business Consultancy
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="services" value="training">
-                                    <span class="checkmark"></span>
-                                    Business Training
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="services" value="not-sure">
-                                    <span class="checkmark"></span>
-                                    Not sure, help me decide
-                                </label>
-                            </div>
+                            <label for="ma-industry">What industry or market segment do you operate in?</label>
+                            <input type="text" id="ma-industry" name="ma_industry" required placeholder="e.g., Property Management, SaaS, Retail...">
                         </div>
                         <div class="form-group">
-                            <label for="anything-else">Anything else you'd like us to know?</label>
-                            <textarea id="anything-else" name="anything_else" rows="3" placeholder="Optional: timeline, budget, specific goals..."></textarea>
+                            <label for="ma-competitors">Who are your top 3 competitors?</label>
+                            <input type="text" id="ma-competitors" name="ma_competitors" placeholder="e.g., Company A, Company B, Company C">
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-complaints">What do your customers complain about most?</label>
+                            <textarea id="ma-complaints" name="ma_complaints" rows="3" placeholder="e.g., Slow response times, lack of transparency, hidden fees..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-feedback">How do you currently gather customer feedback?</label>
+                            <select id="ma-feedback" name="ma_feedback" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="reviews">Online Reviews</option>
+                                <option value="surveys">Customer Surveys</option>
+                                <option value="social">Social Media Monitoring</option>
+                                <option value="none">We don't currently</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-decision">What business decision will this analysis inform?</label>
+                            <select id="ma-decision" name="ma_decision" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="new-product">New product or service launch</option>
+                                <option value="new-market">Entering a new market</option>
+                                <option value="improve-existing">Improving an existing offering</option>
+                                <option value="understand-competitors">Understanding competitors better</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-urgency">How urgently do you need results?</label>
+                            <select id="ma-urgency" name="ma_urgency">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="asap">ASAP</option>
+                                <option value="1-3-months">Within 1–3 months</option>
+                                <option value="3-6-months">3–6 months</option>
+                                <option value="exploring">Just exploring options</option>
+                            </select>
                         </div>
                         <div class="form-nav">
                             <button type="button" class="btn btn-ghost form-prev">Back</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
+
+                    <!-- Digital Solutions Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="digital-solutions">
+                        <h3 class="form-step-title">Digital Solutions — Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your operational pain point so we can design the right technology to solve it.</p>
+                        <div class="form-group">
+                            <label for="ds-problem">What process or problem are you trying to solve with technology?</label>
+                            <textarea id="ds-problem" name="ds_problem" required rows="3" placeholder="e.g., Manual invoice processing takes 3 hours daily..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-current">How is this problem currently handled?</label>
+                            <select id="ds-current" name="ds_current" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="manual">Manual processes / pen & paper</option>
+                                <option value="spreadsheets">Spreadsheets</option>
+                                <option value="outdated-software">Outdated software</option>
+                                <option value="no-system">No current system</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-affected">How many people are affected by this problem daily?</label>
+                            <select id="ds-affected" name="ds_affected">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="1-5">1–5 people</option>
+                                <option value="5-20">5–20 people</option>
+                                <option value="20-50">20–50 people</option>
+                                <option value="50+">50+ people</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-integrations">Do you have existing tools or systems we'd need to integrate with?</label>
+                            <input type="text" id="ds-integrations" name="ds_integrations" placeholder="e.g., CRM, accounting software, ERP...">
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-success">What does success look like for you?</label>
+                            <textarea id="ds-success" name="ds_success" rows="3" placeholder="e.g., 50% faster turnaround, zero manual data entry, real-time dashboard..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-budget">What's your estimated budget range?</label>
+                            <select id="ds-budget" name="ds_budget">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="under-5k">Under $5,000</option>
+                                <option value="5k-15k">$5,000 – $15,000</option>
+                                <option value="15k-50k">$15,000 – $50,000</option>
+                                <option value="50k+">$50,000+</option>
+                                <option value="not-sure">Not sure yet</option>
+                            </select>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Business Consultancy Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="consultancy">
+                        <h3 class="form-step-title">Business Consultancy — Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your strategic challenge so we can guide you toward the right next step.</p>
+                        <div class="form-group">
+                            <label for="bc-area">What area of your business needs the most attention right now?</label>
+                            <select id="bc-area" name="bc_area" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="operations">Operations</option>
+                                <option value="sales-marketing">Sales & Marketing</option>
+                                <option value="financial">Financial Performance</option>
+                                <option value="strategy-growth">Strategy & Growth</option>
+                                <option value="team-leadership">Team & Leadership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-challenge">Describe the core challenge you're facing.</label>
+                            <textarea id="bc-challenge" name="bc_challenge" required rows="3" placeholder="Tell us what's holding your business back..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-tried">What have you already tried to address this?</label>
+                            <textarea id="bc-tried" name="bc_tried" rows="3" placeholder="e.g., Hired a consultant, restructured team, changed pricing..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-goals">What are your key business goals for the next 12 months?</label>
+                            <textarea id="bc-goals" name="bc_goals" rows="3" placeholder="e.g., Increase revenue by 30%, expand to new market, streamline operations..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-kpis">Are there specific KPIs or metrics you want to improve?</label>
+                            <input type="text" id="bc-kpis" name="bc_kpis" placeholder="e.g., Revenue, customer retention, conversion rate...">
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-stage">How would you describe your business stage?</label>
+                            <select id="bc-stage" name="bc_stage">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="early-stage">Early-stage</option>
+                                <option value="growing">Growing</option>
+                                <option value="established">Established</option>
+                                <option value="pivoting">Pivoting</option>
+                                <option value="scaling">Scaling</option>
+                            </select>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Business Training Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="training">
+                        <h3 class="form-step-title">Business Training — Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your team's learning needs so we can design the most impactful training programme.</p>
+                        <div class="form-group">
+                            <label for="bt-skills">What skills or topics does your team need training in?</label>
+                            <textarea id="bt-skills" name="bt_skills" required rows="3" placeholder="e.g., Sales fundamentals, market analysis, digital tools, leadership..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-team-size">How many team members need training?</label>
+                            <select id="bt-team-size" name="bt_team_size" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="1-5">1–5</option>
+                                <option value="5-15">5–15</option>
+                                <option value="15-50">15–50</option>
+                                <option value="50+">50+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-level">What is their current experience level?</label>
+                            <select id="bt-level" name="bt_level">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="mixed">Mixed levels</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-driver">What's driving the need for training?</label>
+                            <select id="bt-driver" name="bt_driver" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="new-hires">New hires onboarding</option>
+                                <option value="performance-gaps">Performance gaps</option>
+                                <option value="business-pivot">Business pivot or change</option>
+                                <option value="upskilling">Upskilling initiative</option>
+                                <option value="compliance">Compliance requirements</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-format">Preferred training format?</label>
+                            <select id="bt-format" name="bt_format">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="online-self-paced">Online self-paced</option>
+                                <option value="live-virtual">Live virtual sessions</option>
+                                <option value="in-person">In-person workshops</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="no-preference">No preference</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-outcome">What does a successful training outcome look like?</label>
+                            <textarea id="bt-outcome" name="bt_outcome" rows="3" placeholder="e.g., Team can independently run market analysis, improved sales conversion..."></textarea>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- General / Not Sure Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="general">
+                        <h3 class="form-step-title">Tell Us More</h3>
+                        <p class="form-step-intro">Not sure which service is right for you? No problem — tell us about your situation and we'll help you find the best path forward.</p>
+                        <div class="form-group">
+                            <label for="gen-challenge">What's the biggest challenge your business is facing right now?</label>
+                            <textarea id="gen-challenge" name="gen_challenge" required rows="4" placeholder="Tell us what's keeping you up at night..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="gen-industry">What industry are you in?</label>
+                            <input type="text" id="gen-industry" name="gen_industry" placeholder="e.g., Property Management, Construction, Retail...">
+                        </div>
+                        <div class="form-group">
+                            <label for="gen-outcome">What outcome are you hoping to achieve?</label>
+                            <textarea id="gen-outcome" name="gen_outcome" rows="3" placeholder="e.g., More customers, better tools, smarter strategy..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="gen-anything">Is there anything else you'd like us to know?</label>
+                            <textarea id="gen-anything" name="gen_anything" rows="3" placeholder="Optional: timeline, budget, specific goals..."></textarea>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
                     <!-- Success Message -->
                     <div class="form-success" id="form-success">
                         <div class="success-icon">

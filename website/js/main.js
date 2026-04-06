@@ -46,13 +46,22 @@
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            const target = document.querySelector(href);
             if (target) {
                 const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 60;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
+            }
+
+            // If clicking a service card "Contact Us" with data-pillar, auto-select pillar
+            const pillar = this.getAttribute('data-pillar');
+            if (pillar && href === '#contact') {
+                setTimeout(() => {
+                    selectPillar(pillar);
+                }, 600);
             }
         });
     });
@@ -136,16 +145,44 @@
         requestAnimationFrame(update);
     }
 
-    // ── Multi-Step Form ──────────────────────────────────────────────
+    // ── Multi-Step Pillar Form ────────────────────────────────────────
     const form = document.getElementById('contact-form');
-    const formSteps = document.querySelectorAll('.form-step');
     const progressSteps = document.querySelectorAll('.progress-step');
     const progressBar = document.getElementById('progress-bar');
     const formSuccess = document.getElementById('form-success');
+    const selectedServiceInput = document.getElementById('selected-service');
     let currentStep = 1;
+    let selectedPillar = '';
     const totalSteps = 3;
 
-    // Next buttons
+    // ── Pillar Card Selection (Step 1) ────────────────────────────────
+    const pillarCards = document.querySelectorAll('.pillar-card');
+
+    pillarCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const pillar = card.getAttribute('data-pillar');
+            selectPillar(pillar);
+        });
+    });
+
+    function selectPillar(pillar) {
+        selectedPillar = pillar;
+        selectedServiceInput.value = pillar;
+
+        // Visual feedback: highlight selected card
+        pillarCards.forEach(c => c.classList.remove('selected'));
+        const targetCard = document.querySelector(`.pillar-card[data-pillar="${pillar}"]`);
+        if (targetCard) {
+            targetCard.classList.add('selected');
+        }
+
+        // Auto-advance to step 2 after short delay
+        setTimeout(() => {
+            goToStep(2);
+        }, 300);
+    }
+
+    // ── Next / Previous buttons ───────────────────────────────────────
     document.querySelectorAll('.form-next').forEach(btn => {
         btn.addEventListener('click', () => {
             if (validateStep(currentStep)) {
@@ -154,7 +191,6 @@
         });
     });
 
-    // Previous buttons
     document.querySelectorAll('.form-prev').forEach(btn => {
         btn.addEventListener('click', () => {
             goToStep(currentStep - 1);
@@ -164,10 +200,22 @@
     function goToStep(step) {
         if (step < 1 || step > totalSteps) return;
 
-        // Hide current
-        formSteps.forEach(s => s.classList.remove('active'));
-        // Show target
-        document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+        // Hide all form steps
+        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+
+        if (step === 3) {
+            // Show the pillar-specific step 3
+            const pillarStep = document.querySelector(`.pillar-step[data-pillar="${selectedPillar}"]`);
+            if (pillarStep) {
+                pillarStep.classList.add('active');
+            }
+        } else {
+            // Show the generic step (1 or 2)
+            const genericStep = document.querySelector(`.form-step[data-step="${step}"]:not(.pillar-step)`);
+            if (genericStep) {
+                genericStep.classList.add('active');
+            }
+        }
 
         // Update progress indicators
         progressSteps.forEach(ps => {
@@ -188,8 +236,24 @@
     }
 
     function validateStep(step) {
-        const currentFormStep = document.querySelector(`.form-step[data-step="${step}"]`);
-        const requiredFields = currentFormStep.querySelectorAll('[required]');
+        // Step 1 validation: must have a pillar selected
+        if (step === 1) {
+            if (!selectedPillar) {
+                // Flash the pillar cards to indicate selection needed
+                document.querySelector('.pillar-selector').classList.add('shake');
+                setTimeout(() => {
+                    document.querySelector('.pillar-selector').classList.remove('shake');
+                }, 500);
+                return false;
+            }
+            return true;
+        }
+
+        // For steps 2 and 3, validate required fields in the active step
+        const activeStep = document.querySelector('.form-step.active');
+        if (!activeStep) return true;
+
+        const requiredFields = activeStep.querySelectorAll('[required]');
         let valid = true;
 
         requiredFields.forEach(field => {
@@ -202,19 +266,50 @@
                         this.removeEventListener('input', handler);
                     }
                 });
+                field.addEventListener('change', function handler() {
+                    if (this.value.trim()) {
+                        this.style.borderBottomColor = '';
+                        this.removeEventListener('change', handler);
+                    }
+                });
             }
         });
 
         return valid;
     }
 
-    // Form submission via Formspree
+    // ── Form Submission via Formspree ──────────────────────────────────
     if (form) {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const formData = new FormData(form);
-            const submitBtn = form.querySelector('[type="submit"]');
+            // Only collect fields from the active pillar step + shared steps
+            const formData = new FormData();
+
+            // Always include service type
+            formData.append('service', selectedPillar);
+
+            // Collect shared Step 2 fields
+            const sharedFields = ['name', 'email', 'company', 'type'];
+            sharedFields.forEach(fieldName => {
+                const field = form.querySelector(`[name="${fieldName}"]`);
+                if (field && field.value) {
+                    formData.append(fieldName, field.value);
+                }
+            });
+
+            // Collect active pillar step fields
+            const activePillarStep = document.querySelector(`.pillar-step[data-pillar="${selectedPillar}"]`);
+            if (activePillarStep) {
+                const pillarFields = activePillarStep.querySelectorAll('input, select, textarea');
+                pillarFields.forEach(field => {
+                    if (field.name && field.value) {
+                        formData.append(field.name, field.value);
+                    }
+                });
+            }
+
+            const submitBtn = document.querySelector('.form-step.active [type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
@@ -229,7 +324,7 @@
             .then(response => {
                 if (response.ok) {
                     // Success — show thank you message
-                    formSteps.forEach(s => s.classList.remove('active'));
+                    document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
                     document.querySelector('.form-progress').style.display = 'none';
                     formSuccess.classList.add('active');
                 } else {
