@@ -1031,6 +1031,21 @@ body {
     font-style: italic;
 }
 
+.footer-email {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--grey-400);
+    text-decoration: none;
+    margin-top: 12px;
+    letter-spacing: 0.02em;
+    transition: var(--transition);
+}
+
+.footer-email:hover {
+    color: var(--white);
+}
+
 .footer-links {
     display: flex;
     gap: 28px;
