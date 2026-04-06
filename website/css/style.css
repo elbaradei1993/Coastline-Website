@@ -769,11 +769,13 @@ body {
 }
 
 .project-logo {
-    height: 56px;
+    height: 36px;
     width: auto;
     display: block;
     margin-bottom: 16px;
     object-fit: contain;
+    filter: invert(1) grayscale(1) brightness(1.5);
+    mix-blend-mode: screen;
 }
 
 .project-title {
