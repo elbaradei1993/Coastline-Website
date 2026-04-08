@@ -1,3 +1,4 @@
+]
 /* ══════════════════════════════════════════════════════════════════════
    Coastline Digital Solutions — Stylesheet
    Premium, minimalist, black & white
@@ -831,7 +832,32 @@ body {
 
 /* Startup pillar card in form */
 .pillar-card-startup {
-    /* Spans full width like general */
+    /* Pairs with general in 2-col grid */
+}
+
+/* Startup page specific */
+.startup-hero {
+    min-height: 100vh;
+}
+
+.form-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 40px 0;
+}
+
+.startup-form-submit {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.active-page {
+    color: var(--white) !important;
+}
+
+.active-page::after {
+    width: 100% !important;
 }
 
 /* ── Our Work / Proof Section ─────────────────────────────────────── */
