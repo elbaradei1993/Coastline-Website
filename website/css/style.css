@@ -713,6 +713,127 @@ body {
     color: var(--grey-600);
 }
 
+/* ── Startup Launchpad Section ────────────────────────────────────── */
+.startup-section {
+    padding: 140px 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,10,10,0.8) 50%, rgba(0,0,0,0) 100%);
+}
+
+.startup-value-props {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 80px;
+}
+
+.startup-value-card {
+    text-align: center;
+    padding: 32px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.02);
+    transition: var(--transition);
+}
+
+.startup-value-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.startup-value-icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto 16px;
+    color: var(--grey-400);
+}
+
+.startup-value-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.startup-value-card h4 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.startup-value-card p {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--grey-400);
+    line-height: 1.6;
+}
+
+/* Startup Roadmap */
+.startup-roadmap {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.roadmap-phase {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+.phase-number {
+    font-size: 0.8rem;
+    font-weight: 200;
+    color: var(--grey-500);
+    letter-spacing: 0.1em;
+    min-width: 40px;
+    padding-top: 2px;
+}
+
+.phase-content {
+    flex: 1;
+}
+
+.phase-tag {
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+    margin-bottom: 4px;
+    padding: 3px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: inline-block;
+}
+
+.phase-content h3 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+    margin-top: 8px;
+}
+
+.phase-content p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--grey-400);
+    line-height: 1.7;
+}
+
+.roadmap-connector {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+    margin: 16px 0 16px 19px;
+}
+
+.startup-cta {
+    text-align: center;
+    margin-top: 64px;
+}
+
+/* Startup pillar card in form */
+.pillar-card-startup {
+    /* Spans full width like general */
+}
+
 /* ── Our Work / Proof Section ─────────────────────────────────────── */
 .work-section {
     padding: 140px 0;
@@ -1370,6 +1491,11 @@ body {
         gap: 24px;
     }
 
+    .startup-value-props {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
     .proof-stats {
         flex-direction: column;
         gap: 40px;
@@ -1420,6 +1546,7 @@ body {
     .method-section,
     .services-section,
     .clients-section,
+    .startup-section,
     .work-section,
     .contact-section {
         padding: 100px 0;
