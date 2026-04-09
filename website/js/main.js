@@ -6,6 +6,90 @@
 (function () {
     'use strict';
 
+    // ── Scroll Progress Bar ──────────────────────────────────────────
+    const scrollProgressBar = document.getElementById('scroll-progress-bar');
+    
+    function updateScrollProgress() {
+        if (!scrollProgressBar) return;
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollProgressBar.style.width = scrollPercent + '%';
+    }
+
+    // ── Dot Navigation ───────────────────────────────────────────────
+    const dotNav = document.getElementById('dot-nav');
+    const dotNavItems = document.querySelectorAll('.dot-nav-item');
+
+    function updateDotNav() {
+        if (!dotNav) return;
+        
+        // Show/hide dot nav based on scroll position
+        if (window.scrollY > 300) {
+            dotNav.classList.add('visible');
+        } else {
+            dotNav.classList.remove('visible');
+        }
+
+        // Highlight active section
+        const scrollPos = window.scrollY + window.innerHeight / 3;
+        
+        dotNavItems.forEach(item => {
+            const sectionId = item.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
+            if (!section) return;
+
+            const sectionTop = section.offsetTop;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                dotNavItems.forEach(d => d.classList.remove('active'));
+                item.classList.add('active');
+            }
+        });
+    }
+
+    // Dot nav click handling
+    dotNavItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('data-section');
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const offsetTop = section.getBoundingClientRect().top + window.pageYOffset - 60;
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ── Back to Top Button ───────────────────────────────────────────
+    const backToTop = document.getElementById('back-to-top');
+
+    function updateBackToTop() {
+        if (!backToTop) return;
+        if (window.scrollY > 600) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    }
+
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // ── Combined Scroll Handler ──────────────────────────────────────
+    function onScroll() {
+        updateScrollProgress();
+        updateDotNav();
+        updateBackToTop();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // Run once on load
+
     // ── Navigation ───────────────────────────────────────────────────
     const navbar = document.getElementById('navbar');
     const navToggle = document.getElementById('nav-toggle');
