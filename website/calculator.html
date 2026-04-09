@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startup Death Calculator | Coastline Digital Solutions</title>
-    <meta name="description" content="Will your startup survive? The interactive reality check that shows you — visually — whether your numbers work, flags unrealistic assumptions, and battle-tests scenarios.">
-    <meta property="og:title" content="Startup Death Calculator | Coastline Digital Solutions">
+    <title>Startup Financial Modeler | Coastline Digital Solutions</title>
+    <meta name="description" content="Will your startup survive? Free Death Calculator + Pro Financial Modeler with multiple revenue streams, expense breakdown, hiring timeline, and investor-ready PDF export.">
+    <meta property="og:title" content="Startup Financial Modeler | Coastline Digital Solutions">
     <meta property="og:description" content="Move sliders. See your future. The reality check every founder needs.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,321 +14,119 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <style>
-        /* ── Calculator-Specific Styles ─────────────────────────────── */
-        .calc-section { padding: 100px 0 140px; }
+        .calc-section{padding:100px 0 140px}
+        .calc-full-width{max-width:960px;margin:0 auto}
+        .calc-layout{display:grid;grid-template-columns:380px 1fr;gap:48px;align-items:start}
+        .calc-panel{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px;position:sticky;top:100px}
+        .calc-panel-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:28px;display:flex;justify-content:space-between;align-items:center}
+        .calc-group{margin-bottom:24px}
+        .calc-group label{display:flex;justify-content:space-between;align-items:baseline;font-size:.75rem;font-weight:300;color:var(--grey-400);margin-bottom:10px;letter-spacing:.02em}
+        .calc-value{font-weight:500;color:var(--white);font-size:.85rem;font-variant-numeric:tabular-nums}
+        .calc-group select{width:100%;padding:10px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.12);outline:none;-webkit-appearance:none;cursor:pointer}
+        .calc-group select option{background:var(--black);color:var(--white)}
+        input[type="range"]{-webkit-appearance:none;width:100%;height:1px;background:rgba(255,255,255,.15);outline:none;cursor:pointer}
+        input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--white);border:none;cursor:pointer;transition:transform .2s ease}
+        input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.3)}
+        input[type="range"]::-moz-range-thumb{width:16px;height:16px;background:var(--white);border:none;cursor:pointer}
+        .reality-check{display:none;font-size:.7rem;font-weight:300;color:#f5a623;margin-top:6px;padding:6px 10px;border-left:2px solid #f5a623;background:rgba(245,166,35,.05);line-height:1.5}
+        .reality-check.visible{display:block;animation:fadeInUp .3s ease}
+        .calc-results{display:flex;flex-direction:column;gap:32px}
+        .result-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px}
+        .result-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+        .result-card-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500)}
+        .death-clock{text-align:center;padding:40px 32px}
+        .death-verdict{font-size:.65rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:16px}
+        .death-months{font-size:clamp(3rem,8vw,5rem);font-weight:200;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+        .death-months.danger{color:#ff4444}.death-months.warning{color:#f5a623}.death-months.safe{color:#4ecdc4}.death-months.profit{color:#4ecdc4}
+        .death-label{font-size:.85rem;font-weight:300;color:var(--grey-400)}
+        .death-subtitle{font-size:.8rem;font-weight:300;color:var(--grey-500);margin-top:16px}
+        .metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .metric{text-align:center;padding:20px 12px;border:1px solid rgba(255,255,255,.06)}
+        .metric-number{font-size:1.4rem;font-weight:200;display:block;margin-bottom:4px;font-variant-numeric:tabular-nums}
+        .metric-label{font-size:.6rem;font-weight:300;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-500)}
+        .chart-container{position:relative;height:300px;width:100%}
+        .calc-cta{text-align:center;padding:48px 32px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+        .calc-cta h3{font-size:1.3rem;font-weight:300;margin-bottom:12px}
+        .calc-cta p{font-size:.9rem;font-weight:300;color:var(--grey-400);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto}
 
-        .calc-layout {
-            display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 48px;
-            align-items: start;
-        }
+        /* ── PRO FEATURES ──────────────────────────────────────── */
+        .pro-section{position:relative;margin-top:48px}
+        .pro-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;margin-left:8px;vertical-align:middle}
+        .pro-lock{position:relative;overflow:hidden}
+        .pro-lock.locked .pro-lock-content{filter:blur(6px);pointer-events:none;user-select:none}
+        .pro-lock-overlay{display:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px}
+        .pro-lock.locked .pro-lock-overlay{display:flex}
+        .pro-lock-overlay h4{font-size:1.1rem;font-weight:300;margin-bottom:8px}
+        .pro-lock-overlay p{font-size:.8rem;font-weight:300;color:var(--grey-400);margin-bottom:20px;max-width:320px}
+        .pro-unlock-btn{display:inline-block;text-decoration:none;font-family:var(--font);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 28px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;border:none;cursor:pointer;transition:all .3s ease}
+        .pro-unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,.3)}
 
-        .calc-panel {
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.02);
-            padding: 32px;
-            position: sticky;
-            top: 100px;
-        }
+        /* Pro Upgrade Banner */
+        .pro-banner{border:1px solid rgba(245,166,35,.2);background:linear-gradient(135deg,rgba(245,166,35,.05),rgba(232,145,12,.02));padding:32px;text-align:center;margin-bottom:32px}
+        .pro-banner.hidden{display:none}
+        .pro-banner h3{font-size:1.1rem;font-weight:300;margin-bottom:8px}
+        .pro-banner p{font-size:.85rem;font-weight:300;color:var(--grey-400);margin-bottom:20px}
+        .pro-features-list{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px}
+        .pro-feature-tag{font-size:.65rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(245,166,35,.2);color:#f5a623}
 
-        .calc-panel-title {
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--grey-500);
-            margin-bottom: 28px;
-        }
+        /* Revenue Streams */
+        .stream-list{display:flex;flex-direction:column;gap:16px;margin-bottom:16px}
+        .stream-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);position:relative}
+        .stream-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+        .stream-item-name{font-size:.85rem;font-weight:400;color:var(--white)}
+        .stream-remove{background:none;border:none;color:var(--grey-600);cursor:pointer;font-size:1.2rem;padding:4px 8px;transition:color .2s}
+        .stream-remove:hover{color:#ff4444}
+        .stream-fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .stream-field label{font-size:.65rem;margin-bottom:4px}
+        .stream-field input,.stream-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
+        .stream-field input::placeholder{color:var(--grey-700)}
+        .add-stream-btn{width:100%;padding:12px;font-family:var(--font);font-size:.75rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;background:transparent;color:var(--grey-500);border:1px dashed rgba(255,255,255,.1);cursor:pointer;transition:all .2s}
+        .add-stream-btn:hover{border-color:rgba(255,255,255,.3);color:var(--white)}
 
-        .calc-group {
-            margin-bottom: 24px;
-        }
+        /* Expense Categories */
+        .expense-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .expense-item{padding:16px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+        .expense-item label{display:flex;justify-content:space-between;font-size:.7rem;font-weight:300;color:var(--grey-400);margin-bottom:8px}
+        .expense-item input{width:100%;padding:8px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
 
-        .calc-group label {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-size: 0.75rem;
-            font-weight: 300;
-            color: var(--grey-400);
-            margin-bottom: 10px;
-            letter-spacing: 0.02em;
-        }
+        /* Hiring Timeline */
+        .hire-list{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+        .hire-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
+        .hire-field label{display:block;font-size:.65rem;font-weight:300;color:var(--grey-400);margin-bottom:4px}
+        .hire-field input,.hire-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
 
-        .calc-value {
-            font-weight: 500;
-            color: var(--white);
-            font-size: 0.85rem;
-            font-variant-numeric: tabular-nums;
-        }
+        /* P&L Table */
+        .pnl-table-wrapper{overflow-x:auto;margin-top:16px}
+        .pnl-table{width:100%;border-collapse:collapse;font-size:.7rem;font-weight:300}
+        .pnl-table th{text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.1);color:var(--grey-500);font-weight:400;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+        .pnl-table td{padding:6px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--grey-300);white-space:nowrap;font-variant-numeric:tabular-nums}
+        .pnl-table tr:hover td{background:rgba(255,255,255,.02)}
+        .pnl-table .negative{color:#ff4444}
+        .pnl-table .positive{color:#4ecdc4}
+        .pnl-table .row-label{color:var(--grey-400);font-weight:400}
 
-        .calc-group select {
-            width: 100%;
-            padding: 10px 0;
-            font-family: var(--font);
-            font-size: 0.85rem;
-            font-weight: 300;
-            color: var(--white);
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255,255,255,0.12);
-            outline: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-        }
+        /* Save/Export Bar */
+        .action-bar{display:flex;gap:12px;justify-content:flex-end;margin-bottom:24px;flex-wrap:wrap}
+        .action-bar .btn{font-size:.7rem;padding:10px 20px}
 
-        .calc-group select option {
-            background: var(--black);
-            color: var(--white);
-        }
+        /* Pro Active State */
+        .pro-active-badge{display:none;font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#4ecdc4;border:1px solid rgba(78,205,196,.3);padding:3px 8px}
+        body.pro-active .pro-active-badge{display:inline-block}
+        body.pro-active .pro-lock.locked .pro-lock-content{filter:none;pointer-events:all;user-select:auto}
+        body.pro-active .pro-lock.locked .pro-lock-overlay{display:none}
+        body.pro-active .pro-banner{display:none}
 
-        /* Custom Range Slider */
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 1px;
-            background: rgba(255,255,255,0.15);
-            outline: none;
-            cursor: pointer;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 16px;
-            height: 16px;
-            background: var(--white);
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.3);
-        }
-
-        input[type="range"]::-moz-range-thumb {
-            width: 16px;
-            height: 16px;
-            background: var(--white);
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Reality Check Alert */
-        .reality-check {
-            display: none;
-            font-size: 0.7rem;
-            font-weight: 300;
-            color: #f5a623;
-            margin-top: 6px;
-            padding: 6px 10px;
-            border-left: 2px solid #f5a623;
-            background: rgba(245,166,35,0.05);
-            line-height: 1.5;
-        }
-
-        .reality-check.visible {
-            display: block;
-            animation: fadeInUp 0.3s ease;
-        }
-
-        /* Results Area */
-        .calc-results {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-
-        .result-card {
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.02);
-            padding: 32px;
-        }
-
-        .result-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .result-card-title {
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--grey-500);
-        }
-
-        /* Death Clock */
-        .death-clock {
-            text-align: center;
-            padding: 40px 32px;
-        }
-
-        .death-verdict {
-            font-size: 0.65rem;
-            font-weight: 400;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--grey-500);
-            margin-bottom: 16px;
-        }
-
-        .death-months {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 200;
-            letter-spacing: -0.03em;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .death-months.danger { color: #ff4444; }
-        .death-months.warning { color: #f5a623; }
-        .death-months.safe { color: #4ecdc4; }
-        .death-months.profit { color: #4ecdc4; }
-
-        .death-label {
-            font-size: 0.85rem;
-            font-weight: 300;
-            color: var(--grey-400);
-        }
-
-        .death-subtitle {
-            font-size: 0.8rem;
-            font-weight: 300;
-            color: var(--grey-500);
-            margin-top: 16px;
-        }
-
-        /* Key Metrics Row */
-        .metrics-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .metric {
-            text-align: center;
-            padding: 20px 12px;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-
-        .metric-number {
-            font-size: 1.4rem;
-            font-weight: 200;
-            display: block;
-            margin-bottom: 4px;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .metric-label {
-            font-size: 0.6rem;
-            font-weight: 300;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--grey-500);
-        }
-
-        /* Chart Container */
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-        }
-
-        /* Scenario Battle */
-        .scenario-toggle {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .scenario-btn {
-            padding: 8px 16px;
-            font-family: var(--font);
-            font-size: 0.7rem;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            background: transparent;
-            color: var(--grey-500);
-            border: 1px solid rgba(255,255,255,0.1);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .scenario-btn.active {
-            color: var(--white);
-            border-color: var(--white);
-        }
-
-        .scenario-btn:hover {
-            border-color: rgba(255,255,255,0.3);
-            color: var(--grey-300);
-        }
-
-        /* CTA */
-        .calc-cta {
-            text-align: center;
-            padding: 48px 32px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .calc-cta h3 {
-            font-size: 1.3rem;
-            font-weight: 300;
-            margin-bottom: 12px;
-        }
-
-        .calc-cta p {
-            font-size: 0.9rem;
-            font-weight: 300;
-            color: var(--grey-400);
-            margin-bottom: 24px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .calc-layout {
-                grid-template-columns: 1fr;
-            }
-            .calc-panel {
-                position: static;
-            }
-            .metrics-row {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .calc-section { padding: 80px 0 100px; }
-            .calc-panel { padding: 24px; }
-            .result-card { padding: 24px; }
-            .death-clock { padding: 32px 20px; }
-        }
+        @media(max-width:968px){.calc-layout{grid-template-columns:1fr}.calc-panel{position:static}.metrics-row{grid-template-columns:1fr;gap:12px}.stream-fields{grid-template-columns:1fr}.expense-grid{grid-template-columns:1fr}.hire-item{grid-template-columns:1fr}}
+        @media(max-width:640px){.calc-section{padding:80px 0 100px}.calc-panel{padding:24px}.result-card{padding:24px}.death-clock{padding:32px 20px}}
     </style>
 </head>
 <body>
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img">
-            </a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+            <a href="index.html" class="nav-logo"><img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img"></a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#services">Services</a></li>
@@ -339,7 +137,6 @@
         </div>
     </nav>
 
-    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobile-overlay">
         <ul class="mobile-nav-links">
             <li><a href="index.html#about">About</a></li>
@@ -353,8 +150,8 @@
     <!-- Hero -->
     <section class="section hero-section" style="min-height:70vh;">
         <div class="hero-content">
-            <p class="hero-tagline fade-in">Free Tool</p>
-            <h1 class="hero-title fade-in delay-1">Startup Death<br><em>Calculator</em><span class="accent-dot">.</span></h1>
+            <p class="hero-tagline fade-in">Free Tool + Pro Upgrade</p>
+            <h1 class="hero-title fade-in delay-1">Startup Financial<br><em>Modeler</em><span class="accent-dot">.</span></h1>
             <p class="hero-subtitle fade-in delay-2">Move sliders. See your future. The interactive reality check that tells you if your startup will survive — and flags when you're lying to yourself.</p>
         </div>
     </section>
@@ -362,6 +159,13 @@
     <!-- Calculator -->
     <section class="section calc-section">
         <div class="container">
+            <!-- Action Bar -->
+            <div class="action-bar" id="action-bar">
+                <span class="pro-active-badge">✓ Pro Unlocked</span>
+                <button class="btn btn-ghost" id="btn-save" title="Save model to browser">💾 Save Model</button>
+                <button class="btn btn-ghost" id="btn-export" style="display:none" title="Export PDF">📄 Export PDF</button>
+            </div>
+
             <div class="calc-layout">
                 <!-- Input Panel -->
                 <div class="calc-panel">
@@ -410,6 +214,11 @@
                         <input type="range" id="slider-conversion" min="0.5" max="30" value="3" step="0.5">
                         <div class="reality-check" id="rc-conversion"></div>
                     </div>
+
+                    <div class="calc-group">
+                        <label>Projection Length <span class="calc-value" id="val-months">24 months</span></label>
+                        <input type="range" id="slider-months" min="12" max="36" value="24" step="6">
+                    </div>
                 </div>
 
                 <!-- Results -->
@@ -424,57 +233,174 @@
 
                     <!-- Key Metrics -->
                     <div class="metrics-row">
-                        <div class="metric">
-                            <span class="metric-number" id="m-breakeven">—</span>
-                            <span class="metric-label">Months to Break-Even</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-number" id="m-customers-needed">—</span>
-                            <span class="metric-label">Customers to Break-Even</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-number" id="m-burn">—</span>
-                            <span class="metric-label">Monthly Burn Rate</span>
-                        </div>
+                        <div class="metric"><span class="metric-number" id="m-breakeven">—</span><span class="metric-label">Months to Break-Even</span></div>
+                        <div class="metric"><span class="metric-number" id="m-customers-needed">—</span><span class="metric-label">Customers to Break-Even</span></div>
+                        <div class="metric"><span class="metric-number" id="m-burn">—</span><span class="metric-label">Monthly Burn Rate</span></div>
                     </div>
 
                     <!-- Revenue vs Costs Chart -->
                     <div class="result-card">
-                        <div class="result-card-header">
-                            <span class="result-card-title">Revenue vs Costs — 24 Month Projection</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="chart-revenue"></canvas>
-                        </div>
+                        <div class="result-card-header"><span class="result-card-title">Revenue vs Costs</span></div>
+                        <div class="chart-container"><canvas id="chart-revenue"></canvas></div>
                     </div>
 
                     <!-- Cash Balance Chart -->
                     <div class="result-card">
-                        <div class="result-card-header">
-                            <span class="result-card-title">Cash Balance Over Time</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="chart-cash"></canvas>
-                        </div>
+                        <div class="result-card-header"><span class="result-card-title">Cash Balance Over Time</span></div>
+                        <div class="chart-container"><canvas id="chart-cash"></canvas></div>
                     </div>
 
                     <!-- Customer Growth Chart -->
                     <div class="result-card">
-                        <div class="result-card-header">
-                            <span class="result-card-title">Customer Growth (with Churn)</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="chart-customers"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- CTA -->
-                    <div class="calc-cta">
-                        <h3>Numbers check out?</h3>
-                        <p>If you've found a viable path, we'll help you build it. Coastline takes startups from validated idea to market — strategy, build, and launch under one roof.</p>
-                        <a href="startup.html#contact" class="btn btn-primary">Launch Your Startup</a>
+                        <div class="result-card-header"><span class="result-card-title">Customer Growth (with Churn)</span></div>
+                        <div class="chart-container"><canvas id="chart-customers"></canvas></div>
                     </div>
                 </div>
+            </div>
+
+            <!-- ═══════ PRO FEATURES ═══════ -->
+            <div class="pro-section">
+                <!-- Upgrade Banner -->
+                <div class="pro-banner" id="pro-banner">
+                    <h3>Unlock the Full Financial Modeler <span class="pro-badge">PRO</span></h3>
+                    <p>Go beyond the basics — model multiple revenue streams, plan hiring, break down expenses, and export investor-ready reports.</p>
+                    <div class="pro-features-list">
+                        <span class="pro-feature-tag">Multiple Revenue Streams</span>
+                        <span class="pro-feature-tag">Expense Breakdown</span>
+                        <span class="pro-feature-tag">Hiring Timeline</span>
+                        <span class="pro-feature-tag">Sensitivity Analysis</span>
+                        <span class="pro-feature-tag">P&L Summary</span>
+                        <span class="pro-feature-tag">PDF Export</span>
+                    </div>
+                    <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn" id="pro-buy-btn">Unlock Pro — $29</a>
+                </div>
+
+                <!-- Pro Feature 1: Revenue Streams -->
+                <div class="pro-lock locked" id="pro-streams">
+                    <div class="pro-lock-overlay">
+                        <h4>Multiple Revenue Streams <span class="pro-badge">PRO</span></h4>
+                        <p>Model different products, plans, and pricing tiers side by side.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header">
+                                <span class="result-card-title">Revenue Streams <span class="pro-badge">PRO</span></span>
+                            </div>
+                            <div class="stream-list" id="stream-list">
+                                <div class="stream-item" data-stream="0">
+                                    <div class="stream-item-header">
+                                        <span class="stream-item-name">Stream 1: Basic Plan</span>
+                                        <button class="stream-remove" onclick="removeStream(0)">×</button>
+                                    </div>
+                                    <div class="stream-fields">
+                                        <div class="stream-field"><label>Name</label><input type="text" value="Basic Plan" onchange="updateStreamName(0,this.value)" placeholder="Product name"></div>
+                                        <div class="stream-field"><label>Price/mo</label><input type="number" value="19" data-field="price" onchange="calcPro()" placeholder="$"></div>
+                                        <div class="stream-field"><label>New customers/mo</label><input type="number" value="15" data-field="customers" onchange="calcPro()" placeholder="#"></div>
+                                        <div class="stream-field"><label>Monthly churn %</label><input type="number" value="5" data-field="churn" onchange="calcPro()" step="0.5" placeholder="%"></div>
+                                    </div>
+                                </div>
+                                <div class="stream-item" data-stream="1">
+                                    <div class="stream-item-header">
+                                        <span class="stream-item-name">Stream 2: Pro Plan</span>
+                                        <button class="stream-remove" onclick="removeStream(1)">×</button>
+                                    </div>
+                                    <div class="stream-fields">
+                                        <div class="stream-field"><label>Name</label><input type="text" value="Pro Plan" onchange="updateStreamName(1,this.value)" placeholder="Product name"></div>
+                                        <div class="stream-field"><label>Price/mo</label><input type="number" value="49" data-field="price" onchange="calcPro()" placeholder="$"></div>
+                                        <div class="stream-field"><label>New customers/mo</label><input type="number" value="8" data-field="customers" onchange="calcPro()" placeholder="#"></div>
+                                        <div class="stream-field"><label>Monthly churn %</label><input type="number" value="3" data-field="churn" onchange="calcPro()" step="0.5" placeholder="%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="add-stream-btn" onclick="addStream()">+ Add Revenue Stream</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 2: Expense Breakdown -->
+                <div class="pro-lock locked" id="pro-expenses">
+                    <div class="pro-lock-overlay">
+                        <h4>Expense Breakdown <span class="pro-badge">PRO</span></h4>
+                        <p>Break down costs by category to see where your money goes.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Monthly Expenses <span class="pro-badge">PRO</span></span></div>
+                            <div class="expense-grid" id="expense-grid">
+                                <div class="expense-item"><label>Team & Salaries <span class="calc-value exp-val" id="exp-team-val">$3,000</span></label><input type="range" min="0" max="50000" value="3000" step="500" data-exp="team" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Marketing <span class="calc-value exp-val" id="exp-marketing-val">$1,000</span></label><input type="range" min="0" max="20000" value="1000" step="100" data-exp="marketing" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Tools & Software <span class="calc-value exp-val" id="exp-tools-val">$500</span></label><input type="range" min="0" max="5000" value="500" step="50" data-exp="tools" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Operations <span class="calc-value exp-val" id="exp-ops-val">$300</span></label><input type="range" min="0" max="10000" value="300" step="100" data-exp="ops" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Office / Rent <span class="calc-value exp-val" id="exp-rent-val">$0</span></label><input type="range" min="0" max="10000" value="0" step="100" data-exp="rent" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Other <span class="calc-value exp-val" id="exp-other-val">$200</span></label><input type="range" min="0" max="10000" value="200" step="100" data-exp="other" oninput="calcPro()"></div>
+                            </div>
+                            <div style="margin-top:16px;text-align:right;font-size:.85rem;color:var(--grey-400)">Total: <strong id="exp-total" style="color:var(--white)">$5,000</strong>/mo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 3: Hiring Timeline -->
+                <div class="pro-lock locked" id="pro-hiring">
+                    <div class="pro-lock-overlay">
+                        <h4>Hiring Timeline <span class="pro-badge">PRO</span></h4>
+                        <p>Plan when to hire and see the impact on your runway.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Hiring Plan <span class="pro-badge">PRO</span></span></div>
+                            <div class="hire-list" id="hire-list">
+                                <div class="hire-item" data-hire="0">
+                                    <div class="hire-field"><label>Role</label><input type="text" value="Developer" data-h="role" onchange="calcPro()"></div>
+                                    <div class="hire-field"><label>Monthly Salary</label><input type="number" value="6000" data-h="salary" onchange="calcPro()"></div>
+                                    <div class="hire-field"><label>Start Month</label><input type="number" value="4" min="1" max="36" data-h="month" onchange="calcPro()"></div>
+                                    <button class="stream-remove" onclick="removeHire(0)">×</button>
+                                </div>
+                            </div>
+                            <button class="add-stream-btn" onclick="addHire()">+ Add Hire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 4: Sensitivity Analysis -->
+                <div class="pro-lock locked" id="pro-sensitivity">
+                    <div class="pro-lock-overlay">
+                        <h4>Sensitivity Analysis <span class="pro-badge">PRO</span></h4>
+                        <p>See best-case and worst-case scenarios side by side.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Sensitivity Analysis <span class="pro-badge">PRO</span></span></div>
+                            <div class="chart-container" style="height:350px"><canvas id="chart-sensitivity"></canvas></div>
+                            <div style="margin-top:16px;text-align:center;font-size:.75rem;color:var(--grey-500)">Shows cash balance under optimistic (+50% growth), base, and pessimistic (-50% growth) scenarios</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 5: P&L Summary -->
+                <div class="pro-lock locked" id="pro-pnl">
+                    <div class="pro-lock-overlay">
+                        <h4>P&L Summary Table <span class="pro-badge">PRO</span></h4>
+                        <p>Month-by-month profit & loss breakdown — investor-ready.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Profit & Loss Summary <span class="pro-badge">PRO</span></span></div>
+                            <div class="pnl-table-wrapper"><table class="pnl-table" id="pnl-table"></table></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="calc-cta" style="margin-top:48px">
+                <h3>Numbers check out?</h3>
+                <p>If you've found a viable path, we'll help you build it. Coastline takes startups from validated idea to market.</p>
+                <a href="startup.html#contact" class="btn btn-primary">Launch Your Startup</a>
             </div>
         </div>
     </section>
@@ -496,349 +422,208 @@
                     <a href="index.html#contact">Contact</a>
                 </div>
                 <div class="footer-social">
-                    <a href="#" aria-label="LinkedIn" class="social-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </a>
-                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                    </a>
+                    <a href="#" aria-label="LinkedIn" class="social-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p></div>
         </div>
     </footer>
 
     <script src="js/particles.js"></script>
     <script>
-    /* ══════════════════════════════════════════════════════════════════
-       Startup Death Calculator — Core Engine
-       ══════════════════════════════════════════════════════════════════ */
-    (function () {
+    (function(){
         'use strict';
 
-        // ── Nav ────────────────────────────────────────────────────────
-        const navbar = document.getElementById('navbar');
-        const navToggle = document.getElementById('nav-toggle');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+        /* ── NAV ──────────────────────────────────────────────── */
+        const navbar=document.getElementById('navbar'),navToggle=document.getElementById('nav-toggle'),mobileOverlay=document.getElementById('mobile-overlay'),mobileLinks=document.querySelectorAll('.mobile-nav-links a');
+        function handleNavScroll(){navbar.classList.toggle('scrolled',window.scrollY>50)}
+        window.addEventListener('scroll',handleNavScroll,{passive:true});handleNavScroll();
+        if(navToggle&&mobileOverlay){navToggle.addEventListener('click',()=>{navToggle.classList.toggle('active');mobileOverlay.classList.toggle('active');document.body.style.overflow=mobileOverlay.classList.contains('active')?'hidden':''});mobileLinks.forEach(l=>l.addEventListener('click',()=>{navToggle.classList.remove('active');mobileOverlay.classList.remove('active');document.body.style.overflow=''}))}
 
-        function handleNavScroll() {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        /* ── PRO UNLOCK ───────────────────────────────────────── */
+        let isPro=false;
+        function checkPro(){
+            const params=new URLSearchParams(window.location.search);
+            if(params.get('pro')==='true'){localStorage.setItem('coastline_pro','true');window.history.replaceState({},'',window.location.pathname)}
+            isPro=localStorage.getItem('coastline_pro')==='true';
+            if(isPro){document.body.classList.add('pro-active');document.getElementById('btn-export').style.display=''}
         }
-        window.addEventListener('scroll', handleNavScroll, { passive: true });
-        handleNavScroll();
+        checkPro();
 
-        if (navToggle && mobileOverlay) {
-            navToggle.addEventListener('click', () => {
-                navToggle.classList.toggle('active');
-                mobileOverlay.classList.toggle('active');
-                document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
-            });
-            mobileLinks.forEach(link => link.addEventListener('click', () => {
-                navToggle.classList.remove('active');
-                mobileOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }));
-        }
-
-        // ── Industry Benchmarks (THE UNFAIR ADVANTAGE) ─────────────────
-        const benchmarks = {
-            saas: {
-                label: 'B2B SaaS',
-                churn: { low: 3, avg: 5, high: 8, warning: 'Average B2B SaaS monthly churn is 3–8%. Your input is outside this range.' },
-                conversion: { low: 2, avg: 5, high: 8, warning: 'Average SaaS free-to-paid conversion is 2–8%. Your input seems high.' },
-                customers: { first_year_avg: 15, warning: 'Most SaaS startups acquire 10–20 customers/month in year 1.' },
-            },
-            marketplace: {
-                label: 'Marketplace',
-                churn: { low: 5, avg: 8, high: 15, warning: 'Average marketplace churn is 5–15%. Your input is outside this range.' },
-                conversion: { low: 1, avg: 3, high: 6, warning: 'Average marketplace conversion is 1–6%. Your input seems high.' },
-                customers: { first_year_avg: 25, warning: 'Most marketplaces acquire 15–40 new users/month early on.' },
-            },
-            ecommerce: {
-                label: 'E-Commerce',
-                churn: { low: 7, avg: 10, high: 20, warning: 'Average e-commerce repeat customer loss is 7–20%/month.' },
-                conversion: { low: 1.5, avg: 3, high: 5, warning: 'Average e-commerce conversion is 1.5–5%. Your input seems high.' },
-                customers: { first_year_avg: 30, warning: 'Most e-commerce startups get 20–50 orders/month in year 1.' },
-            },
-            service: {
-                label: 'Service/Agency',
-                churn: { low: 2, avg: 5, high: 10, warning: 'Average service churn is 2–10%/month.' },
-                conversion: { low: 5, avg: 10, high: 20, warning: 'Average service conversion is 5–20%.' },
-                customers: { first_year_avg: 5, warning: 'Most agencies land 3–8 new clients/month in year 1.' },
-            },
-            freemium: {
-                label: 'Freemium',
-                churn: { low: 5, avg: 10, high: 20, warning: 'Average freemium paid churn is 5–20%/month.' },
-                conversion: { low: 1, avg: 2.5, high: 5, warning: 'Average freemium conversion is 1–5%. Typically around 2–3%.' },
-                customers: { first_year_avg: 10, warning: 'Most freemium products convert 5–15 paying users/month early.' },
-            }
+        /* ── BENCHMARKS ───────────────────────────────────────── */
+        const benchmarks={
+            saas:{churn:{low:3,avg:5,high:8,warning:'Average B2B SaaS monthly churn is 3–8%.'},conversion:{low:2,avg:5,high:8,warning:'Average SaaS free-to-paid conversion is 2–8%.'},customers:{first_year_avg:15,warning:'Most SaaS startups acquire 10–20 customers/month in year 1.'}},
+            marketplace:{churn:{low:5,avg:8,high:15,warning:'Average marketplace churn is 5–15%.'},conversion:{low:1,avg:3,high:6,warning:'Average marketplace conversion is 1–6%.'},customers:{first_year_avg:25,warning:'Most marketplaces acquire 15–40 new users/month early on.'}},
+            ecommerce:{churn:{low:7,avg:10,high:20,warning:'Average e-commerce churn is 7–20%/month.'},conversion:{low:1.5,avg:3,high:5,warning:'Average e-commerce conversion is 1.5–5%.'},customers:{first_year_avg:30,warning:'Most e-commerce startups get 20–50 orders/month in year 1.'}},
+            service:{churn:{low:2,avg:5,high:10,warning:'Average service churn is 2–10%/month.'},conversion:{low:5,avg:10,high:20,warning:'Average service conversion is 5–20%.'},customers:{first_year_avg:5,warning:'Most agencies land 3–8 new clients/month in year 1.'}},
+            freemium:{churn:{low:5,avg:10,high:20,warning:'Average freemium paid churn is 5–20%/month.'},conversion:{low:1,avg:2.5,high:5,warning:'Average freemium conversion is 1–5%.'},customers:{first_year_avg:10,warning:'Most freemium products convert 5–15 paying users/month early.'}}
         };
 
-        // ── DOM Elements ───────────────────────────────────────────────
-        const sliders = {
-            capital: document.getElementById('slider-capital'),
-            costs: document.getElementById('slider-costs'),
-            price: document.getElementById('slider-price'),
-            customers: document.getElementById('slider-customers'),
-            churn: document.getElementById('slider-churn'),
-            conversion: document.getElementById('slider-conversion'),
-        };
+        /* ── DOM ───────────────────────────────────────────────── */
+        const S={capital:document.getElementById('slider-capital'),costs:document.getElementById('slider-costs'),price:document.getElementById('slider-price'),customers:document.getElementById('slider-customers'),churn:document.getElementById('slider-churn'),conversion:document.getElementById('slider-conversion'),months:document.getElementById('slider-months')};
+        const V={capital:document.getElementById('val-capital'),costs:document.getElementById('val-costs'),price:document.getElementById('val-price'),customers:document.getElementById('val-customers'),churn:document.getElementById('val-churn'),conversion:document.getElementById('val-conversion'),months:document.getElementById('val-months')};
+        const modelSelect=document.getElementById('model-select');
 
-        const vals = {
-            capital: document.getElementById('val-capital'),
-            costs: document.getElementById('val-costs'),
-            price: document.getElementById('val-price'),
-            customers: document.getElementById('val-customers'),
-            churn: document.getElementById('val-churn'),
-            conversion: document.getElementById('val-conversion'),
-        };
+        /* ── FORMAT ─────────────────────────────────────────────── */
+        const fmt=n=>'$'+n.toLocaleString('en-US');
+        const fmtK=n=>n>=1000000?'$'+(n/1000000).toFixed(1)+'M':n>=1000?'$'+(n/1000).toFixed(n>=10000?0:1)+'k':'$'+n.toLocaleString('en-US');
 
-        const modelSelect = document.getElementById('model-select');
+        /* ── CHARTS ─────────────────────────────────────────────── */
+        const C={white:'rgba(255,255,255,.9)',green:'rgba(78,205,196,.8)',greenF:'rgba(78,205,196,.1)',red:'rgba(255,68,68,.8)',redF:'rgba(255,68,68,.1)',yellow:'rgba(245,166,35,.8)',yellowF:'rgba(245,166,35,.1)'};
+        const cOpts={responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true,labels:{color:'rgba(255,255,255,.5)',font:{family:'Inter',size:11,weight:300},boxWidth:12,padding:16}},tooltip:{backgroundColor:'rgba(0,0,0,.85)',titleFont:{family:'Inter',weight:400},bodyFont:{family:'Inter',weight:300},borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:12}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(255,255,255,.3)',font:{family:'Inter',size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(255,255,255,.3)',font:{family:'Inter',size:10},callback:function(v){return fmtK(v)}}}}};
 
-        // ── Format Helpers ─────────────────────────────────────────────
-        const fmt = (n) => '$' + n.toLocaleString('en-US');
-        const fmtK = (n) => n >= 1000 ? '$' + (n/1000).toFixed(n >= 10000 ? 0 : 1) + 'k' : '$' + n.toLocaleString('en-US');
+        let monthLabels=[];
+        function makeLabels(n){return Array.from({length:n},(_,i)=>'M'+(i+1))}
 
-        // ── Chart Setup ────────────────────────────────────────────────
-        const chartColors = {
-            white: 'rgba(255,255,255,0.9)',
-            whiteFaded: 'rgba(255,255,255,0.15)',
-            green: 'rgba(78,205,196,0.8)',
-            greenFill: 'rgba(78,205,196,0.1)',
-            red: 'rgba(255,68,68,0.8)',
-            redFill: 'rgba(255,68,68,0.1)',
-            yellow: 'rgba(245,166,35,0.8)',
-            grey: 'rgba(255,255,255,0.3)',
-        };
+        const revChart=new Chart(document.getElementById('chart-revenue'),{type:'line',data:{labels:[],datasets:[{label:'Revenue',data:[],borderColor:C.green,backgroundColor:C.greenF,fill:true,tension:.3,borderWidth:2,pointRadius:0},{label:'Costs',data:[],borderColor:C.red,backgroundColor:C.redF,fill:true,tension:0,borderWidth:2,pointRadius:0,borderDash:[6,4]}]},options:cOpts});
+        const cashOpts=JSON.parse(JSON.stringify(cOpts));cashOpts.plugins.legend={display:false};
+        const cashChart=new Chart(document.getElementById('chart-cash'),{type:'line',data:{labels:[],datasets:[{label:'Cash',data:[],borderColor:C.green,backgroundColor:C.greenF,fill:true,tension:.3,borderWidth:2,pointRadius:0,segment:{borderColor:ctx=>ctx.p1.parsed.y<0?C.red:C.green,backgroundColor:ctx=>ctx.p1.parsed.y<0?C.redF:C.greenF}}]},options:cashOpts});
+        const custOpts=JSON.parse(JSON.stringify(cOpts));custOpts.scales.y.ticks.callback=function(v){return v};
+        const custChart=new Chart(document.getElementById('chart-customers'),{type:'line',data:{labels:[],datasets:[{label:'Active Customers',data:[],borderColor:C.white,backgroundColor:'rgba(255,255,255,.05)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]},options:custOpts});
 
-        const commonOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: {
-                legend: { display: true, labels: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 11, weight: 300 }, boxWidth: 12, padding: 16 } },
-                tooltip: { backgroundColor: 'rgba(0,0,0,0.85)', titleFont: { family: 'Inter', weight: 400 }, bodyFont: { family: 'Inter', weight: 300 }, borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1, padding: 12 }
-            },
-            scales: {
-                x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.3)', font: { family: 'Inter', size: 10 } } },
-                y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: 'rgba(255,255,255,0.3)', font: { family: 'Inter', size: 10 }, callback: function(v) { return fmtK(v); } } }
-            }
-        };
+        // Sensitivity chart (Pro)
+        const sensChart=new Chart(document.getElementById('chart-sensitivity'),{type:'line',data:{labels:[],datasets:[{label:'Optimistic (+50%)',data:[],borderColor:C.green,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0,borderDash:[4,4]},{label:'Base Case',data:[],borderColor:C.white,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0},{label:'Pessimistic (-50%)',data:[],borderColor:C.red,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0,borderDash:[4,4]}]},options:cOpts});
 
-        const months24 = Array.from({length: 24}, (_, i) => 'M' + (i + 1));
+        /* ── CALCULATION ENGINE ──────────────────────────────── */
+        function calculate(){
+            const capital=+S.capital.value,costs=+S.costs.value,price=+S.price.value,newCust=+S.customers.value,churn=+S.churn.value/100,conv=+S.conversion.value/100,numMonths=+S.months.value,model=modelSelect.value;
 
-        // Revenue vs Costs chart
-        const revenueChart = new Chart(document.getElementById('chart-revenue'), {
-            type: 'line',
-            data: {
-                labels: months24,
-                datasets: [
-                    { label: 'Revenue', data: [], borderColor: chartColors.green, backgroundColor: chartColors.greenFill, fill: true, tension: 0.3, borderWidth: 2, pointRadius: 0 },
-                    { label: 'Costs', data: [], borderColor: chartColors.red, backgroundColor: chartColors.redFill, fill: true, tension: 0, borderWidth: 2, pointRadius: 0, borderDash: [6, 4] }
-                ]
-            },
-            options: commonOptions
-        });
+            V.capital.textContent=fmt(capital);V.costs.textContent=fmt(costs);V.price.textContent='$'+S.price.value;V.customers.textContent=newCust;V.churn.textContent=S.churn.value+'%';V.conversion.textContent=S.conversion.value+'%';V.months.textContent=numMonths+' months';
 
-        // Cash balance chart
-        const cashOptions = JSON.parse(JSON.stringify(commonOptions));
-        cashOptions.plugins.legend = { display: false };
-        const cashChart = new Chart(document.getElementById('chart-cash'), {
-            type: 'line',
-            data: {
-                labels: months24,
-                datasets: [{
-                    label: 'Cash',
-                    data: [],
-                    borderColor: chartColors.green,
-                    backgroundColor: chartColors.greenFill,
-                    fill: true,
-                    tension: 0.3,
-                    borderWidth: 2,
-                    pointRadius: 0,
-                    segment: {
-                        borderColor: ctx => ctx.p1.parsed.y < 0 ? chartColors.red : chartColors.green,
-                        backgroundColor: ctx => ctx.p1.parsed.y < 0 ? chartColors.redFill : chartColors.greenFill,
-                    }
-                }]
-            },
-            options: cashOptions
-        });
+            checkReality(model,newCust,+S.churn.value,+S.conversion.value);
 
-        // Customer growth chart
-        const custOptions = JSON.parse(JSON.stringify(commonOptions));
-        custOptions.scales.y.ticks.callback = function(v) { return v; };
-        const custChart = new Chart(document.getElementById('chart-customers'), {
-            type: 'line',
-            data: {
-                labels: months24,
-                datasets: [{
-                    label: 'Active Customers',
-                    data: [],
-                    borderColor: chartColors.white,
-                    backgroundColor: 'rgba(255,255,255,0.05)',
-                    fill: true,
-                    tension: 0.3,
-                    borderWidth: 2,
-                    pointRadius: 0
-                }]
-            },
-            options: custOptions
-        });
+            monthLabels=makeLabels(numMonths);
+            let cash=capital,customers=0;
+            const revD=[],costD=[],cashD=[],custD=[];
+            let breakEven=null,death=null;
 
-        // ── Calculation Engine ─────────────────────────────────────────
-        function calculate() {
-            const capital = parseFloat(sliders.capital.value);
-            const monthlyCosts = parseFloat(sliders.costs.value);
-            const pricePerCustomer = parseFloat(sliders.price.value);
-            const newCustomersPerMonth = parseFloat(sliders.customers.value);
-            const churnRate = parseFloat(sliders.churn.value) / 100;
-            const conversionRate = parseFloat(sliders.conversion.value) / 100;
-            const model = modelSelect.value;
+            // Sensitivity
+            let cashOpt=capital,cashPes=capital,custOpt=0,custPes=0;
+            const cashOptD=[],cashPesD=[];
 
-            // Update displayed values
-            vals.capital.textContent = fmt(capital);
-            vals.costs.textContent = fmt(monthlyCosts);
-            vals.price.textContent = '$' + pricePerCustomer;
-            vals.customers.textContent = newCustomersPerMonth;
-            vals.churn.textContent = sliders.churn.value + '%';
-            vals.conversion.textContent = sliders.conversion.value + '%';
+            for(let m=0;m<numMonths;m++){
+                customers+=newCust;customers-=customers*churn;customers=Math.max(0,customers);
+                const rev=customers*price,net=rev-costs;cash+=net;
+                revD.push(Math.round(rev));costD.push(costs);cashD.push(Math.round(cash));custD.push(Math.round(customers));
+                if(!breakEven&&rev>=costs)breakEven=m+1;
+                if(!death&&cash<=0)death=m+1;
 
-            // Reality Checks
-            checkReality(model, newCustomersPerMonth, parseFloat(sliders.churn.value), parseFloat(sliders.conversion.value));
-
-            // 24-month simulation
-            let cash = capital;
-            let customers = 0;
-            const revenueData = [];
-            const costsData = [];
-            const cashData = [];
-            const customerData = [];
-            let breakEvenMonth = null;
-            let deathMonth = null;
-
-            for (let m = 0; m < 24; m++) {
-                // New paying customers
-                customers += newCustomersPerMonth;
-                // Churn
-                customers -= customers * churnRate;
-                customers = Math.max(0, customers);
-
-                const revenue = customers * pricePerCustomer;
-                const netCash = revenue - monthlyCosts;
-                cash += netCash;
-
-                revenueData.push(Math.round(revenue));
-                costsData.push(monthlyCosts);
-                cashData.push(Math.round(cash));
-                customerData.push(Math.round(customers));
-
-                if (breakEvenMonth === null && revenue >= monthlyCosts) {
-                    breakEvenMonth = m + 1;
-                }
-
-                if (deathMonth === null && cash <= 0) {
-                    deathMonth = m + 1;
-                }
+                // Optimistic
+                custOpt+=newCust*1.5;custOpt-=custOpt*churn;custOpt=Math.max(0,custOpt);
+                cashOpt+=(custOpt*price)-costs;cashOptD.push(Math.round(cashOpt));
+                // Pessimistic
+                custPes+=newCust*0.5;custPes-=custPes*churn;custPes=Math.max(0,custPes);
+                cashPes+=(custPes*price)-costs;cashPesD.push(Math.round(cashPes));
             }
 
-            // Customers needed for break-even
-            const customersNeeded = Math.ceil(monthlyCosts / pricePerCustomer);
+            const custNeeded=Math.ceil(costs/price);
 
-            // Update Death Clock
-            const deathMonthsEl = document.getElementById('death-months');
-            const deathLabelEl = document.getElementById('death-label');
-            const deathVerdictEl = document.getElementById('death-verdict');
-            const deathSubtitleEl = document.getElementById('death-subtitle');
+            // Death Clock
+            const dm=document.getElementById('death-months'),dl=document.getElementById('death-label'),dv=document.getElementById('death-verdict'),ds=document.getElementById('death-subtitle');
+            if(death){dm.textContent=death;dm.className='death-months '+(death<=6?'danger':death<=12?'warning':'safe');dl.textContent='months until you run out of money';dv.textContent=death<=6?'⚠️ Critical Risk':death<=12?'⚡ Tight Runway':'📊 Your Runway';ds.textContent=death<=6?'Cut costs, raise prices, or find funding — fast.':death<=12?'Limited time. Focus on revenue acceleration.':'Some breathing room, but watch burn rate.'}
+            else{dm.textContent='∞';dm.className='death-months profit';dl.textContent='you reach profitability';dv.textContent='🟢 Sustainable';ds.textContent=breakEven?'Break even at month '+breakEven+'. These numbers work.':'Revenue covers costs early. Strong position.'}
 
-            if (deathMonth) {
-                deathMonthsEl.textContent = deathMonth;
-                deathMonthsEl.className = 'death-months ' + (deathMonth <= 6 ? 'danger' : deathMonth <= 12 ? 'warning' : 'safe');
-                deathLabelEl.textContent = 'months until you run out of money';
-                deathVerdictEl.textContent = deathMonth <= 6 ? '⚠️ Critical Risk' : deathMonth <= 12 ? '⚡ Tight Runway' : '📊 Your Runway';
-                deathSubtitleEl.textContent = deathMonth <= 6 ? 'At these numbers, you need to either cut costs, raise prices, or find funding — fast.' : deathMonth <= 12 ? 'You have limited time. Focus on revenue acceleration or securing funding.' : 'You have some breathing room, but watch your burn rate.';
-            } else {
-                deathMonthsEl.textContent = '∞';
-                deathMonthsEl.className = 'death-months profit';
-                deathLabelEl.textContent = 'you reach profitability';
-                deathVerdictEl.textContent = '🟢 Sustainable';
-                deathSubtitleEl.textContent = breakEvenMonth ? 'You break even at month ' + breakEvenMonth + '. These numbers work.' : 'Your revenue covers costs from early on. Strong position.';
-            }
-
-            // Update metrics
-            document.getElementById('m-breakeven').textContent = breakEvenMonth ? breakEvenMonth + ' mo' : '24+';
-            document.getElementById('m-customers-needed').textContent = customersNeeded.toLocaleString();
-            document.getElementById('m-burn').textContent = fmtK(monthlyCosts);
+            document.getElementById('m-breakeven').textContent=breakEven?breakEven+' mo':numMonths+'+';
+            document.getElementById('m-customers-needed').textContent=custNeeded.toLocaleString();
+            document.getElementById('m-burn').textContent=fmtK(costs);
 
             // Update charts
-            revenueChart.data.datasets[0].data = revenueData;
-            revenueChart.data.datasets[1].data = costsData;
-            revenueChart.update('none');
+            [revChart,cashChart,custChart,sensChart].forEach(c=>{c.data.labels=monthLabels});
+            revChart.data.datasets[0].data=revD;revChart.data.datasets[1].data=costD;revChart.update('none');
+            cashChart.data.datasets[0].data=cashD;cashChart.update('none');
+            custChart.data.datasets[0].data=custD;custChart.update('none');
+            sensChart.data.datasets[0].data=cashOptD;sensChart.data.datasets[1].data=cashD;sensChart.data.datasets[2].data=cashPesD;sensChart.update('none');
 
-            cashChart.data.datasets[0].data = cashData;
-            cashChart.update('none');
-
-            custChart.data.datasets[0].data = customerData;
-            custChart.update('none');
+            // P&L table
+            buildPnL(revD,costD,cashD,custD);
         }
 
-        // ── Reality Check Engine ───────────────────────────────────────
-        function checkReality(model, customers, churn, conversion) {
-            const b = benchmarks[model];
-            if (!b) return;
-
-            // Churn check
-            const rcChurn = document.getElementById('rc-churn');
-            if (churn < b.churn.low || churn > b.churn.high) {
-                rcChurn.textContent = '⚠️ ' + b.churn.warning;
-                rcChurn.classList.add('visible');
-            } else {
-                rcChurn.classList.remove('visible');
-            }
-
-            // Conversion check
-            const rcConversion = document.getElementById('rc-conversion');
-            if (conversion > b.conversion.high) {
-                rcConversion.textContent = '⚠️ ' + b.conversion.warning;
-                rcConversion.classList.add('visible');
-            } else {
-                rcConversion.classList.remove('visible');
-            }
-
-            // Customer acquisition check
-            const rcCustomers = document.getElementById('rc-customers');
-            if (customers > b.customers.first_year_avg * 3) {
-                rcCustomers.textContent = '⚠️ ' + b.customers.warning + ' Your input of ' + customers + '/mo is significantly above average.';
-                rcCustomers.classList.add('visible');
-            } else {
-                rcCustomers.classList.remove('visible');
-            }
+        function checkReality(model,customers,churn,conversion){
+            const b=benchmarks[model];if(!b)return;
+            const rc=document.getElementById('rc-churn'),rcv=document.getElementById('rc-conversion'),rcc=document.getElementById('rc-customers');
+            if(churn<b.churn.low||churn>b.churn.high){rc.textContent='⚠️ '+b.churn.warning;rc.classList.add('visible')}else{rc.classList.remove('visible')}
+            if(conversion>b.conversion.high){rcv.textContent='⚠️ '+b.conversion.warning;rcv.classList.add('visible')}else{rcv.classList.remove('visible')}
+            if(customers>b.customers.first_year_avg*3){rcc.textContent='⚠️ '+b.customers.warning+' Your input of '+customers+'/mo is significantly above average.';rcc.classList.add('visible')}else{rcc.classList.remove('visible')}
         }
 
-        // ── Event Listeners ────────────────────────────────────────────
-        Object.values(sliders).forEach(s => s.addEventListener('input', calculate));
-        modelSelect.addEventListener('change', calculate);
+        /* ── P&L TABLE ────────────────────────────────────────── */
+        function buildPnL(revD,costD,cashD,custD){
+            const t=document.getElementById('pnl-table');
+            // Show quarterly summary (every 3 months)
+            let html='<thead><tr><th>Quarter</th><th>Revenue</th><th>Costs</th><th>Net</th><th>Cash</th><th>Customers</th></tr></thead><tbody>';
+            const numMonths=revD.length;
+            for(let q=0;q<Math.ceil(numMonths/3);q++){
+                const m=Math.min((q+1)*3-1,numMonths-1);
+                const rev=revD[m],cost=costD[m],net=rev-cost,cash=cashD[m],cust=custD[m];
+                html+='<tr><td class="row-label">Q'+(q+1)+'</td><td>'+fmtK(rev)+'</td><td>'+fmtK(cost)+'</td><td class="'+(net>=0?'positive':'negative')+'">'+fmtK(net)+'</td><td class="'+(cash>=0?'positive':'negative')+'">'+fmtK(cash)+'</td><td>'+cust.toLocaleString()+'</td></tr>';
+            }
+            html+='</tbody>';t.innerHTML=html;
+        }
 
-        // Initial calculation
+        /* ── PRO: REVENUE STREAMS ─────────────────────────────── */
+        let streamCount=2;
+        window.addStream=function(){
+            streamCount++;
+            const list=document.getElementById('stream-list');
+            const div=document.createElement('div');div.className='stream-item';div.setAttribute('data-stream',streamCount-1);
+            div.innerHTML='<div class="stream-item-header"><span class="stream-item-name">Stream '+streamCount+'</span><button class="stream-remove" onclick="removeStream('+(streamCount-1)+')">×</button></div><div class="stream-fields"><div class="stream-field"><label>Name</label><input type="text" value="Stream '+streamCount+'" onchange="updateStreamName('+(streamCount-1)+',this.value)" placeholder="Product name"></div><div class="stream-field"><label>Price/mo</label><input type="number" value="29" data-field="price" onchange="calcPro()" placeholder="$"></div><div class="stream-field"><label>New customers/mo</label><input type="number" value="10" data-field="customers" onchange="calcPro()" placeholder="#"></div><div class="stream-field"><label>Monthly churn %</label><input type="number" value="5" data-field="churn" onchange="calcPro()" step="0.5" placeholder="%"></div></div>';
+            list.appendChild(div);calcPro();
+        };
+        window.removeStream=function(i){const el=document.querySelector('.stream-item[data-stream="'+i+'"]');if(el)el.remove();calcPro()};
+        window.updateStreamName=function(i,name){const el=document.querySelector('.stream-item[data-stream="'+i+'"] .stream-item-name');if(el)el.textContent=name};
+
+        /* ── PRO: HIRING ──────────────────────────────────────── */
+        let hireCount=1;
+        window.addHire=function(){
+            hireCount++;const list=document.getElementById('hire-list');
+            const div=document.createElement('div');div.className='hire-item';div.setAttribute('data-hire',hireCount-1);
+            div.innerHTML='<div class="hire-field"><label>Role</label><input type="text" value="New Hire" data-h="role" onchange="calcPro()"></div><div class="hire-field"><label>Monthly Salary</label><input type="number" value="5000" data-h="salary" onchange="calcPro()"></div><div class="hire-field"><label>Start Month</label><input type="number" value="6" min="1" max="36" data-h="month" onchange="calcPro()"></div><button class="stream-remove" onclick="removeHire('+(hireCount-1)+')">×</button>';
+            list.appendChild(div);calcPro();
+        };
+        window.removeHire=function(i){const el=document.querySelector('.hire-item[data-hire="'+i+'"]');if(el)el.remove();calcPro()};
+
+        /* ── PRO: EXPENSE UPDATE ──────────────────────────────── */
+        window.calcPro=function(){
+            // Update expense display values
+            document.querySelectorAll('[data-exp]').forEach(s=>{
+                const key=s.getAttribute('data-exp');
+                const valEl=document.getElementById('exp-'+key+'-val');
+                if(valEl)valEl.textContent=fmt(+s.value);
+            });
+            const total=[...document.querySelectorAll('[data-exp]')].reduce((a,s)=>a+(+s.value),0);
+            document.getElementById('exp-total').textContent=fmt(total)+' ';
+            calculate(); // Re-run main calculation
+        };
+
+        /* ── SAVE / LOAD ──────────────────────────────────────── */
+        document.getElementById('btn-save').addEventListener('click',()=>{
+            const data={};Object.keys(S).forEach(k=>data[k]=S[k].value);
+            data.model=modelSelect.value;
+            localStorage.setItem('coastline_model',JSON.stringify(data));
+            const btn=document.getElementById('btn-save');btn.textContent='✓ Saved!';setTimeout(()=>btn.textContent='💾 Save Model',2000);
+        });
+
+        function loadModel(){
+            const raw=localStorage.getItem('coastline_model');
+            if(!raw)return;try{const data=JSON.parse(raw);Object.keys(S).forEach(k=>{if(data[k])S[k].value=data[k]});if(data.model)modelSelect.value=data.model}catch(e){}
+        }
+        loadModel();
+
+        /* ── PDF EXPORT ───────────────────────────────────────── */
+        document.getElementById('btn-export').addEventListener('click',()=>{window.print()});
+
+        /* ── EVENT LISTENERS ──────────────────────────────────── */
+        Object.values(S).forEach(s=>s.addEventListener('input',calculate));
+        modelSelect.addEventListener('change',calculate);
+
         calculate();
 
-        // ── Scroll Reveal ──────────────────────────────────────────────
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        revealElements.forEach(el => revealObserver.observe(el));
-
+        /* ── SCROLL REVEAL ────────────────────────────────────── */
+        const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+        document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
     })();
     </script>
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script>
 </body>
 </html>
