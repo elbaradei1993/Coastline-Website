@@ -457,6 +457,40 @@
         }
         checkPro();
 
+        /* ── DEV TOGGLE (Ctrl+Shift+P x3) ────────────────────── */
+        (function(){
+            var devTaps=0,devTimer=null;
+            document.addEventListener('keydown',function(e){
+                if(e.ctrlKey&&e.shiftKey&&e.code==='KeyP'){
+                    e.preventDefault();
+                    devTaps++;
+                    clearTimeout(devTimer);
+                    devTimer=setTimeout(function(){devTaps=0},2000);
+                    if(devTaps>=3){
+                        devTaps=0;
+                        isPro=!isPro;
+                        if(isPro){
+                            localStorage.setItem('coastline_pro','true');
+                            document.body.classList.add('pro-active');
+                            document.getElementById('btn-export-xlsx').style.display='';
+                            document.getElementById('btn-export-pdf').style.display='';
+                        }else{
+                            localStorage.removeItem('coastline_pro');
+                            document.body.classList.remove('pro-active');
+                            document.getElementById('btn-export-xlsx').style.display='none';
+                            document.getElementById('btn-export-pdf').style.display='none';
+                        }
+                        var n=document.createElement('div');
+                        n.textContent=isPro?'\uD83D\uDD13 Dev Mode: Pro Unlocked':'\uD83D\uDD12 Dev Mode: Pro Locked';
+                        n.style.cssText='position:fixed;top:90px;left:50%;transform:translateX(-50%);z-index:9999;background:'+(isPro?'rgba(78,205,196,.15)':'rgba(255,68,68,.15)')+';border:1px solid '+(isPro?'rgba(78,205,196,.3)':'rgba(255,68,68,.3)')+';color:'+(isPro?'#4ecdc4':'#ff4444')+';padding:10px 24px;font-family:Inter,sans-serif;font-size:.75rem;font-weight:400;letter-spacing:.05em;backdrop-filter:blur(10px);transition:opacity .4s ease';
+                        document.body.appendChild(n);
+                        setTimeout(function(){n.style.opacity='0';setTimeout(function(){n.remove()},500)},1500);
+                        calculate();
+                    }
+                }
+            });
+        })();
+
         /* ── BENCHMARKS ───────────────────────────────────────── */
         const benchmarks={
             saas:{churn:{low:3,avg:5,high:8,warning:'Average B2B SaaS monthly churn is 3–8%.'},conversion:{low:2,avg:5,high:8,warning:'Average SaaS free-to-paid conversion is 2–8%.'},customers:{first_year_avg:15,warning:'Most SaaS startups acquire 10–20 customers/month in year 1.'}},
