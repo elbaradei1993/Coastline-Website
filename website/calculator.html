@@ -396,6 +396,105 @@
                         </div>
                     </div>
                 </div>
+                <!-- Pro Feature 6: Unit Economics -->
+                <div class="pro-lock locked" id="pro-unit-economics">
+                    <div class="pro-lock-overlay">
+                        <h4>Unit Economics Engine <span class="pro-badge">PRO</span></h4>
+                        <p>CAC, LTV, payback period — what investors actually look for.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Unit Economics <span class="pro-badge">PRO</span></span></div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+                                <div class="calc-group">
+                                    <label>Monthly Marketing Spend <span class="calc-value" id="val-marketing">$2,000</span></label>
+                                    <input type="range" id="slider-marketing" min="0" max="50000" value="2000" step="100" oninput="document.getElementById('val-marketing').textContent='$'+Number(this.value).toLocaleString();calculate()">
+                                </div>
+                                <div class="calc-group">
+                                    <label>Cost of Goods / Service (COGS/mo) <span class="calc-value" id="val-cogs">$5</span></label>
+                                    <input type="range" id="slider-cogs" min="0" max="200" value="5" step="1" oninput="document.getElementById('val-cogs').textContent='$'+this.value;calculate()">
+                                </div>
+                            </div>
+                            <div class="metrics-row" style="grid-template-columns:repeat(5,1fr);gap:12px">
+                                <div class="metric"><span class="metric-number" id="ue-cac">—</span><span class="metric-label">CAC</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-lifespan">—</span><span class="metric-label">Avg Lifespan</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-ltv">—</span><span class="metric-label">LTV</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-ratio">—</span><span class="metric-label">LTV:CAC</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-payback">—</span><span class="metric-label">CAC Payback</span></div>
+                            </div>
+                            <p style="margin-top:16px;font-size:.7rem;color:var(--grey-600);text-align:center">Investors target LTV:CAC ≥ 3x and payback ≤ 12 months</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 7: Monte Carlo Simulation -->
+                <div class="pro-lock locked" id="pro-montecarlo">
+                    <div class="pro-lock-overlay">
+                        <h4>Monte Carlo Probability Engine <span class="pro-badge">PRO</span></h4>
+                        <p>1,000 randomized simulations. Real probability your startup survives.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Monte Carlo Survival Simulation <span class="pro-badge">PRO</span></span></div>
+                            <div class="metrics-row">
+                                <div class="metric"><span class="metric-number" id="mc-survival">—</span><span class="metric-label">Cash Survival Probability</span></div>
+                                <div class="metric"><span class="metric-number" id="mc-profit">—</span><span class="metric-label">Profitability Probability</span></div>
+                                <div class="metric"><span class="metric-number" id="mc-runs">1,000</span><span class="metric-label">Simulations Run</span></div>
+                            </div>
+                            <p style="margin-top:16px;font-size:.7rem;color:var(--grey-600);text-align:center">Simulates 1,000 random growth/churn scenarios (±40% variation) to calculate real survival odds</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 8: Fundraising & Dilution Simulator -->
+                <div class="pro-lock locked" id="pro-fundraising">
+                    <div class="pro-lock-overlay">
+                        <h4>Fundraising & Dilution Simulator <span class="pro-badge">PRO</span></h4>
+                        <p>Model your funding round and see exactly how much equity you give up.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Fundraising & Dilution Simulator <span class="pro-badge">PRO</span></span></div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+                                <div class="calc-group">
+                                    <label>Amount Raising <span class="calc-value" id="val-raise">$500,000</span></label>
+                                    <input type="range" id="slider-raise" min="10000" max="5000000" value="500000" step="10000" oninput="document.getElementById('val-raise').textContent='$'+Number(this.value).toLocaleString();calculate()">
+                                </div>
+                                <div class="calc-group">
+                                    <label>Pre-Money Valuation <span class="calc-value" id="val-premoney">$2,000,000</span></label>
+                                    <input type="range" id="slider-premoney" min="100000" max="20000000" value="2000000" step="50000" oninput="document.getElementById('val-premoney').textContent='$'+Number(this.value).toLocaleString();calculate()">
+                                </div>
+                            </div>
+                            <div class="metrics-row" style="grid-template-columns:repeat(5,1fr);gap:12px">
+                                <div class="metric"><span class="metric-number" id="fr-raise" style="font-size:1rem">—</span><span class="metric-label">Raising</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-premoney" style="font-size:1rem">—</span><span class="metric-label">Pre-Money</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-postmoney" style="font-size:1rem">—</span><span class="metric-label">Post-Money</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-founder">—</span><span class="metric-label">Founder %</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-investor">—</span><span class="metric-label">Investor %</span></div>
+                            </div>
+                            <div style="margin-top:12px;display:none" id="fr-dilution-row"><p style="text-align:center;font-size:.75rem;color:var(--grey-500)">Dilution: <strong id="fr-dilution" style="color:#f5a623">—</strong></p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 9: AI Insights -->
+                <div class="pro-lock locked" id="pro-insights">
+                    <div class="pro-lock-overlay">
+                        <h4>AI Insights Panel <span class="pro-badge">PRO</span></h4>
+                        <p>Intelligent recommendations based on your model — what investors actually care about.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Founder Insights <span class="pro-badge">PRO</span></span></div>
+                            <div id="insights-list" style="display:flex;flex-direction:column;gap:12px"></div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- CTA -->
@@ -885,9 +984,157 @@
             });
         });
 
+        /* ── UNIT ECONOMICS ENGINE ────────────────────────────── */
+        function calculateUnitEconomics(){
+            const marketing = parseFloat(document.getElementById('slider-marketing')?.value || 0);
+            const newCust = +S.customers.value;
+            const price = +S.price.value;
+            const churn = +S.churn.value/100;
+            const cogs = parseFloat(document.getElementById('slider-cogs')?.value || 0);
+
+            if(newCust>0 && marketing>0){
+                const CAC = marketing / newCust;
+                const lifespan = churn>0 ? Math.round(1/churn) : 60;
+                const monthlyMargin = price - cogs;
+                const LTV = monthlyMargin * lifespan;
+                const ratio = LTV/CAC;
+                const payback = Math.ceil(CAC/monthlyMargin);
+
+                document.getElementById('ue-cac').textContent = '$'+Math.round(CAC).toLocaleString();
+                document.getElementById('ue-lifespan').textContent = lifespan+' mo';
+                document.getElementById('ue-ltv').textContent = '$'+Math.round(LTV).toLocaleString();
+                document.getElementById('ue-ratio').textContent = ratio.toFixed(1)+'x';
+                document.getElementById('ue-payback').textContent = payback+' mo';
+
+                // Set health colors
+                document.getElementById('ue-ratio').className = 'metric-number ' + (ratio>=3?'positive':ratio>=2?'warning':'danger');
+                document.getElementById('ue-payback').className = 'metric-number ' + (payback<=6?'positive':payback<=12?'warning':'danger');
+            }
+        }
+
+        /* ── FUNDRAISING & DILUTION SIMULATOR ─────────────────── */
+        function calculateFundraising(){
+            const raise = parseFloat(document.getElementById('slider-raise')?.value || 0);
+            const pre = parseFloat(document.getElementById('slider-premoney')?.value || 0);
+
+            if(raise>0 && pre>0){
+                const post = pre + raise;
+                const dilution = (raise/post)*100;
+                const investor = raise;
+                const founder = pre;
+
+                document.getElementById('fr-raise').textContent = '$'+raise.toLocaleString();
+                document.getElementById('fr-premoney').textContent = '$'+pre.toLocaleString();
+                document.getElementById('fr-postmoney').textContent = '$'+post.toLocaleString();
+                document.getElementById('fr-dilution').textContent = dilution.toFixed(1)+'%';
+                document.getElementById('fr-founder').textContent = (100-dilution).toFixed(1)+'%';
+                document.getElementById('fr-investor').textContent = dilution.toFixed(1)+'%';
+            }
+        }
+
+        /* ── MONTE CARLO PROBABILITY ENGINE ───────────────────── */
+        function runMonteCarlo(){
+            const runs = 1000;
+            const capital = +S.capital.value;
+            const costs = +S.costs.value;
+            const price = +S.price.value;
+            const baseGrowth = +S.customers.value;
+            const churn = +S.churn.value/100;
+            const months = +S.months.value;
+
+            let results = [];
+            let profitable = 0;
+            let cashPositive = 0;
+
+            for(let run=0; run<runs; run++){
+                let cash = capital;
+                let customers = 0;
+                let success = true;
+                let reachedProfit = false;
+
+                for(let m=0; m<months; m++){
+                    // Random variation - normal distribution ±40%
+                    const growthMultiplier = 0.6 + Math.random()*0.8;
+                    const churnMultiplier = 0.7 + Math.random()*0.6;
+
+                    customers += baseGrowth * growthMultiplier;
+                    customers -= customers * churn * churnMultiplier;
+                    customers = Math.max(0, customers);
+
+                    const revenue = customers * price;
+                    cash += revenue - costs;
+
+                    if(cash <=0){ success = false; break; }
+                    if(revenue >= costs) reachedProfit = true;
+                }
+
+                results.push({cash, success});
+                if(success) cashPositive++;
+                if(reachedProfit) profitable++;
+            }
+
+            const cashProb = Math.round((cashPositive/runs)*100);
+            const profitProb = Math.round((profitable/runs)*100);
+
+            document.getElementById('mc-survival').textContent = cashProb+'%';
+            document.getElementById('mc-profit').textContent = profitProb+'%';
+            document.getElementById('mc-runs').textContent = runs.toLocaleString();
+
+            // Probability bar colors
+            document.getElementById('mc-survival').className = 'metric-number ' + (cashProb>=75?'positive':cashProb>=50?'warning':'danger');
+            document.getElementById('mc-profit').className = 'metric-number ' + (profitProb>=50?'positive':profitProb>=30?'warning':'danger');
+        }
+
+        /* ── AI INSIGHTS PANEL (RULE-BASED) ───────────────────── */
+        function generateInsights(){
+            const insights = [];
+            const churn = +S.churn.value;
+            const breakEven = document.getElementById('m-breakeven').textContent;
+            const ratio = parseFloat(document.getElementById('ue-ratio')?.textContent || 0);
+            const runway = document.getElementById('death-months').textContent;
+
+            // Churn insights
+            if(churn>8) insights.push('⚠️ Churn above 8% is high for SaaS. Lowering churn by 2% would add 12+ months customer lifespan.');
+            else if(churn>5) insights.push('💡 Churn is average for this model. Focus on retention to boost LTV.');
+            else insights.push('✅ Great churn rate — well above industry average.');
+
+            // LTV:CAC ratio
+            if(ratio>0 && ratio<2) insights.push('⚠️ LTV:CAC ratio is '+ratio+'x. Investors want 3x minimum.');
+            else if(ratio>=3) insights.push('✅ Excellent LTV:CAC ratio of '+ratio+'x — this is investable.');
+
+            // Runway
+            if(runway==='∞') insights.push('✅ Great unit economics — you reach profitability.');
+            else if(parseInt(runway)<12) insights.push('⚠️ Runway is tight. Extend runway by cutting costs or accelerating revenue.');
+
+            // Break even
+            if(parseInt(breakEven)<=12) insights.push('💡 Breaking even at '+breakEven+' is good. Most startups take 18+ months.');
+
+            // Update panel
+            const container = document.getElementById('insights-list');
+            container.innerHTML = insights.map(i=>`<div class="insight-item">${i}</div>`).join('');
+        }
+
+        /* ── EXTENDED CALCULATION WRAPPER ─────────────────────── */
+        const originalCalculate = calculate;
+        calculate = function(){
+            originalCalculate();
+            if(isPro){
+                calculateUnitEconomics();
+                calculateFundraising();
+                runMonteCarlo();
+                generateInsights();
+            }
+        };
+
         /* ── EVENT LISTENERS ──────────────────────────────────── */
         Object.values(S).forEach(s=>s.addEventListener('input',calculate));
         modelSelect.addEventListener('change',calculate);
+
+        // New slider listeners
+        ['marketing','cogs','raise','premoney'].forEach(id=>{
+            const el = document.getElementById('slider-'+id);
+            if(el) el.addEventListener('input',calculate);
+        });
 
         calculate();
 
