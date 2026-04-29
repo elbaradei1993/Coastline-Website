@@ -1,0 +1,1148 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FounderMath | Coastline Digital Solutions</title>
+    <meta name="description" content="Will your startup survive? Free interactive tool with real-time charts, industry benchmarks, and Pro financial modeling with multiple revenue streams, expense breakdown, and investor-ready exports.">
+    <meta property="og:title" content="FounderMath | Coastline Digital Solutions">
+    <meta property="og:description" content="Move sliders. See your future. The reality check every founder needs.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        .calc-section{padding:100px 0 140px}
+        .calc-full-width{max-width:960px;margin:0 auto}
+        .calc-layout{display:grid;grid-template-columns:380px 1fr;gap:48px;align-items:start}
+        .calc-panel{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px;position:sticky;top:100px}
+        .calc-panel-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:28px;display:flex;justify-content:space-between;align-items:center}
+        .calc-group{margin-bottom:24px}
+        .calc-group label{display:flex;justify-content:space-between;align-items:baseline;font-size:.75rem;font-weight:300;color:var(--grey-400);margin-bottom:10px;letter-spacing:.02em}
+        .calc-value{font-weight:500;color:var(--white);font-size:.85rem;font-variant-numeric:tabular-nums}
+        .calc-group select{width:100%;padding:10px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.12);outline:none;-webkit-appearance:none;cursor:pointer}
+        .calc-group select option{background:var(--black);color:var(--white)}
+        input[type="range"]{-webkit-appearance:none;width:100%;height:1px;background:rgba(255,255,255,.15);outline:none;cursor:pointer}
+        input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--white);border:none;cursor:pointer;transition:transform .2s ease}
+        input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.3)}
+        input[type="range"]::-moz-range-thumb{width:16px;height:16px;background:var(--white);border:none;cursor:pointer}
+        .reality-check{display:none;font-size:.7rem;font-weight:300;color:#f5a623;margin-top:6px;padding:6px 10px;border-left:2px solid #f5a623;background:rgba(245,166,35,.05);line-height:1.5}
+        .reality-check.visible{display:block;animation:fadeInUp .3s ease}
+        .calc-results{display:flex;flex-direction:column;gap:32px}
+        .result-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px}
+        .result-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+        .result-card-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500)}
+        .death-clock{text-align:center;padding:40px 32px}
+        .death-verdict{font-size:.65rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:16px}
+        .death-months{font-size:clamp(3rem,8vw,5rem);font-weight:200;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+        .death-months.danger{color:#ff4444}.death-months.warning{color:#f5a623}.death-months.safe{color:#4ecdc4}.death-months.profit{color:#4ecdc4}
+        .death-label{font-size:.85rem;font-weight:300;color:var(--grey-400)}
+        .death-subtitle{font-size:.8rem;font-weight:300;color:var(--grey-500);margin-top:16px}
+        .metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .metric{text-align:center;padding:20px 12px;border:1px solid rgba(255,255,255,.06)}
+        .metric-number{font-size:1.4rem;font-weight:200;display:block;margin-bottom:4px;font-variant-numeric:tabular-nums}
+        .metric-label{font-size:.6rem;font-weight:300;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-500)}
+        .chart-container{position:relative;height:300px;width:100%}
+        .calc-cta{text-align:center;padding:48px 32px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+        .calc-cta h3{font-size:1.3rem;font-weight:300;margin-bottom:12px}
+        .calc-cta p{font-size:.9rem;font-weight:300;color:var(--grey-400);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto}
+
+        /* ── PRO FEATURES ──────────────────────────────────────── */
+        .pro-section{position:relative;margin-top:48px}
+        .pro-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;margin-left:8px;vertical-align:middle}
+        .pro-lock{position:relative;overflow:hidden}
+        .pro-lock.locked .pro-lock-content{filter:blur(6px);pointer-events:none;user-select:none}
+        .pro-lock-overlay{display:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px}
+        .pro-lock.locked .pro-lock-overlay{display:flex}
+        .pro-lock-overlay h4{font-size:1.1rem;font-weight:300;margin-bottom:8px}
+        .pro-lock-overlay p{font-size:.8rem;font-weight:300;color:var(--grey-400);margin-bottom:20px;max-width:320px}
+        .pro-unlock-btn{display:inline-block;text-decoration:none;font-family:var(--font);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 28px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;border:none;cursor:pointer;transition:all .3s ease}
+        .pro-unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,.3)}
+
+        /* Pro Upgrade Banner */
+        .pro-banner{border:1px solid rgba(245,166,35,.2);background:linear-gradient(135deg,rgba(245,166,35,.05),rgba(232,145,12,.02));padding:32px;text-align:center;margin-bottom:32px}
+        .pro-banner.hidden{display:none}
+        .pro-banner h3{font-size:1.1rem;font-weight:300;margin-bottom:8px}
+        .pro-banner p{font-size:.85rem;font-weight:300;color:var(--grey-400);margin-bottom:20px}
+        .pro-features-list{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px}
+        .pro-feature-tag{font-size:.65rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(245,166,35,.2);color:#f5a623}
+
+        /* Revenue Streams */
+        .stream-list{display:flex;flex-direction:column;gap:16px;margin-bottom:16px}
+        .stream-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);position:relative}
+        .stream-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+        .stream-item-name{font-size:.85rem;font-weight:400;color:var(--white)}
+        .stream-remove{background:none;border:none;color:var(--grey-600);cursor:pointer;font-size:1.2rem;padding:4px 8px;transition:color .2s}
+        .stream-remove:hover{color:#ff4444}
+        .stream-fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .stream-field label{font-size:.65rem;margin-bottom:4px}
+        .stream-field input,.stream-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
+        .stream-field input::placeholder{color:var(--grey-700)}
+        .add-stream-btn{width:100%;padding:12px;font-family:var(--font);font-size:.75rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;background:transparent;color:var(--grey-500);border:1px dashed rgba(255,255,255,.1);cursor:pointer;transition:all .2s}
+        .add-stream-btn:hover{border-color:rgba(255,255,255,.3);color:var(--white)}
+
+        /* Expense Categories */
+        .expense-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .expense-item{padding:16px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+        .expense-item label{display:flex;justify-content:space-between;font-size:.7rem;font-weight:300;color:var(--grey-400);margin-bottom:8px}
+        .expense-item input{width:100%;padding:8px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
+
+        /* Hiring Timeline */
+        .hire-list{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+        .hire-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
+        .hire-field label{display:block;font-size:.65rem;font-weight:300;color:var(--grey-400);margin-bottom:4px}
+        .hire-field input,.hire-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
+
+        /* P&L Table */
+        .pnl-table-wrapper{overflow-x:auto;margin-top:16px}
+        .pnl-table{width:100%;border-collapse:collapse;font-size:.7rem;font-weight:300}
+        .pnl-table th{text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.1);color:var(--grey-500);font-weight:400;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+        .pnl-table td{padding:6px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--grey-300);white-space:nowrap;font-variant-numeric:tabular-nums}
+        .pnl-table tr:hover td{background:rgba(255,255,255,.02)}
+        .pnl-table .negative{color:#ff4444}
+        .pnl-table .positive{color:#4ecdc4}
+        .pnl-table .row-label{color:var(--grey-400);font-weight:400}
+
+        /* Save/Export Bar */
+        .action-bar{display:flex;gap:12px;justify-content:flex-end;margin-bottom:24px;flex-wrap:wrap}
+        .action-bar .btn{font-size:.7rem;padding:10px 20px}
+
+        /* Pro Active State */
+        .pro-active-badge{display:none;font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#4ecdc4;border:1px solid rgba(78,205,196,.3);padding:3px 8px}
+        body.pro-active .pro-active-badge{display:inline-block}
+        body.pro-active .pro-lock.locked .pro-lock-content{filter:none;pointer-events:all;user-select:auto}
+        body.pro-active .pro-lock.locked .pro-lock-overlay{display:none}
+        body.pro-active .pro-banner{display:none}
+
+        @media(max-width:968px){.calc-layout{grid-template-columns:1fr}.calc-panel{position:static}.metrics-row{grid-template-columns:1fr;gap:12px}.stream-fields{grid-template-columns:1fr}.expense-grid{grid-template-columns:1fr}.hire-item{grid-template-columns:1fr}}
+        @media(max-width:640px){.calc-section{padding:80px 0 100px}.calc-panel{padding:24px}.result-card{padding:24px}.death-clock{padding:32px 20px}}
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo"><img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img"></a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu"><span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span></button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="startup.html">Startups</a></li>
+                <li><a href="#" class="active-page">FounderMath</a></li>
+                <li><a href="index.html#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobile-overlay">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="startup.html">Startups</a></li>
+            <li><a href="#">FounderMath</a></li>
+            <li><a href="index.html#contact" class="nav-cta-mobile">Get Started</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero -->
+    <section class="section hero-section" style="min-height:70vh;">
+        <div class="hero-content">
+            <p class="hero-tagline fade-in">Free Tool + Pro Upgrade</p>
+            <h1 class="hero-title fade-in delay-1">Founder<br><em>Math</em><span class="accent-dot">.</span></h1>
+            <p class="hero-subtitle fade-in delay-2">Move sliders. See your future. The interactive reality check that tells you if your startup will survive, and calls you out when the numbers don't add up.</p>
+        </div>
+    </section>
+
+    <!-- Calculator -->
+    <section class="section calc-section">
+        <div class="container">
+            <!-- Action Bar -->
+            <div class="action-bar" id="action-bar">
+                <span class="pro-active-badge">✓ Pro Unlocked</span>
+                <button class="btn btn-ghost" id="btn-save" title="Save model to browser">💾 Save Model</button>
+                <button class="btn btn-ghost" id="btn-export-xlsx" style="display:none" title="Download Excel Financial Model">📊 Download Model (.xlsx)</button>
+                <button class="btn btn-ghost" id="btn-export-pdf" style="display:none" title="Export PDF Report">📄 Export PDF</button>
+            </div>
+
+            <div class="calc-layout">
+                <!-- Input Panel -->
+                <div class="calc-panel">
+                    <p class="calc-panel-title">Your Numbers</p>
+
+                    <div class="calc-group">
+                        <label for="model-select">Business Model</label>
+                        <select id="model-select">
+                            <option value="saas">SaaS / Subscription</option>
+                            <option value="marketplace">Marketplace</option>
+                            <option value="ecommerce">E-Commerce</option>
+                            <option value="service">Service / Agency</option>
+                            <option value="freemium">Freemium / Ad-supported</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-group">
+                        <label>Starting Capital <span class="calc-value" id="val-capital">$50,000</span></label>
+                        <input type="range" id="slider-capital" min="1000" max="500000" value="50000" step="1000">
+                    </div>
+
+                    <div class="calc-group">
+                        <label>Monthly Costs <span class="calc-value" id="val-costs">$5,000</span></label>
+                        <input type="range" id="slider-costs" min="500" max="100000" value="5000" step="500">
+                    </div>
+
+                    <div class="calc-group">
+                        <label>Price per Customer/mo <span class="calc-value" id="val-price">$29</span></label>
+                        <input type="range" id="slider-price" min="1" max="500" value="29" step="1">
+                    </div>
+
+                    <div class="calc-group">
+                        <label>New Customers / Month <span class="calc-value" id="val-customers">20</span></label>
+                        <input type="range" id="slider-customers" min="1" max="500" value="20" step="1">
+                        <div class="reality-check" id="rc-customers"></div>
+                    </div>
+
+                    <div class="calc-group">
+                        <label>Monthly Churn Rate <span class="calc-value" id="val-churn">5%</span></label>
+                        <input type="range" id="slider-churn" min="0" max="30" value="5" step="0.5">
+                        <div class="reality-check" id="rc-churn"></div>
+                    </div>
+
+                    <div class="calc-group">
+                        <label>Conversion Rate <span class="calc-value" id="val-conversion">3%</span></label>
+                        <input type="range" id="slider-conversion" min="0.5" max="30" value="3" step="0.5">
+                        <div class="reality-check" id="rc-conversion"></div>
+                    </div>
+
+                    <div class="calc-group">
+                        <label>Projection Length <span class="calc-value" id="val-months">24 months</span></label>
+                        <input type="range" id="slider-months" min="12" max="36" value="24" step="6">
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="calc-results">
+                    <!-- Death Clock -->
+                    <div class="result-card death-clock">
+                        <p class="death-verdict" id="death-verdict">Your Runway</p>
+                        <p class="death-months safe" id="death-months">—</p>
+                        <p class="death-label" id="death-label">months until lights out</p>
+                        <p class="death-subtitle" id="death-subtitle"></p>
+                    </div>
+
+                    <!-- Key Metrics -->
+                    <div class="metrics-row">
+                        <div class="metric"><span class="metric-number" id="m-breakeven">—</span><span class="metric-label">Months to Break-Even</span></div>
+                        <div class="metric"><span class="metric-number" id="m-customers-needed">—</span><span class="metric-label">Customers to Break-Even</span></div>
+                        <div class="metric"><span class="metric-number" id="m-burn">—</span><span class="metric-label">Monthly Burn Rate</span></div>
+                    </div>
+
+                    <!-- Revenue vs Costs Chart -->
+                    <div class="result-card">
+                        <div class="result-card-header"><span class="result-card-title">Revenue vs Costs</span></div>
+                        <div class="chart-container"><canvas id="chart-revenue"></canvas></div>
+                    </div>
+
+                    <!-- Cash Balance Chart -->
+                    <div class="result-card">
+                        <div class="result-card-header"><span class="result-card-title">Cash Balance Over Time</span></div>
+                        <div class="chart-container"><canvas id="chart-cash"></canvas></div>
+                    </div>
+
+                    <!-- Customer Growth Chart -->
+                    <div class="result-card">
+                        <div class="result-card-header"><span class="result-card-title">Customer Growth (with Churn)</span></div>
+                        <div class="chart-container"><canvas id="chart-customers"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════ PRO FEATURES ═══════ -->
+            <div class="pro-section">
+                <!-- Upgrade Banner -->
+                <div class="pro-banner" id="pro-banner">
+                    <h3>Unlock the Full Financial Modeler <span class="pro-badge">PRO</span></h3>
+                    <p>Go beyond the basics — model multiple revenue streams, plan hiring, break down expenses, and export investor-ready reports.</p>
+                    <div class="pro-features-list">
+                        <span class="pro-feature-tag">Multiple Revenue Streams</span>
+                        <span class="pro-feature-tag">Expense Breakdown</span>
+                        <span class="pro-feature-tag">Hiring Timeline</span>
+                        <span class="pro-feature-tag">Sensitivity Analysis</span>
+                        <span class="pro-feature-tag">P&L Summary</span>
+                        <span class="pro-feature-tag">PDF Export</span>
+                    </div>
+                    <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn" id="pro-buy-btn">Unlock Pro — $29</a>
+                </div>
+
+                <!-- Pro Feature 1: Revenue Streams -->
+                <div class="pro-lock locked" id="pro-streams">
+                    <div class="pro-lock-overlay">
+                        <h4>Multiple Revenue Streams <span class="pro-badge">PRO</span></h4>
+                        <p>Model different products, plans, and pricing tiers side by side.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header">
+                                <span class="result-card-title">Revenue Streams <span class="pro-badge">PRO</span></span>
+                            </div>
+                            <div class="stream-list" id="stream-list">
+                                <div class="stream-item" data-stream="0">
+                                    <div class="stream-item-header">
+                                        <span class="stream-item-name">Stream 1: Basic Plan</span>
+                                        <button class="stream-remove" onclick="removeStream(0)">×</button>
+                                    </div>
+                                    <div class="stream-fields">
+                                        <div class="stream-field"><label>Name</label><input type="text" value="Basic Plan" onchange="updateStreamName(0,this.value)" placeholder="Product name"></div>
+                                        <div class="stream-field"><label>Price/mo</label><input type="number" value="19" data-field="price" onchange="calcPro()" placeholder="$"></div>
+                                        <div class="stream-field"><label>New customers/mo</label><input type="number" value="15" data-field="customers" onchange="calcPro()" placeholder="#"></div>
+                                        <div class="stream-field"><label>Monthly churn %</label><input type="number" value="5" data-field="churn" onchange="calcPro()" step="0.5" placeholder="%"></div>
+                                    </div>
+                                </div>
+                                <div class="stream-item" data-stream="1">
+                                    <div class="stream-item-header">
+                                        <span class="stream-item-name">Stream 2: Pro Plan</span>
+                                        <button class="stream-remove" onclick="removeStream(1)">×</button>
+                                    </div>
+                                    <div class="stream-fields">
+                                        <div class="stream-field"><label>Name</label><input type="text" value="Pro Plan" onchange="updateStreamName(1,this.value)" placeholder="Product name"></div>
+                                        <div class="stream-field"><label>Price/mo</label><input type="number" value="49" data-field="price" onchange="calcPro()" placeholder="$"></div>
+                                        <div class="stream-field"><label>New customers/mo</label><input type="number" value="8" data-field="customers" onchange="calcPro()" placeholder="#"></div>
+                                        <div class="stream-field"><label>Monthly churn %</label><input type="number" value="3" data-field="churn" onchange="calcPro()" step="0.5" placeholder="%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="add-stream-btn" onclick="addStream()">+ Add Revenue Stream</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 2: Expense Breakdown -->
+                <div class="pro-lock locked" id="pro-expenses">
+                    <div class="pro-lock-overlay">
+                        <h4>Expense Breakdown <span class="pro-badge">PRO</span></h4>
+                        <p>Break down costs by category to see where your money goes.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Monthly Expenses <span class="pro-badge">PRO</span></span></div>
+                            <div class="expense-grid" id="expense-grid">
+                                <div class="expense-item"><label>Team & Salaries <span class="calc-value exp-val" id="exp-team-val">$3,000</span></label><input type="range" min="0" max="50000" value="3000" step="500" data-exp="team" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Marketing <span class="calc-value exp-val" id="exp-marketing-val">$1,000</span></label><input type="range" min="0" max="20000" value="1000" step="100" data-exp="marketing" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Tools & Software <span class="calc-value exp-val" id="exp-tools-val">$500</span></label><input type="range" min="0" max="5000" value="500" step="50" data-exp="tools" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Operations <span class="calc-value exp-val" id="exp-ops-val">$300</span></label><input type="range" min="0" max="10000" value="300" step="100" data-exp="ops" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Office / Rent <span class="calc-value exp-val" id="exp-rent-val">$0</span></label><input type="range" min="0" max="10000" value="0" step="100" data-exp="rent" oninput="calcPro()"></div>
+                                <div class="expense-item"><label>Other <span class="calc-value exp-val" id="exp-other-val">$200</span></label><input type="range" min="0" max="10000" value="200" step="100" data-exp="other" oninput="calcPro()"></div>
+                            </div>
+                            <div style="margin-top:16px;text-align:right;font-size:.85rem;color:var(--grey-400)">Total: <strong id="exp-total" style="color:var(--white)">$5,000</strong>/mo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 3: Hiring Timeline -->
+                <div class="pro-lock locked" id="pro-hiring">
+                    <div class="pro-lock-overlay">
+                        <h4>Hiring Timeline <span class="pro-badge">PRO</span></h4>
+                        <p>Plan when to hire and see the impact on your runway.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Hiring Plan <span class="pro-badge">PRO</span></span></div>
+                            <div class="hire-list" id="hire-list">
+                                <div class="hire-item" data-hire="0">
+                                    <div class="hire-field"><label>Role</label><input type="text" value="Developer" data-h="role" onchange="calcPro()"></div>
+                                    <div class="hire-field"><label>Monthly Salary</label><input type="number" value="6000" data-h="salary" onchange="calcPro()"></div>
+                                    <div class="hire-field"><label>Start Month</label><input type="number" value="4" min="1" max="36" data-h="month" onchange="calcPro()"></div>
+                                    <button class="stream-remove" onclick="removeHire(0)">×</button>
+                                </div>
+                            </div>
+                            <button class="add-stream-btn" onclick="addHire()">+ Add Hire</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 4: Sensitivity Analysis -->
+                <div class="pro-lock locked" id="pro-sensitivity">
+                    <div class="pro-lock-overlay">
+                        <h4>Sensitivity Analysis <span class="pro-badge">PRO</span></h4>
+                        <p>See best-case and worst-case scenarios side by side.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Sensitivity Analysis <span class="pro-badge">PRO</span></span></div>
+                            <div class="chart-container" style="height:350px"><canvas id="chart-sensitivity"></canvas></div>
+                            <div style="margin-top:16px;text-align:center;font-size:.75rem;color:var(--grey-500)">Shows cash balance under optimistic (+50% growth), base, and pessimistic (-50% growth) scenarios</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 5: P&L Summary -->
+                <div class="pro-lock locked" id="pro-pnl">
+                    <div class="pro-lock-overlay">
+                        <h4>P&L Summary Table <span class="pro-badge">PRO</span></h4>
+                        <p>Month-by-month profit & loss breakdown — investor-ready.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Profit & Loss Summary <span class="pro-badge">PRO</span></span></div>
+                            <div class="pnl-table-wrapper"><table class="pnl-table" id="pnl-table"></table></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pro Feature 6: Unit Economics -->
+                <div class="pro-lock locked" id="pro-unit-economics">
+                    <div class="pro-lock-overlay">
+                        <h4>Unit Economics Engine <span class="pro-badge">PRO</span></h4>
+                        <p>CAC, LTV, payback period — what investors actually look for.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Unit Economics <span class="pro-badge">PRO</span></span></div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+                                <div class="calc-group">
+                                    <label>Monthly Marketing Spend <span class="calc-value" id="val-marketing">$2,000</span></label>
+                                    <input type="range" id="slider-marketing" min="0" max="50000" value="2000" step="100" oninput="document.getElementById('val-marketing').textContent='$'+Number(this.value).toLocaleString();calculate()">
+                                </div>
+                                <div class="calc-group">
+                                    <label>Cost of Goods / Service (COGS/mo) <span class="calc-value" id="val-cogs">$5</span></label>
+                                    <input type="range" id="slider-cogs" min="0" max="200" value="5" step="1" oninput="document.getElementById('val-cogs').textContent='$'+this.value;calculate()">
+                                </div>
+                            </div>
+                            <div class="metrics-row" style="grid-template-columns:repeat(5,1fr);gap:12px">
+                                <div class="metric"><span class="metric-number" id="ue-cac">—</span><span class="metric-label">CAC</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-lifespan">—</span><span class="metric-label">Avg Lifespan</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-ltv">—</span><span class="metric-label">LTV</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-ratio">—</span><span class="metric-label">LTV:CAC</span></div>
+                                <div class="metric"><span class="metric-number" id="ue-payback">—</span><span class="metric-label">CAC Payback</span></div>
+                            </div>
+                            <p style="margin-top:16px;font-size:.7rem;color:var(--grey-600);text-align:center">Investors target LTV:CAC ≥ 3x and payback ≤ 12 months</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 7: Monte Carlo Simulation -->
+                <div class="pro-lock locked" id="pro-montecarlo">
+                    <div class="pro-lock-overlay">
+                        <h4>Monte Carlo Probability Engine <span class="pro-badge">PRO</span></h4>
+                        <p>1,000 randomized simulations. Real probability your startup survives.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Monte Carlo Survival Simulation <span class="pro-badge">PRO</span></span></div>
+                            <div class="metrics-row">
+                                <div class="metric"><span class="metric-number" id="mc-survival">—</span><span class="metric-label">Cash Survival Probability</span></div>
+                                <div class="metric"><span class="metric-number" id="mc-profit">—</span><span class="metric-label">Profitability Probability</span></div>
+                                <div class="metric"><span class="metric-number" id="mc-runs">1,000</span><span class="metric-label">Simulations Run</span></div>
+                            </div>
+                            <p style="margin-top:16px;font-size:.7rem;color:var(--grey-600);text-align:center">Simulates 1,000 random growth/churn scenarios (±40% variation) to calculate real survival odds</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 8: Fundraising & Dilution Simulator -->
+                <div class="pro-lock locked" id="pro-fundraising">
+                    <div class="pro-lock-overlay">
+                        <h4>Fundraising & Dilution Simulator <span class="pro-badge">PRO</span></h4>
+                        <p>Model your funding round and see exactly how much equity you give up.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Fundraising & Dilution Simulator <span class="pro-badge">PRO</span></span></div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+                                <div class="calc-group">
+                                    <label>Amount Raising <span class="calc-value" id="val-raise">$500,000</span></label>
+                                    <input type="range" id="slider-raise" min="10000" max="5000000" value="500000" step="10000" oninput="document.getElementById('val-raise').textContent='$'+Number(this.value).toLocaleString();calculate()">
+                                </div>
+                                <div class="calc-group">
+                                    <label>Pre-Money Valuation <span class="calc-value" id="val-premoney">$2,000,000</span></label>
+                                    <input type="range" id="slider-premoney" min="100000" max="20000000" value="2000000" step="50000" oninput="document.getElementById('val-premoney').textContent='$'+Number(this.value).toLocaleString();calculate()">
+                                </div>
+                            </div>
+                            <div class="metrics-row" style="grid-template-columns:repeat(5,1fr);gap:12px">
+                                <div class="metric"><span class="metric-number" id="fr-raise" style="font-size:1rem">—</span><span class="metric-label">Raising</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-premoney" style="font-size:1rem">—</span><span class="metric-label">Pre-Money</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-postmoney" style="font-size:1rem">—</span><span class="metric-label">Post-Money</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-founder">—</span><span class="metric-label">Founder %</span></div>
+                                <div class="metric"><span class="metric-number" id="fr-investor">—</span><span class="metric-label">Investor %</span></div>
+                            </div>
+                            <div style="margin-top:12px;display:none" id="fr-dilution-row"><p style="text-align:center;font-size:.75rem;color:var(--grey-500)">Dilution: <strong id="fr-dilution" style="color:#f5a623">—</strong></p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pro Feature 9: AI Insights -->
+                <div class="pro-lock locked" id="pro-insights">
+                    <div class="pro-lock-overlay">
+                        <h4>AI Insights Panel <span class="pro-badge">PRO</span></h4>
+                        <p>Intelligent recommendations based on your model — what investors actually care about.</p>
+                        <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro — $29</a>
+                    </div>
+                    <div class="pro-lock-content">
+                        <div class="result-card">
+                            <div class="result-card-header"><span class="result-card-title">Founder Insights <span class="pro-badge">PRO</span></span></div>
+                            <div id="insights-list" style="display:flex;flex-direction:column;gap:12px"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="calc-cta" style="margin-top:48px">
+                <h3>Numbers check out?</h3>
+                <p>If you've found a viable path, we'll help you build it. Coastline takes startups from validated idea to market.</p>
+                <a href="startup.html#contact" class="btn btn-primary">Launch Your Startup</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="footer-logo-img">
+                    <p class="footer-motto">Your market's missing piece.</p>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" class="footer-email">info@coastlinedigitalsolutions.com</a>
+                    <p class="footer-location">BC, Canada</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#services">Services</a>
+                    <a href="startup.html">Startups</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn" class="social-link"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script>
+    (function(){
+        'use strict';
+
+        /* ── NAV ──────────────────────────────────────────────── */
+        const navbar=document.getElementById('navbar'),navToggle=document.getElementById('nav-toggle'),mobileOverlay=document.getElementById('mobile-overlay'),mobileLinks=document.querySelectorAll('.mobile-nav-links a');
+        function handleNavScroll(){navbar.classList.toggle('scrolled',window.scrollY>50)}
+        window.addEventListener('scroll',handleNavScroll,{passive:true});handleNavScroll();
+        if(navToggle&&mobileOverlay){navToggle.addEventListener('click',()=>{navToggle.classList.toggle('active');mobileOverlay.classList.toggle('active');document.body.style.overflow=mobileOverlay.classList.contains('active')?'hidden':''});mobileLinks.forEach(l=>l.addEventListener('click',()=>{navToggle.classList.remove('active');mobileOverlay.classList.remove('active');document.body.style.overflow=''}))}
+
+        /* ── PRO UNLOCK ───────────────────────────────────────── */
+        let isPro=false;
+        function checkPro(){
+            const params=new URLSearchParams(window.location.search);
+            if(params.get('pro')==='true'){localStorage.setItem('coastline_pro','true');window.history.replaceState({},'',window.location.pathname)}
+            isPro=localStorage.getItem('coastline_pro')==='true';
+            if(isPro){
+                document.body.classList.add('pro-active');
+                document.getElementById('btn-export-xlsx').style.display='';
+                document.getElementById('btn-export-pdf').style.display='';
+            }
+        }
+        checkPro();
+
+        /* ── DEV TOGGLE (Ctrl+Shift+P x3) ────────────────────── */
+        (function(){
+            var devTaps=0,devTimer=null;
+            document.addEventListener('keydown',function(e){
+                if(e.ctrlKey&&e.shiftKey&&e.code==='KeyP'){
+                    e.preventDefault();
+                    devTaps++;
+                    clearTimeout(devTimer);
+                    devTimer=setTimeout(function(){devTaps=0},2000);
+                    if(devTaps>=3){
+                        devTaps=0;
+                        isPro=!isPro;
+                        if(isPro){
+                            localStorage.setItem('coastline_pro','true');
+                            document.body.classList.add('pro-active');
+                            document.getElementById('btn-export-xlsx').style.display='';
+                            document.getElementById('btn-export-pdf').style.display='';
+                        }else{
+                            localStorage.removeItem('coastline_pro');
+                            document.body.classList.remove('pro-active');
+                            document.getElementById('btn-export-xlsx').style.display='none';
+                            document.getElementById('btn-export-pdf').style.display='none';
+                        }
+                        var n=document.createElement('div');
+                        n.textContent=isPro?'\uD83D\uDD13 Dev Mode: Pro Unlocked':'\uD83D\uDD12 Dev Mode: Pro Locked';
+                        n.style.cssText='position:fixed;top:90px;left:50%;transform:translateX(-50%);z-index:9999;background:'+(isPro?'rgba(78,205,196,.15)':'rgba(255,68,68,.15)')+';border:1px solid '+(isPro?'rgba(78,205,196,.3)':'rgba(255,68,68,.3)')+';color:'+(isPro?'#4ecdc4':'#ff4444')+';padding:10px 24px;font-family:Inter,sans-serif;font-size:.75rem;font-weight:400;letter-spacing:.05em;backdrop-filter:blur(10px);transition:opacity .4s ease';
+                        document.body.appendChild(n);
+                        setTimeout(function(){n.style.opacity='0';setTimeout(function(){n.remove()},500)},1500);
+                        calculate();
+                    }
+                }
+            });
+        })();
+
+        /* ── BENCHMARKS ───────────────────────────────────────── */
+        const benchmarks={
+            saas:{churn:{low:3,avg:5,high:8,warning:'Average B2B SaaS monthly churn is 3–8%.'},conversion:{low:2,avg:5,high:8,warning:'Average SaaS free-to-paid conversion is 2–8%.'},customers:{first_year_avg:15,warning:'Most SaaS startups acquire 10–20 customers/month in year 1.'}},
+            marketplace:{churn:{low:5,avg:8,high:15,warning:'Average marketplace churn is 5–15%.'},conversion:{low:1,avg:3,high:6,warning:'Average marketplace conversion is 1–6%.'},customers:{first_year_avg:25,warning:'Most marketplaces acquire 15–40 new users/month early on.'}},
+            ecommerce:{churn:{low:7,avg:10,high:20,warning:'Average e-commerce churn is 7–20%/month.'},conversion:{low:1.5,avg:3,high:5,warning:'Average e-commerce conversion is 1.5–5%.'},customers:{first_year_avg:30,warning:'Most e-commerce startups get 20–50 orders/month in year 1.'}},
+            service:{churn:{low:2,avg:5,high:10,warning:'Average service churn is 2–10%/month.'},conversion:{low:5,avg:10,high:20,warning:'Average service conversion is 5–20%.'},customers:{first_year_avg:5,warning:'Most agencies land 3–8 new clients/month in year 1.'}},
+            freemium:{churn:{low:5,avg:10,high:20,warning:'Average freemium paid churn is 5–20%/month.'},conversion:{low:1,avg:2.5,high:5,warning:'Average freemium conversion is 1–5%.'},customers:{first_year_avg:10,warning:'Most freemium products convert 5–15 paying users/month early.'}}
+        };
+
+        /* ── DOM ───────────────────────────────────────────────── */
+        const S={capital:document.getElementById('slider-capital'),costs:document.getElementById('slider-costs'),price:document.getElementById('slider-price'),customers:document.getElementById('slider-customers'),churn:document.getElementById('slider-churn'),conversion:document.getElementById('slider-conversion'),months:document.getElementById('slider-months')};
+        const V={capital:document.getElementById('val-capital'),costs:document.getElementById('val-costs'),price:document.getElementById('val-price'),customers:document.getElementById('val-customers'),churn:document.getElementById('val-churn'),conversion:document.getElementById('val-conversion'),months:document.getElementById('val-months')};
+        const modelSelect=document.getElementById('model-select');
+
+        /* ── FORMAT ─────────────────────────────────────────────── */
+        const fmt=n=>'$'+n.toLocaleString('en-US');
+        const fmtK=n=>n>=1000000?'$'+(n/1000000).toFixed(1)+'M':n>=1000?'$'+(n/1000).toFixed(n>=10000?0:1)+'k':'$'+n.toLocaleString('en-US');
+
+        /* ── CHARTS ─────────────────────────────────────────────── */
+        const C={white:'rgba(255,255,255,.9)',green:'rgba(78,205,196,.8)',greenF:'rgba(78,205,196,.1)',red:'rgba(255,68,68,.8)',redF:'rgba(255,68,68,.1)',yellow:'rgba(245,166,35,.8)',yellowF:'rgba(245,166,35,.1)'};
+        const cOpts={responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true,labels:{color:'rgba(255,255,255,.5)',font:{family:'Inter',size:11,weight:300},boxWidth:12,padding:16}},tooltip:{backgroundColor:'rgba(0,0,0,.85)',titleFont:{family:'Inter',weight:400},bodyFont:{family:'Inter',weight:300},borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:12}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(255,255,255,.3)',font:{family:'Inter',size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(255,255,255,.3)',font:{family:'Inter',size:10},callback:function(v){return fmtK(v)}}}}};
+
+        let monthLabels=[];
+        function makeLabels(n){return Array.from({length:n},(_,i)=>'M'+(i+1))}
+
+        const revChart=new Chart(document.getElementById('chart-revenue'),{type:'line',data:{labels:[],datasets:[{label:'Revenue',data:[],borderColor:C.green,backgroundColor:C.greenF,fill:true,tension:.3,borderWidth:2,pointRadius:0},{label:'Costs',data:[],borderColor:C.red,backgroundColor:C.redF,fill:true,tension:0,borderWidth:2,pointRadius:0,borderDash:[6,4]}]},options:cOpts});
+        const cashOpts=JSON.parse(JSON.stringify(cOpts));cashOpts.plugins.legend={display:false};
+        const cashChart=new Chart(document.getElementById('chart-cash'),{type:'line',data:{labels:[],datasets:[{label:'Cash',data:[],borderColor:C.green,backgroundColor:C.greenF,fill:true,tension:.3,borderWidth:2,pointRadius:0,segment:{borderColor:ctx=>ctx.p1.parsed.y<0?C.red:C.green,backgroundColor:ctx=>ctx.p1.parsed.y<0?C.redF:C.greenF}}]},options:cashOpts});
+        const custOpts=JSON.parse(JSON.stringify(cOpts));custOpts.scales.y.ticks.callback=function(v){return v};
+        const custChart=new Chart(document.getElementById('chart-customers'),{type:'line',data:{labels:[],datasets:[{label:'Active Customers',data:[],borderColor:C.white,backgroundColor:'rgba(255,255,255,.05)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]},options:custOpts});
+
+        // Sensitivity chart (Pro)
+        const sensChart=new Chart(document.getElementById('chart-sensitivity'),{type:'line',data:{labels:[],datasets:[{label:'Optimistic (+50%)',data:[],borderColor:C.green,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0,borderDash:[4,4]},{label:'Base Case',data:[],borderColor:C.white,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0},{label:'Pessimistic (-50%)',data:[],borderColor:C.red,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0,borderDash:[4,4]}]},options:cOpts});
+
+        /* ── CALCULATION ENGINE ──────────────────────────────── */
+        function calculate(){
+            const capital=+S.capital.value,costs=+S.costs.value,price=+S.price.value,newCust=+S.customers.value,churn=+S.churn.value/100,conv=+S.conversion.value/100,numMonths=+S.months.value,model=modelSelect.value;
+
+            V.capital.textContent=fmt(capital);V.costs.textContent=fmt(costs);V.price.textContent='$'+S.price.value;V.customers.textContent=newCust;V.churn.textContent=S.churn.value+'%';V.conversion.textContent=S.conversion.value+'%';V.months.textContent=numMonths+' months';
+
+            checkReality(model,newCust,+S.churn.value,+S.conversion.value);
+
+            monthLabels=makeLabels(numMonths);
+            let cash=capital,customers=0;
+            const revD=[],costD=[],cashD=[],custD=[];
+            let breakEven=null,death=null;
+
+            // Sensitivity
+            let cashOpt=capital,cashPes=capital,custOpt=0,custPes=0;
+            const cashOptD=[],cashPesD=[];
+
+            for(let m=0;m<numMonths;m++){
+                customers+=newCust;customers-=customers*churn;customers=Math.max(0,customers);
+                const rev=customers*price,net=rev-costs;cash+=net;
+                revD.push(Math.round(rev));costD.push(costs);cashD.push(Math.round(cash));custD.push(Math.round(customers));
+                if(!breakEven&&rev>=costs)breakEven=m+1;
+                if(!death&&cash<=0)death=m+1;
+
+                // Optimistic
+                custOpt+=newCust*1.5;custOpt-=custOpt*churn;custOpt=Math.max(0,custOpt);
+                cashOpt+=(custOpt*price)-costs;cashOptD.push(Math.round(cashOpt));
+                // Pessimistic
+                custPes+=newCust*0.5;custPes-=custPes*churn;custPes=Math.max(0,custPes);
+                cashPes+=(custPes*price)-costs;cashPesD.push(Math.round(cashPes));
+            }
+
+            const custNeeded=Math.ceil(costs/price);
+
+            // Death Clock
+            const dm=document.getElementById('death-months'),dl=document.getElementById('death-label'),dv=document.getElementById('death-verdict'),ds=document.getElementById('death-subtitle');
+            if(death){dm.textContent=death;dm.className='death-months '+(death<=6?'danger':death<=12?'warning':'safe');dl.textContent='months until you run out of money';dv.textContent=death<=6?'⚠️ Critical Risk':death<=12?'⚡ Tight Runway':'📊 Your Runway';ds.textContent=death<=6?'Cut costs, raise prices, or find funding — fast.':death<=12?'Limited time. Focus on revenue acceleration.':'Some breathing room, but watch burn rate.'}
+            else{dm.textContent='∞';dm.className='death-months profit';dl.textContent='you reach profitability';dv.textContent='🟢 Sustainable';ds.textContent=breakEven?'Break even at month '+breakEven+'. These numbers work.':'Revenue covers costs early. Strong position.'}
+
+            document.getElementById('m-breakeven').textContent=breakEven?breakEven+' mo':numMonths+'+';
+            document.getElementById('m-customers-needed').textContent=custNeeded.toLocaleString();
+            document.getElementById('m-burn').textContent=fmtK(costs);
+
+            // Update charts
+            [revChart,cashChart,custChart,sensChart].forEach(c=>{c.data.labels=monthLabels});
+            revChart.data.datasets[0].data=revD;revChart.data.datasets[1].data=costD;revChart.update('none');
+            cashChart.data.datasets[0].data=cashD;cashChart.update('none');
+            custChart.data.datasets[0].data=custD;custChart.update('none');
+            sensChart.data.datasets[0].data=cashOptD;sensChart.data.datasets[1].data=cashD;sensChart.data.datasets[2].data=cashPesD;sensChart.update('none');
+
+            // P&L table
+            buildPnL(revD,costD,cashD,custD);
+        }
+
+        function checkReality(model,customers,churn,conversion){
+            const b=benchmarks[model];if(!b)return;
+            const rc=document.getElementById('rc-churn'),rcv=document.getElementById('rc-conversion'),rcc=document.getElementById('rc-customers');
+            if(churn<b.churn.low||churn>b.churn.high){rc.textContent='⚠️ '+b.churn.warning;rc.classList.add('visible')}else{rc.classList.remove('visible')}
+            if(conversion>b.conversion.high){rcv.textContent='⚠️ '+b.conversion.warning;rcv.classList.add('visible')}else{rcv.classList.remove('visible')}
+            if(customers>b.customers.first_year_avg*3){rcc.textContent='⚠️ '+b.customers.warning+' Your input of '+customers+'/mo is significantly above average.';rcc.classList.add('visible')}else{rcc.classList.remove('visible')}
+        }
+
+        /* ── P&L TABLE ────────────────────────────────────────── */
+        function buildPnL(revD,costD,cashD,custD){
+            const t=document.getElementById('pnl-table');
+            // Show quarterly summary (every 3 months)
+            let html='<thead><tr><th>Quarter</th><th>Revenue</th><th>Costs</th><th>Net</th><th>Cash</th><th>Customers</th></tr></thead><tbody>';
+            const numMonths=revD.length;
+            for(let q=0;q<Math.ceil(numMonths/3);q++){
+                const m=Math.min((q+1)*3-1,numMonths-1);
+                const rev=revD[m],cost=costD[m],net=rev-cost,cash=cashD[m],cust=custD[m];
+                html+='<tr><td class="row-label">Q'+(q+1)+'</td><td>'+fmtK(rev)+'</td><td>'+fmtK(cost)+'</td><td class="'+(net>=0?'positive':'negative')+'">'+fmtK(net)+'</td><td class="'+(cash>=0?'positive':'negative')+'">'+fmtK(cash)+'</td><td>'+cust.toLocaleString()+'</td></tr>';
+            }
+            html+='</tbody>';t.innerHTML=html;
+        }
+
+        /* ── PRO: REVENUE STREAMS ─────────────────────────────── */
+        let streamCount=2;
+        window.addStream=function(){
+            streamCount++;
+            const list=document.getElementById('stream-list');
+            const div=document.createElement('div');div.className='stream-item';div.setAttribute('data-stream',streamCount-1);
+            div.innerHTML='<div class="stream-item-header"><span class="stream-item-name">Stream '+streamCount+'</span><button class="stream-remove" onclick="removeStream('+(streamCount-1)+')">×</button></div><div class="stream-fields"><div class="stream-field"><label>Name</label><input type="text" value="Stream '+streamCount+'" onchange="updateStreamName('+(streamCount-1)+',this.value)" placeholder="Product name"></div><div class="stream-field"><label>Price/mo</label><input type="number" value="29" data-field="price" onchange="calcPro()" placeholder="$"></div><div class="stream-field"><label>New customers/mo</label><input type="number" value="10" data-field="customers" onchange="calcPro()" placeholder="#"></div><div class="stream-field"><label>Monthly churn %</label><input type="number" value="5" data-field="churn" onchange="calcPro()" step="0.5" placeholder="%"></div></div>';
+            list.appendChild(div);calcPro();
+        };
+        window.removeStream=function(i){const el=document.querySelector('.stream-item[data-stream="'+i+'"]');if(el)el.remove();calcPro()};
+        window.updateStreamName=function(i,name){const el=document.querySelector('.stream-item[data-stream="'+i+'"] .stream-item-name');if(el)el.textContent=name};
+
+        /* ── PRO: HIRING ──────────────────────────────────────── */
+        let hireCount=1;
+        window.addHire=function(){
+            hireCount++;const list=document.getElementById('hire-list');
+            const div=document.createElement('div');div.className='hire-item';div.setAttribute('data-hire',hireCount-1);
+            div.innerHTML='<div class="hire-field"><label>Role</label><input type="text" value="New Hire" data-h="role" onchange="calcPro()"></div><div class="hire-field"><label>Monthly Salary</label><input type="number" value="5000" data-h="salary" onchange="calcPro()"></div><div class="hire-field"><label>Start Month</label><input type="number" value="6" min="1" max="36" data-h="month" onchange="calcPro()"></div><button class="stream-remove" onclick="removeHire('+(hireCount-1)+')">×</button>';
+            list.appendChild(div);calcPro();
+        };
+        window.removeHire=function(i){const el=document.querySelector('.hire-item[data-hire="'+i+'"]');if(el)el.remove();calcPro()};
+
+        /* ── PRO: EXPENSE UPDATE ──────────────────────────────── */
+        window.calcPro=function(){
+            // Update expense display values
+            document.querySelectorAll('[data-exp]').forEach(s=>{
+                const key=s.getAttribute('data-exp');
+                const valEl=document.getElementById('exp-'+key+'-val');
+                if(valEl)valEl.textContent=fmt(+s.value);
+            });
+            const total=[...document.querySelectorAll('[data-exp]')].reduce((a,s)=>a+(+s.value),0);
+            document.getElementById('exp-total').textContent=fmt(total)+' ';
+            calculate(); // Re-run main calculation
+        };
+
+        /* ── SAVE / LOAD ──────────────────────────────────────── */
+        document.getElementById('btn-save').addEventListener('click',()=>{
+            const data={};Object.keys(S).forEach(k=>data[k]=S[k].value);
+            data.model=modelSelect.value;
+            localStorage.setItem('coastline_model',JSON.stringify(data));
+            const btn=document.getElementById('btn-save');btn.textContent='✓ Saved!';setTimeout(()=>btn.textContent='💾 Save Model',2000);
+        });
+
+        function loadModel(){
+            const raw=localStorage.getItem('coastline_model');
+            if(!raw)return;try{const data=JSON.parse(raw);Object.keys(S).forEach(k=>{if(data[k])S[k].value=data[k]});if(data.model)modelSelect.value=data.model}catch(e){}
+        }
+        loadModel();
+
+        /* ── EXCEL EXPORT (Pro) ────────────────────────────────── */
+        document.getElementById('btn-export-xlsx').addEventListener('click', function(){
+            if(!isPro) return;
+            const btn=this; btn.textContent='⏳ Generating...'; btn.disabled=true;
+
+            try {
+                const wb = XLSX.utils.book_new();
+                const capital=+S.capital.value, costs=+S.costs.value, price=+S.price.value,
+                      newCust=+S.customers.value, churn=+S.churn.value/100, numMonths=+S.months.value,
+                      model=modelSelect.value;
+
+                // Sheet 1: Assumptions
+                const assumptions = [
+                    ['FounderMath Pro — Financial Model'],
+                    ['Generated by Coastline Digital Solutions'],
+                    ['Date', new Date().toLocaleDateString()],
+                    [],
+                    ['ASSUMPTIONS'],
+                    ['Business Model', model.charAt(0).toUpperCase()+model.slice(1)],
+                    ['Starting Capital', capital],
+                    ['Monthly Costs', costs],
+                    ['Price per Customer/mo', price],
+                    ['New Customers/Month', newCust],
+                    ['Monthly Churn Rate', (+S.churn.value)+'%'],
+                    ['Conversion Rate', (+S.conversion.value)+'%'],
+                    ['Projection Length', numMonths+' months']
+                ];
+                const wsAssump = XLSX.utils.aoa_to_sheet(assumptions);
+                wsAssump['!cols'] = [{wch:28},{wch:20}];
+                XLSX.utils.book_append_sheet(wb, wsAssump, 'Assumptions');
+
+                // Sheet 2: Monthly P&L
+                const pnlHeader = ['Month','Revenue','Costs','Net Income','Cash Balance','Active Customers'];
+                const pnlRows = [pnlHeader];
+                let cash=capital, customers=0;
+                for(let m=0; m<numMonths; m++){
+                    customers += newCust;
+                    customers -= customers * churn;
+                    customers = Math.max(0, customers);
+                    const rev = customers * price;
+                    const net = rev - costs;
+                    cash += net;
+                    pnlRows.push(['Month '+(m+1), Math.round(rev), costs, Math.round(net), Math.round(cash), Math.round(customers)]);
+                }
+                const wsPnL = XLSX.utils.aoa_to_sheet(pnlRows);
+                wsPnL['!cols'] = [{wch:10},{wch:14},{wch:14},{wch:14},{wch:16},{wch:18}];
+                XLSX.utils.book_append_sheet(wb, wsPnL, 'Monthly P&L');
+
+                // Sheet 3: Revenue Streams
+                const streams = document.querySelectorAll('.stream-item');
+                if(streams.length > 0){
+                    const streamRows = [['Revenue Streams'],[]];
+                    streamRows.push(['Stream Name','Price/mo','New Customers/mo','Churn %']);
+                    streams.forEach(s => {
+                        const inputs = s.querySelectorAll('.stream-fields input');
+                        const name = inputs[0] ? inputs[0].value : '';
+                        const p = inputs[1] ? inputs[1].value : '';
+                        const c = inputs[2] ? inputs[2].value : '';
+                        const ch = inputs[3] ? inputs[3].value : '';
+                        streamRows.push([name, +p, +c, ch+'%']);
+                    });
+                    const wsStreams = XLSX.utils.aoa_to_sheet(streamRows);
+                    wsStreams['!cols'] = [{wch:20},{wch:12},{wch:18},{wch:12}];
+                    XLSX.utils.book_append_sheet(wb, wsStreams, 'Revenue Streams');
+                }
+
+                // Sheet 4: Expense Breakdown
+                const expRows = [['Expense Breakdown'],[]];
+                expRows.push(['Category','Monthly Amount']);
+                document.querySelectorAll('[data-exp]').forEach(s => {
+                    const key = s.getAttribute('data-exp');
+                    const labels = {team:'Team & Salaries',marketing:'Marketing',tools:'Tools & Software',ops:'Operations',rent:'Office / Rent',other:'Other'};
+                    expRows.push([labels[key]||key, +s.value]);
+                });
+                const totalExp = [...document.querySelectorAll('[data-exp]')].reduce((a,s)=>a+(+s.value),0);
+                expRows.push([]);
+                expRows.push(['TOTAL', totalExp]);
+                const wsExp = XLSX.utils.aoa_to_sheet(expRows);
+                wsExp['!cols'] = [{wch:20},{wch:16}];
+                XLSX.utils.book_append_sheet(wb, wsExp, 'Expenses');
+
+                // Sheet 5: Hiring Plan
+                const hires = document.querySelectorAll('.hire-item');
+                if(hires.length > 0){
+                    const hireRows = [['Hiring Plan'],[]];
+                    hireRows.push(['Role','Monthly Salary','Start Month']);
+                    hires.forEach(h => {
+                        const role = h.querySelector('[data-h="role"]');
+                        const salary = h.querySelector('[data-h="salary"]');
+                        const month = h.querySelector('[data-h="month"]');
+                        hireRows.push([
+                            role ? role.value : '',
+                            salary ? +salary.value : 0,
+                            month ? +month.value : 0
+                        ]);
+                    });
+                    const wsHire = XLSX.utils.aoa_to_sheet(hireRows);
+                    wsHire['!cols'] = [{wch:20},{wch:16},{wch:14}];
+                    XLSX.utils.book_append_sheet(wb, wsHire, 'Hiring Plan');
+                }
+
+                // Sheet 6: Sensitivity Analysis
+                const sensRows = [['Sensitivity Analysis'],['Shows cash balance under 3 scenarios'],[]];
+                sensRows.push(['Month','Optimistic (+50%)','Base Case','Pessimistic (-50%)']);
+                let cashO=capital, cashB=capital, cashP=capital, custO=0, custB2=0, custP=0;
+                for(let m=0; m<numMonths; m++){
+                    custO+=newCust*1.5; custO-=custO*churn; custO=Math.max(0,custO);
+                    cashO+=(custO*price)-costs;
+                    custB2+=newCust; custB2-=custB2*churn; custB2=Math.max(0,custB2);
+                    cashB+=(custB2*price)-costs;
+                    custP+=newCust*0.5; custP-=custP*churn; custP=Math.max(0,custP);
+                    cashP+=(custP*price)-costs;
+                    sensRows.push(['Month '+(m+1), Math.round(cashO), Math.round(cashB), Math.round(cashP)]);
+                }
+                const wsSens = XLSX.utils.aoa_to_sheet(sensRows);
+                wsSens['!cols'] = [{wch:10},{wch:18},{wch:14},{wch:18}];
+                XLSX.utils.book_append_sheet(wb, wsSens, 'Sensitivity');
+
+                XLSX.writeFile(wb, 'FounderMath_Financial_Model.xlsx');
+                btn.textContent='✓ Downloaded!';
+                setTimeout(()=>{ btn.textContent='📊 Download Model (.xlsx)'; btn.disabled=false; }, 2500);
+            } catch(e) {
+                console.error('Excel export error:', e);
+                btn.textContent='❌ Error'; btn.disabled=false;
+                setTimeout(()=>{ btn.textContent='📊 Download Model (.xlsx)'; }, 3000);
+            }
+        });
+
+        /* ── PDF EXPORT (Pro) ─────────────────────────────────── */
+        document.getElementById('btn-export-pdf').addEventListener('click', function(){
+            if(!isPro) return;
+            const btn=this; btn.textContent='⏳ Generating PDF...'; btn.disabled=true;
+
+            // Build a clean HTML report for PDF
+            const capital=+S.capital.value, costs=+S.costs.value, price=+S.price.value,
+                  newCust=+S.customers.value, numMonths=+S.months.value, churn=+S.churn.value,
+                  conversion=+S.conversion.value, model=modelSelect.value;
+            const runway=document.getElementById('death-months').textContent;
+            const breakeven=document.getElementById('m-breakeven').textContent;
+            const custNeeded=document.getElementById('m-customers-needed').textContent;
+
+            const reportHTML = `
+                <div style="font-family:Inter,Helvetica,Arial,sans-serif;color:#000;padding:40px;max-width:800px;margin:0 auto;">
+                    <div style="text-align:center;margin-bottom:40px;border-bottom:2px solid #000;padding-bottom:24px;">
+                        <h1 style="font-size:28px;font-weight:300;margin:0 0 8px;">FounderMath Pro</h1>
+                        <p style="font-size:14px;color:#666;margin:0;">Financial Model Report — Generated ${new Date().toLocaleDateString()}</p>
+                        <p style="font-size:11px;color:#999;margin:4px 0 0;">Coastline Digital Solutions</p>
+                    </div>
+
+                    <h2 style="font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:2px;color:#888;margin:32px 0 16px;">Assumptions</h2>
+                    <table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:32px;">
+                        <tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;">Business Model</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:500;">${model.charAt(0).toUpperCase()+model.slice(1)}</td></tr>
+                        <tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;">Starting Capital</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:500;">$${capital.toLocaleString()}</td></tr>
+                        <tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;">Monthly Costs</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:500;">$${costs.toLocaleString()}</td></tr>
+                        <tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;">Price/Customer/mo</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:500;">$${price}</td></tr>
+                        <tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;">New Customers/Month</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:500;">${newCust}</td></tr>
+                        <tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;">Monthly Churn</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:500;">${churn}%</td></tr>
+                        <tr><td style="padding:8px 12px;border-bottom:1px solid #eee;color:#666;">Conversion Rate</td><td style="padding:8px 12px;border-bottom:1px solid #eee;font-weight:500;">${conversion}%</td></tr>
+                    </table>
+
+                    <h2 style="font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:2px;color:#888;margin:32px 0 16px;">Key Metrics</h2>
+                    <div style="display:flex;gap:16px;margin-bottom:32px;">
+                        <div style="flex:1;text-align:center;padding:20px;border:1px solid #eee;">
+                            <div style="font-size:28px;font-weight:300;">${runway}</div>
+                            <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#888;margin-top:4px;">Runway (months)</div>
+                        </div>
+                        <div style="flex:1;text-align:center;padding:20px;border:1px solid #eee;">
+                            <div style="font-size:28px;font-weight:300;">${breakeven}</div>
+                            <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#888;margin-top:4px;">Break-Even</div>
+                        </div>
+                        <div style="flex:1;text-align:center;padding:20px;border:1px solid #eee;">
+                            <div style="font-size:28px;font-weight:300;">${custNeeded}</div>
+                            <div style="font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#888;margin-top:4px;">Customers Needed</div>
+                        </div>
+                    </div>
+
+                    <h2 style="font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:2px;color:#888;margin:32px 0 16px;">Quarterly P&L Summary</h2>
+                    <table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:32px;">
+                        <thead><tr style="background:#f8f8f8;">
+                            <th style="padding:8px 12px;text-align:left;border-bottom:2px solid #ddd;">Quarter</th>
+                            <th style="padding:8px 12px;text-align:right;border-bottom:2px solid #ddd;">Revenue</th>
+                            <th style="padding:8px 12px;text-align:right;border-bottom:2px solid #ddd;">Costs</th>
+                            <th style="padding:8px 12px;text-align:right;border-bottom:2px solid #ddd;">Net</th>
+                            <th style="padding:8px 12px;text-align:right;border-bottom:2px solid #ddd;">Cash</th>
+                            <th style="padding:8px 12px;text-align:right;border-bottom:2px solid #ddd;">Customers</th>
+                        </tr></thead><tbody>`;
+
+            // Build quarterly rows
+            let pdfCash=capital, pdfCust=0, pdfHTML=reportHTML;
+            const churnDec=churn/100;
+            for(let m=0;m<numMonths;m++){
+                pdfCust+=newCust; pdfCust-=pdfCust*churnDec; pdfCust=Math.max(0,pdfCust);
+                const rev=pdfCust*price; pdfCash+=(rev-costs);
+                if((m+1)%3===0 || m===numMonths-1){
+                    const q=Math.ceil((m+1)/3);
+                    const net=rev-costs;
+                    const color=net>=0?'#0a8':'#c00';
+                    pdfHTML+=`<tr>
+                        <td style="padding:6px 12px;border-bottom:1px solid #eee;">Q${q}</td>
+                        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:right;">$${Math.round(rev).toLocaleString()}</td>
+                        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:right;">$${costs.toLocaleString()}</td>
+                        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:right;color:${color};">$${Math.round(net).toLocaleString()}</td>
+                        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:right;color:${Math.round(pdfCash)>=0?'#0a8':'#c00'};">$${Math.round(pdfCash).toLocaleString()}</td>
+                        <td style="padding:6px 12px;border-bottom:1px solid #eee;text-align:right;">${Math.round(pdfCust).toLocaleString()}</td>
+                    </tr>`;
+                }
+            }
+            pdfHTML+=`</tbody></table>
+                    <div style="text-align:center;padding:24px;border-top:1px solid #eee;margin-top:40px;">
+                        <p style="font-size:11px;color:#999;">Generated with FounderMath Pro by Coastline Digital Solutions</p>
+                        <p style="font-size:10px;color:#bbb;">coastlinedigitalsolutions.com</p>
+                    </div>
+                </div>`;
+
+            const container = document.createElement('div');
+            container.innerHTML = pdfHTML;
+
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'FounderMath_Financial_Report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(container).save().then(()=>{
+                btn.textContent='✓ Downloaded!';
+                setTimeout(()=>{ btn.textContent='📄 Export PDF'; btn.disabled=false; }, 2500);
+            }).catch(e=>{
+                console.error('PDF export error:', e);
+                btn.textContent='❌ Error'; btn.disabled=false;
+                setTimeout(()=>{ btn.textContent='📄 Export PDF'; }, 3000);
+            });
+        });
+
+        /* ── UNIT ECONOMICS ENGINE ────────────────────────────── */
+        function calculateUnitEconomics(){
+            const marketing = parseFloat(document.getElementById('slider-marketing')?.value || 0);
+            const newCust = +S.customers.value;
+            const price = +S.price.value;
+            const churn = +S.churn.value/100;
+            const cogs = parseFloat(document.getElementById('slider-cogs')?.value || 0);
+
+            if(newCust>0 && marketing>0){
+                const CAC = marketing / newCust;
+                const lifespan = churn>0 ? Math.round(1/churn) : 60;
+                const monthlyMargin = price - cogs;
+                const LTV = monthlyMargin * lifespan;
+                const ratio = LTV/CAC;
+                const payback = Math.ceil(CAC/monthlyMargin);
+
+                document.getElementById('ue-cac').textContent = '$'+Math.round(CAC).toLocaleString();
+                document.getElementById('ue-lifespan').textContent = lifespan+' mo';
+                document.getElementById('ue-ltv').textContent = '$'+Math.round(LTV).toLocaleString();
+                document.getElementById('ue-ratio').textContent = ratio.toFixed(1)+'x';
+                document.getElementById('ue-payback').textContent = payback+' mo';
+
+                // Set health colors
+                document.getElementById('ue-ratio').className = 'metric-number ' + (ratio>=3?'positive':ratio>=2?'warning':'danger');
+                document.getElementById('ue-payback').className = 'metric-number ' + (payback<=6?'positive':payback<=12?'warning':'danger');
+            }
+        }
+
+        /* ── FUNDRAISING & DILUTION SIMULATOR ─────────────────── */
+        function calculateFundraising(){
+            const raise = parseFloat(document.getElementById('slider-raise')?.value || 0);
+            const pre = parseFloat(document.getElementById('slider-premoney')?.value || 0);
+
+            if(raise>0 && pre>0){
+                const post = pre + raise;
+                const dilution = (raise/post)*100;
+                const investor = raise;
+                const founder = pre;
+
+                document.getElementById('fr-raise').textContent = '$'+raise.toLocaleString();
+                document.getElementById('fr-premoney').textContent = '$'+pre.toLocaleString();
+                document.getElementById('fr-postmoney').textContent = '$'+post.toLocaleString();
+                document.getElementById('fr-dilution').textContent = dilution.toFixed(1)+'%';
+                document.getElementById('fr-founder').textContent = (100-dilution).toFixed(1)+'%';
+                document.getElementById('fr-investor').textContent = dilution.toFixed(1)+'%';
+            }
+        }
+
+        /* ── MONTE CARLO PROBABILITY ENGINE ───────────────────── */
+        function runMonteCarlo(){
+            const runs = 1000;
+            const capital = +S.capital.value;
+            const costs = +S.costs.value;
+            const price = +S.price.value;
+            const baseGrowth = +S.customers.value;
+            const churn = +S.churn.value/100;
+            const months = +S.months.value;
+
+            let results = [];
+            let profitable = 0;
+            let cashPositive = 0;
+
+            for(let run=0; run<runs; run++){
+                let cash = capital;
+                let customers = 0;
+                let success = true;
+                let reachedProfit = false;
+
+                for(let m=0; m<months; m++){
+                    // Random variation - normal distribution ±40%
+                    const growthMultiplier = 0.6 + Math.random()*0.8;
+                    const churnMultiplier = 0.7 + Math.random()*0.6;
+
+                    customers += baseGrowth * growthMultiplier;
+                    customers -= customers * churn * churnMultiplier;
+                    customers = Math.max(0, customers);
+
+                    const revenue = customers * price;
+                    cash += revenue - costs;
+
+                    if(cash <=0){ success = false; break; }
+                    if(revenue >= costs) reachedProfit = true;
+                }
+
+                results.push({cash, success});
+                if(success) cashPositive++;
+                if(reachedProfit) profitable++;
+            }
+
+            const cashProb = Math.round((cashPositive/runs)*100);
+            const profitProb = Math.round((profitable/runs)*100);
+
+            document.getElementById('mc-survival').textContent = cashProb+'%';
+            document.getElementById('mc-profit').textContent = profitProb+'%';
+            document.getElementById('mc-runs').textContent = runs.toLocaleString();
+
+            // Probability bar colors
+            document.getElementById('mc-survival').className = 'metric-number ' + (cashProb>=75?'positive':cashProb>=50?'warning':'danger');
+            document.getElementById('mc-profit').className = 'metric-number ' + (profitProb>=50?'positive':profitProb>=30?'warning':'danger');
+        }
+
+        /* ── AI INSIGHTS PANEL (RULE-BASED) ───────────────────── */
+        function generateInsights(){
+            const insights = [];
+            const churn = +S.churn.value;
+            const breakEven = document.getElementById('m-breakeven').textContent;
+            const ratio = parseFloat(document.getElementById('ue-ratio')?.textContent || 0);
+            const runway = document.getElementById('death-months').textContent;
+
+            // Churn insights
+            if(churn>8) insights.push('⚠️ Churn above 8% is high for SaaS. Lowering churn by 2% would add 12+ months customer lifespan.');
+            else if(churn>5) insights.push('💡 Churn is average for this model. Focus on retention to boost LTV.');
+            else insights.push('✅ Great churn rate — well above industry average.');
+
+            // LTV:CAC ratio
+            if(ratio>0 && ratio<2) insights.push('⚠️ LTV:CAC ratio is '+ratio+'x. Investors want 3x minimum.');
+            else if(ratio>=3) insights.push('✅ Excellent LTV:CAC ratio of '+ratio+'x — this is investable.');
+
+            // Runway
+            if(runway==='∞') insights.push('✅ Great unit economics — you reach profitability.');
+            else if(parseInt(runway)<12) insights.push('⚠️ Runway is tight. Extend runway by cutting costs or accelerating revenue.');
+
+            // Break even
+            if(parseInt(breakEven)<=12) insights.push('💡 Breaking even at '+breakEven+' is good. Most startups take 18+ months.');
+
+            // Update panel
+            const container = document.getElementById('insights-list');
+            container.innerHTML = insights.map(i=>`<div class="insight-item">${i}</div>`).join('');
+        }
+
+        /* ── EXTENDED CALCULATION WRAPPER ─────────────────────── */
+        const originalCalculate = calculate;
+        calculate = function(){
+            originalCalculate();
+            if(isPro){
+                calculateUnitEconomics();
+                calculateFundraising();
+                runMonteCarlo();
+                generateInsights();
+            }
+        };
+
+        /* ── EVENT LISTENERS ──────────────────────────────────── */
+        Object.values(S).forEach(s=>s.addEventListener('input',calculate));
+        modelSelect.addEventListener('change',calculate);
+
+        // New slider listeners
+        ['marketing','cogs','raise','premoney'].forEach(id=>{
+            const el = document.getElementById('slider-'+id);
+            if(el) el.addEventListener('input',calculate);
+        });
+
+        calculate();
+
+        /* ── SCROLL REVEAL ────────────────────────────────────── */
+        const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+        document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+    })();
+    </script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script>
+</body>
+</html>

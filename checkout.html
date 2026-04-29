@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Coastline Digital Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .cart-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto auto auto;
+            gap: 24px;
+            align-items: center;
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            background: rgba(255,255,255,0.02);
+            border-radius: 4px;
+            padding: 8px;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: transparent;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .quantity-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: #f56565;
+            cursor: pointer;
+            padding: 8px;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+        .remove-btn:hover {
+            opacity: 1;
+        }
+        .cart-summary {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 32px;
+            margin-top: 32px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .summary-row.total {
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+            margin-top: 16px;
+        }
+        .checkout-btn {
+            width: 100%;
+            margin-top: 24px;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 80px 20px;
+        }
+        @media (max-width: 768px) {
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                gap: 16px;
+            }
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    
+    <div id="scroll-progress"><div id="scroll-progress-bar"></div></div>
+    
+    <button id="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#method">Method</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="startup.html">Startups</a></li>
+                <li><a href="calculator.html">FounderMath</a></li>
+                <li><a href="toolkit.html">Toolkit</a></li>
+                <li><a href="index.html#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-overlay" id="mobile-overlay">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#method">Method</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="startup.html">Startups</a></li>
+            <li><a href="calculator.html">FounderMath</a></li>
+            <li><a href="toolkit.html">Toolkit</a></li>
+            <li><a href="index.html#contact" class="nav-cta-mobile">Get Started</a></li>
+        </ul>
+    </div>
+
+    <section id="hero" class="section hero-section" style="min-height: 30vh; padding-top: 120px;">
+        <div class="hero-content">
+            <h1 class="hero-title fade-in">Your Cart</h1>
+            <p class="hero-subtitle fade-in delay-1" style="max-width: 600px;">Review your items and complete your purchase securely through Amazon.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div id="cart-items-container">
+                <!-- Cart items will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="footer-logo-img">
+                    <p class="footer-motto">Your market's missing piece.</p>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" class="footer-email">info@coastlinedigitalsolutions.com</a>
+                    <p class="footer-location">BC, Canada</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html#about">About</a>
+                    <a href="index.html#method">Method</a>
+                    <a href="index.html#services">Services</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
