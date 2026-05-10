@@ -4,87 +4,140 @@
    ══════════════════════════════════════════════════════════════════════ */
 
 /* ══════════════════════════════════════════════════════════════════════
-   SPLASH SCREEN — Netflix-style logo reveal
+   SPLASH SCREEN — Cinematic Business World
    ══════════════════════════════════════════════════════════════════════ */
 
-/* ── Splash Overlay ───────────────────────────────────────────────── */
+/* ── Overlay ──────────────────────────────────────────────────────── */
 #splash-screen {
     position: fixed;
     inset: 0;
-    background: #000000;
+    background: #000;
     z-index: 99999;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#splash-screen.splash-hidden {
-    display: none;
-}
+#splash-screen.splash-hidden { display: none; }
 
-/* ── Logo Wrapper ─────────────────────────────────────────────────── */
-#splash-logo-wrap {
-    /* NO z-index here — avoids creating a stacking context that would
-       break mix-blend-mode on the logo image */
+/* ── Scenes ──────────────────────────────────────────────────────── */
+.ss {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
 }
 
-#splash-logo-wrap.splash-logo-in {
-    animation: splashLogoIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* ── Icon layouts ─────────────────────────────────────────────────── */
+.si-pair {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(32px, 9vw, 90px);
+}
+
+.si-solo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Icon wrapper ─────────────────────────────────────────────────── */
+.si-wrap {
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform, opacity, filter;
+}
+
+/* Pair icons */
+.si-wrap svg {
+    display: block;
+    width: clamp(88px, 21vw, 148px);
+    height: clamp(88px, 21vw, 148px);
+    overflow: visible;
+}
+
+/* Solo (briefcase) is larger */
+.si-solo .si-wrap svg {
+    width: clamp(130px, 30vw, 200px);
+    height: clamp(130px, 30vw, 200px);
+}
+
+/* Visible base state (set by JS before glow animation) */
+.si-wrap.si-on {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ── Icon keyframes ───────────────────────────────────────────────── */
+@keyframes siAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.45);
+        filter: blur(14px) drop-shadow(0 0 0px rgba(255,255,255,0));
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0px) drop-shadow(0 0 22px rgba(255,255,255,0.52));
+    }
+}
+
+@keyframes siGlow {
+    from { filter: drop-shadow(0 0 14px rgba(255,255,255,0.38)); }
+    to   { filter: drop-shadow(0 0 36px rgba(255,255,255,0.8)); }
+}
+
+@keyframes siBlast {
+    0%   { transform: scale(1);   opacity: 1;
+           filter: blur(0px)  drop-shadow(0 0 26px rgba(255,255,255,0.62)); }
+    32%  { opacity: 1; }
+    100% { transform: scale(13);  opacity: 0;
+           filter: blur(20px) drop-shadow(0 0 0px rgba(255,255,255,0)); }
+}
+
+/* ── Logo finale ──────────────────────────────────────────────────── */
+#splash-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
 }
 
 #splash-logo {
     width: min(320px, 55vw);
     height: auto;
     display: block;
-    /* invert makes the dark logo marks white; the logo's background
-       (whatever shade) becomes its inverse so mix-blend-mode:screen
-       dissolves it against the black splash background */
     filter: invert(1) grayscale(1) brightness(1.8);
     mix-blend-mode: screen;
 }
 
 @keyframes splashLogoIn {
-    from { opacity: 0; transform: scale(0.92); }
+    from { opacity: 0; transform: scale(0.9); }
     to   { opacity: 1; transform: scale(1); }
-}
-
-/* ── Netflix-style zoom: logo blasts toward viewer ────────────────── */
-/* Phase 1: splash overlay stays opaque while logo zooms */
-#splash-screen.portal-zoom {
-    animation: splashFade 0.85s cubic-bezier(0.4, 0, 0.6, 1) 0.1s forwards;
 }
 
 @keyframes splashFade {
     0%   { opacity: 1; }
-    70%  { opacity: 1; }
+    65%  { opacity: 1; }
     100% { opacity: 0; }
 }
 
-/* The logo itself rockets toward the viewer */
-#splash-screen.portal-zoom #splash-logo-wrap {
-    animation: logoBlastOut 0.95s cubic-bezier(0.4, 0, 1, 1) forwards;
-}
-
 @keyframes logoBlastOut {
-    0%   { transform: scale(1);    opacity: 1; }
-    55%  { transform: scale(2.5);  opacity: 1; }
-    80%  { transform: scale(6);    opacity: 0.6; }
-    100% { transform: scale(14);   opacity: 0; }
+    0%   { transform: scale(1);   opacity: 1; }
+    50%  { transform: scale(2.5); opacity: 1; }
+    80%  { transform: scale(7);   opacity: 0.5; }
+    100% { transform: scale(15);  opacity: 0; }
 }
 
-/* ── Body lock during splash ──────────────────────────────────────── */
-body.splash-active {
-    overflow: hidden;
-}
+/* ── Body lock ────────────────────────────────────────────────────── */
+body.splash-active { overflow: hidden; }
 
-/* ── Fade-in elements: paused until splash done ───────────────────── */
-body.splash-active .fade-in {
-    animation-play-state: paused;
-}
+body.splash-active .fade-in { animation-play-state: paused; }
 
 /* ── Reset & Base ─────────────────────────────────────────────────── */
 *, *::before, *::after {

@@ -10,47 +10,100 @@
 (function initSplash() {
     'use strict';
 
-    const splash   = document.getElementById('splash-screen');
-    const logoWrap = document.getElementById('splash-logo-wrap');
-
-    // Skip if splash element is missing
+    var splash = document.getElementById('splash-screen');
     if (!splash) return;
 
-    // NOTE: sessionStorage gate temporarily disabled for testing
-    // Re-enable by un-commenting the line below:
+    // NOTE: sessionStorage gate temporarily disabled — re-enable below:
     // if (sessionStorage.getItem('splashSeen')) { splash.classList.add('splash-hidden'); return; }
 
-    // Lock body scroll while splash is active
     document.body.classList.add('splash-active');
 
-    // ── Animation sequence (Netflix-style) ──────────────────────────
-    // 80ms  : logo fades in (CSS splashLogoIn)
-    // 1200ms: logo zooms toward viewer (CSS logoBlastOut)
-    // 2100ms: overlay gone, hero animations released
+    // ── Helpers ───────────────────────────────────────────────────────
+    function $id(id) { return document.getElementById(id); }
 
-    // Phase 1 — logo fade in
-    setTimeout(function () {
-        if (logoWrap) logoWrap.classList.add('splash-logo-in');
-    }, 80);
+    function showScene(id) {
+        var el = $id(id);
+        if (el) el.style.opacity = '1';
+    }
+    function hideScene(id) {
+        var el = $id(id);
+        if (el) el.style.opacity = '0';
+    }
 
-    // Phase 2 — Netflix-style zoom blast
-    setTimeout(function () {
-        splash.classList.add('portal-zoom');
-    }, 1200);
+    // Materialise: emerge from blur + scale
+    function appear(id) {
+        var el = $id(id);
+        if (!el) return;
+        el.style.animation = 'siAppear 0.48s cubic-bezier(0.22,1,0.36,1) forwards';
+    }
 
-    // Phase 3 — remove splash, unlock page
-    setTimeout(function () {
+    // Glow pulse: steady brightness breathing
+    function glow(id) {
+        var el = $id(id);
+        if (!el) return;
+        el.classList.add('si-on');                      // keep opacity:1 / scale:1
+        el.style.animation = 'siGlow 0.55s ease-in-out infinite alternate';
+    }
+
+    // Blast: scale to 13× and fade — "entering through" the icon
+    function blast(id) {
+        var el = $id(id);
+        if (!el) return;
+        el.classList.remove('si-on');
+        el.style.animation = 'siBlast 0.44s cubic-bezier(0.4,0,1,1) forwards';
+    }
+
+    // ── Scene timings ─────────────────────────────────────────────────
+    // Scene 1: t=0       Growth + Meetings
+    // Scene 2: t=870     Achievement + Intelligence
+    // Scene 3: t=1740    Briefcase solo (Business)
+    // Scene 4: t=2440    Coastline logo — Netflix finale
+    // Hero:    t=4200    Splash done
+
+    var T1=0, T2=870, T3=1740, T4=2440;
+
+    // ── Scene 1 ───────────────────────────────────────────────────────
+    setTimeout(function(){ showScene('ss1'); }, T1);
+    setTimeout(function(){ appear('si-chart'); }, T1+60);
+    setTimeout(function(){ appear('si-people'); }, T1+190);
+    setTimeout(function(){ glow('si-chart'); glow('si-people'); }, T1+520);
+    setTimeout(function(){ blast('si-chart'); blast('si-people'); }, T1+710);
+
+    // ── Scene 2 ───────────────────────────────────────────────────────
+    setTimeout(function(){ hideScene('ss1'); showScene('ss2'); }, T2);
+    setTimeout(function(){ appear('si-trophy'); }, T2+60);
+    setTimeout(function(){ appear('si-bulb'); }, T2+190);
+    setTimeout(function(){ glow('si-trophy'); glow('si-bulb'); }, T2+520);
+    setTimeout(function(){ blast('si-trophy'); blast('si-bulb'); }, T2+710);
+
+    // ── Scene 3 — solo briefcase ──────────────────────────────────────
+    setTimeout(function(){ hideScene('ss2'); showScene('ss3'); }, T3);
+    setTimeout(function(){ appear('si-case'); }, T3+60);
+    setTimeout(function(){ glow('si-case'); }, T3+400);
+    setTimeout(function(){ blast('si-case'); }, T3+590);
+
+    // ── Scene 4 — logo finale ─────────────────────────────────────────
+    setTimeout(function(){ hideScene('ss3'); showScene('ss4'); }, T4);
+    setTimeout(function(){
+        var lw = $id('splash-logo-wrap');
+        if (lw) lw.style.animation = 'splashLogoIn 0.6s cubic-bezier(0.22,1,0.36,1) forwards';
+    }, T4+80);
+    // Netflix blast
+    setTimeout(function(){
+        splash.style.animation = 'splashFade 0.85s cubic-bezier(0.4,0,0.6,1) 0.1s forwards';
+        var lw = $id('splash-logo-wrap');
+        if (lw) lw.style.animation = 'logoBlastOut 0.95s cubic-bezier(0.4,0,1,1) forwards';
+    }, T4+720);
+
+    // ── Reveal hero ───────────────────────────────────────────────────
+    setTimeout(function(){
         splash.classList.add('splash-hidden');
         document.body.classList.remove('splash-active');
-
-        // Resume hero fade-in animations
-        document.querySelectorAll('.fade-in').forEach(function (el) {
+        document.querySelectorAll('.fade-in').forEach(function(el){
             el.style.animationPlayState = 'running';
         });
-
-        // Mark session so splash doesn't replay
         sessionStorage.setItem('splashSeen', '1');
-    }, 2100);
+    }, T4+1760);   // T4+1760 = 4200ms total
 
 })();
 
