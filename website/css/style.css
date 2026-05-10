@@ -1587,6 +1587,14 @@ body {
     letter-spacing: 0.02em;
 }
 
+.affiliate-disclosure {
+    font-size: 0.65rem;
+    color: var(--grey-600);
+    margin-top: 12px;
+    font-weight: 300;
+    opacity: 0.7;
+}
+
 .footer-links {
     display: flex;
     gap: 28px;
