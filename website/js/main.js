@@ -3,6 +3,164 @@
    Navigation, scroll reveals, form logic, stat counters
    ══════════════════════════════════════════════════════════════════════ */
 
+/* ══════════════════════════════════════════════════════════════════════
+   SPLASH SCREEN — Time Portal
+   Runs once per browser session (sessionStorage gate)
+   ══════════════════════════════════════════════════════════════════════ */
+(function initSplash() {
+    'use strict';
+
+    const splash      = document.getElementById('splash-screen');
+    const splashCanvas = document.getElementById('splash-canvas');
+    const logoWrap    = document.getElementById('splash-logo-wrap');
+
+    // Skip if elements missing
+    if (!splash || !splashCanvas) {
+        if (splash) splash.classList.add('splash-hidden');
+        return;
+    }
+    // NOTE: sessionStorage gate temporarily disabled for testing
+    // Re-enable by un-commenting the line below:
+    // if (sessionStorage.getItem('splashSeen')) { splash.classList.add('splash-hidden'); return; }
+
+    // Lock body scroll while splash is active
+    document.body.classList.add('splash-active');
+
+    // ── Warp-speed starfield ─────────────────────────────────────────
+    const ctx = splashCanvas.getContext('2d');
+    let W = splashCanvas.width  = window.innerWidth;
+    let H = splashCanvas.height = window.innerHeight;
+    let rafId;
+    let splashDone = false;
+    let warpLevel  = 0;      // 0 = gentle drift, 1 = full hyperspace
+    let warpTarget = 0;      // smoothly animated toward this value
+
+    const STAR_COUNT = 200;
+    const stars = [];
+
+    function createStar(nearCenter) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist  = nearCenter ? Math.random() * 40 : Math.random() * Math.min(W, H) * 0.15;
+        return {
+            angle : angle,
+            dist  : dist,
+            prevDist: dist,
+            speed : 0.6 + Math.random() * 1.4,
+            width : 0.4 + Math.random() * 0.6,
+            alpha : 0.35 + Math.random() * 0.45,
+        };
+    }
+
+    for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push(createStar(true));
+    }
+
+    function drawWarpStars() {
+        if (splashDone) return;
+
+        // Smooth warp interpolation
+        warpLevel += (warpTarget - warpLevel) * 0.04;
+
+        ctx.clearRect(0, 0, W, H);
+
+        const cx = W / 2;
+        const cy = H / 2;
+        const maxDist = Math.sqrt(cx * cx + cy * cy) + 60;
+
+        stars.forEach(function(s) {
+            s.prevDist = s.dist;
+
+            // Speed multiplier: slow drift at rest, violent surge during warp
+            const distFactor = 0.5 + (s.dist / maxDist) * 1.5;
+            const speedMult  = 1 + warpLevel * 18 + distFactor * warpLevel * 6;
+            s.dist += s.speed * speedMult;
+
+            // Reset star to center once it flies off screen
+            if (s.dist > maxDist) {
+                const fresh = createStar(true);
+                s.angle    = fresh.angle;
+                s.dist     = fresh.dist;
+                s.prevDist = fresh.dist;
+                s.speed    = fresh.speed;
+                s.width    = fresh.width;
+                s.alpha    = fresh.alpha;
+                return;
+            }
+
+            const x1 = cx + Math.cos(s.angle) * s.prevDist;
+            const y1 = cy + Math.sin(s.angle) * s.prevDist;
+            const x2 = cx + Math.cos(s.angle) * s.dist;
+            const y2 = cy + Math.sin(s.angle) * s.dist;
+
+            const brightness = Math.min(1, s.alpha + warpLevel * 0.4);
+            const lw = s.width * (1 + warpLevel * 2.5);
+
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = 'rgba(255,255,255,' + brightness + ')';
+            ctx.lineWidth = lw;
+            ctx.stroke();
+        });
+
+        rafId = requestAnimationFrame(drawWarpStars);
+    }
+
+    drawWarpStars();
+
+    // Handle resize during splash
+    window.addEventListener('resize', function onSplashResize() {
+        W = splashCanvas.width  = window.innerWidth;
+        H = splashCanvas.height = window.innerHeight;
+        if (splashDone) window.removeEventListener('resize', onSplashResize);
+    });
+
+    // ── Animation sequence ───────────────────────────────────────────
+    // Phase 1 (80 ms)   : Logo fades in over gentle starfield
+    // Phase 2 (900 ms)  : Stars begin accelerating toward warp
+    // Phase 3 (1600 ms) : Full warp + portal zoom fires
+    // Phase 4 (2800 ms) : Overlay removed; hero animations released
+
+    // Phase 1 — logo fade in
+    setTimeout(function() {
+        logoWrap.classList.add('splash-logo-in');
+    }, 80);
+
+    // Phase 2 — begin warp acceleration
+    setTimeout(function() {
+        warpTarget = 0.35; // pre-warp shimmer
+    }, 900);
+
+    // Phase 2b — full warp surge
+    setTimeout(function() {
+        warpTarget = 1;
+    }, 1400);
+
+    // Phase 3 — zoom through the logo
+    setTimeout(function() {
+        splash.classList.add('portal-zoom');
+    }, 1700);
+
+    // Phase 4 — remove splash, unlock page
+    setTimeout(function() {
+        splashDone = true;
+        cancelAnimationFrame(rafId);
+
+        splash.classList.add('splash-hidden');
+        document.body.classList.remove('splash-active');
+
+        // Resume hero fade-in animations
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+            el.style.animationPlayState = 'running';
+        });
+
+        // Mark session so splash doesn't replay
+        sessionStorage.setItem('splashSeen', '1');
+    }, 2850);
+
+})();
+
+
 (function () {
     'use strict';
 
