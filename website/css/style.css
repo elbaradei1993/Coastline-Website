@@ -259,6 +259,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .nav-logo {
@@ -331,6 +332,9 @@ body {
     align-items: center;
     gap: 36px;
     list-style: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-links a {
