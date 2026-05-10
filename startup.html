@@ -1,447 +1,718 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startup Launchpad | Coastline Digital Solutions</title>
-    <meta name="description" content="From idea to market leader. Coastline takes startups from zero to their first unfair advantage: validation, strategy, build, and launch under one roof.">
-    <meta property="og:title" content="Startup Launchpad | Coastline Digital Solutions">
-    <meta property="og:description" content="One partner from day one. We take startups from zero to market leader.">
-    <meta property="og:type" content="website">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <!-- Particle Canvas Background -->
-    <canvas id="particle-canvas"></canvas>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img">
-            </a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#method">Method</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="#" class="active-page">Startups</a></li>
-                <li><a href="calculator.html">FounderMath</a></li>
-                <li><a href="training.html">Training</a></li>
-                <li><a href="#contact" class="nav-cta">Get Started</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Mobile Overlay Menu -->
-    <div class="mobile-overlay" id="mobile-overlay">
-        <ul class="mobile-nav-links">
-            <li><a href="index.html#about">About</a></li>
-            <li><a href="index.html#method">Method</a></li>
-            <li><a href="index.html#services">Services</a></li>
-            <li><a href="#">Startups</a></li>
-                <li><a href="calculator.html">FounderMath</a></li>
-                <li><a href="training.html">Training</a></li>
-                <li><a href="#contact" class="nav-cta-mobile">Get Started</a></li>
-        </ul>
-    </div>
-
-    <!-- Startup Hero -->
-    <section id="startup-hero" class="section hero-section startup-hero">
-        <div class="hero-content">
-            <p class="hero-tagline fade-in">Startup Launchpad</p>
-            <h1 class="hero-title fade-in delay-1">From idea to<br><em>market leader</em><span class="accent-dot">.</span></h1>
-            <p class="hero-subtitle fade-in delay-2">One partner from day one. We take startups from zero to their first unfair advantage, handling everything so you can focus on building.</p>
-            <div class="hero-buttons fade-in delay-3">
-                <a href="#contact" class="btn btn-primary">Launch Your Startup</a>
-                <a href="#roadmap" class="btn btn-ghost">See the Roadmap</a>
-            </div>
-        </div>
-        <div class="scroll-indicator fade-in delay-4">
-            <div class="scroll-line"></div>
-        </div>
-    </section>
-
-    <!-- Value Props -->
-    <section id="value" class="section problem-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">Why Coastline</p>
-                <h2 class="section-title reveal">Everything your startup needs.<br><em>Under one roof.</em></h2>
-            </div>
-            <div class="startup-value-props reveal">
-                <div class="startup-value-card">
-                    <div class="startup-value-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
-                        </svg>
-                    </div>
-                    <h4>One Partner, Every Stage</h4>
-                    <p>No juggling 5 agencies. We cover strategy, build, and launch under one roof.</p>
-                </div>
-                <div class="startup-value-card">
-                    <div class="startup-value-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-                        </svg>
-                    </div>
-                    <h4>Market-First Approach</h4>
-                    <p>We validate with real data before you invest a single dollar in building.</p>
-                </div>
-                <div class="startup-value-card">
-                    <div class="startup-value-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                        </svg>
-                    </div>
-                    <h4>Built for Founders</h4>
-                    <p>Lean, fast, no enterprise overhead. Startup-friendly pricing with enterprise-grade quality.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Roadmap -->
-    <section id="roadmap" class="section method-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">The Roadmap</p>
-                <h2 class="section-title reveal">Six phases from<br>idea to growth.</h2>
-            </div>
-            <div class="startup-roadmap">
-                <div class="roadmap-phase reveal">
-                    <div class="phase-number">01</div>
-                    <div class="phase-content">
-                        <div class="phase-tag">Market Analysis</div>
-                        <h3>Validate</h3>
-                        <p>We research your market, mine real customer frustrations, and confirm there's a gap worth filling before you build anything.</p>
-                    </div>
-                </div>
-                <div class="roadmap-connector reveal"></div>
-                <div class="roadmap-phase reveal">
-                    <div class="phase-number">02</div>
-                    <div class="phase-content">
-                        <div class="phase-tag">Consultancy</div>
-                        <h3>Strategize</h3>
-                        <p>Business model, pricing strategy, competitive positioning, and a clear roadmap, so you know exactly where you're going and how to get there.</p>
-                    </div>
-                </div>
-                <div class="roadmap-connector reveal"></div>
-                <div class="roadmap-phase reveal">
-                    <div class="phase-number">03</div>
-                    <div class="phase-content">
-                        <div class="phase-tag">Digital Solutions</div>
-                        <h3>Brand</h3>
-                        <p>Visual identity guidance, market positioning, and messaging that sets you apart from day one. Your brand becomes your first competitive advantage.</p>
-                    </div>
-                </div>
-                <div class="roadmap-connector reveal"></div>
-                <div class="roadmap-phase reveal">
-                    <div class="phase-number">04</div>
-                    <div class="phase-content">
-                        <div class="phase-tag">Digital Solutions</div>
-                        <h3>Build</h3>
-                        <p>MVP development: website, web app, or custom tool built to solve your market's #1 frustration. Lean, functional, and ready for real users.</p>
-                    </div>
-                </div>
-                <div class="roadmap-connector reveal"></div>
-                <div class="roadmap-phase reveal">
-                    <div class="phase-number">05</div>
-                    <div class="phase-content">
-                        <div class="phase-tag">Consultancy + Digital</div>
-                        <h3>Launch</h3>
-                        <p>Go-to-market strategy, landing pages, and digital presence to attract your first customers. We get you in front of the right people, fast.</p>
-                    </div>
-                </div>
-                <div class="roadmap-connector reveal"></div>
-                <div class="roadmap-phase reveal">
-                    <div class="phase-number">06</div>
-                    <div class="phase-content">
-                        <div class="phase-tag">Training + Advisory</div>
-                        <h3>Grow</h3>
-                        <p>Founder training, sales fundamentals, and ongoing advisory to scale what's working. We stay in your corner as you grow.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="startup-cta reveal">
-                <a href="#contact" class="btn btn-primary">Launch Your Startup</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Startup Contact Form -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">Get Started</p>
-                <h2 class="section-title reveal">Ready to launch?<br><em>Tell us about your idea.</em></h2>
-                <p class="section-subtitle reveal">Fill out the form below and we'll get back to you within 24 hours with a tailored plan for your startup.</p>
-            </div>
-            <div class="form-wrapper reveal">
-                <form id="contact-form" action="#" method="POST">
-                    <input type="hidden" name="service" value="startup">
-
-                    <!-- About You -->
-                    <h3 class="form-step-title">About You</h3>
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required placeholder="John Smith">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="john@startup.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company / Startup Name</label>
-                        <input type="text" id="company" name="company" placeholder="Your Startup Inc.">
-                    </div>
-
-                    <!-- Startup Diagnostic -->
-                    <div class="form-divider"></div>
-                    <h3 class="form-step-title">Your Startup</h3>
-
-                    <div class="form-group">
-                        <label for="su-stage">What stage is your startup?</label>
-                        <select id="su-stage" name="su_stage" required>
-                            <option value="" disabled selected>Select one</option>
-                            <option value="idea">Idea only, haven't started yet</option>
-                            <option value="researching">Researching the market</option>
-                            <option value="mvp">Have an MVP or prototype</option>
-                            <option value="launched">Launched but struggling</option>
-                            <option value="scaling">Ready to scale</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="su-idea">Describe your business idea in one sentence</label>
-                        <input type="text" id="su-idea" name="su_idea" required placeholder="e.g., A platform that helps strata councils track rental compliance">
-                    </div>
-                    <div class="form-group">
-                        <label for="su-market">What industry or market are you targeting?</label>
-                        <input type="text" id="su-market" name="su_market" required placeholder="e.g., Property Management, HealthTech, E-commerce...">
-                    </div>
-                    <div class="form-group">
-                        <label for="su-problem">What's the #1 problem you're solving for customers?</label>
-                        <textarea id="su-problem" name="su_problem" required rows="3" placeholder="Describe the frustration or gap you want to address..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="su-validated">Have you validated this with real customers?</label>
-                        <select id="su-validated" name="su_validated" required>
-                            <option value="" disabled selected>Select one</option>
-                            <option value="yes-data">Yes, with data and research</option>
-                            <option value="some-feedback">Some informal feedback</option>
-                            <option value="not-yet">Not yet</option>
-                            <option value="not-sure-how">Not sure how to validate</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="su-help">What do you need help with most right now?</label>
-                        <select id="su-help" name="su_help" required>
-                            <option value="" disabled selected>Select one</option>
-                            <option value="validation">Market validation & research</option>
-                            <option value="strategy">Business strategy & planning</option>
-                            <option value="mvp">Building an MVP or product</option>
-                            <option value="branding">Branding & identity</option>
-                            <option value="website">Website & digital presence</option>
-                            <option value="go-to-market">Go-to-market plan</option>
-                            <option value="training">Founder training & skills</option>
-                            <option value="everything">All of the above, full launchpad</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="su-timeline">What's your timeline?</label>
-                        <select id="su-timeline" name="su_timeline">
-                            <option value="" disabled selected>Select one</option>
-                            <option value="ready-now">Ready to start now</option>
-                            <option value="1-3-months">Within 1-3 months</option>
-                            <option value="3-6-months">3-6 months</option>
-                            <option value="exploring">Just exploring options</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="su-funding">How are you currently funded?</label>
-                        <select id="su-funding" name="su_funding">
-                            <option value="" disabled selected>Select one</option>
-                            <option value="bootstrapped">Bootstrapped / self-funded</option>
-                            <option value="seed-angel">Seed / Angel investment</option>
-                            <option value="vc">VC funded</option>
-                            <option value="grant">Grant funded</option>
-                            <option value="seeking">Seeking funding</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="su-anything">Anything else you'd like us to know?</label>
-                        <textarea id="su-anything" name="su_anything" rows="3" placeholder="Optional: budget, specific goals, questions..."></textarea>
-                    </div>
-
-                    <div class="startup-form-submit">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-
-                    <!-- Success Message -->
-                    <div class="form-success" id="form-success">
-                        <div class="success-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                        </div>
-                        <h3>Thank you!</h3>
-                        <p>We've received your startup inquiry and will get back to you within 24 hours with a tailored plan.</p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="footer-logo-img">
-                    <p class="footer-motto">Your market's missing piece.</p>
-                    <a href="mailto:info@coastlinedigitalsolutions.com" class="footer-email">info@coastlinedigitalsolutions.com</a>
-                    <p class="footer-location">BC, Canada</p>
-                </div>
-                <div class="footer-links">
-                    <a href="index.html#about">About</a>
-                    <a href="index.html#method">Method</a>
-                    <a href="index.html#services">Services</a>
-                    <a href="index.html#contact">Contact</a>
-                </div>
-                <div class="footer-social">
-                    <a href="https://www.linkedin.com/company/coastline-digital-solutions" aria-label="LinkedIn" target="_blank" rel="noopener" class="social-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/particles.js"></script>
-    <script>
-    /* ── Startup Page JavaScript ──────────────────────────────────────── */
-    (function () {
-        'use strict';
-
-        // ── Navigation ─────────────────────────────────────────────────
-        const navbar = document.getElementById('navbar');
-        const navToggle = document.getElementById('nav-toggle');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
-
-        function handleNavScroll() {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        }
-
-        window.addEventListener('scroll', handleNavScroll, { passive: true });
-        handleNavScroll();
-
-        if (navToggle && mobileOverlay) {
-            navToggle.addEventListener('click', () => {
-                navToggle.classList.toggle('active');
-                mobileOverlay.classList.toggle('active');
-                document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
-            });
-
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navToggle.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-        }
-
-        // Smooth scroll for anchor links on this page
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 60;
-                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-                }
-            });
-        });
-
-        // ── Scroll Reveal ──────────────────────────────────────────────
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        revealElements.forEach(el => revealObserver.observe(el));
-
-        // ── Startup Form Submission ────────────────────────────────────
-        const form = document.getElementById('contact-form');
-        const formSuccess = document.getElementById('form-success');
-
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const formData = new FormData(form);
-                const submitBtn = form.querySelector('[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-
-                fetch('https://formspree.io/f/mgoprylk', {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Hide all form fields, show success
-                        const allGroups = form.querySelectorAll('.form-group, .form-step-title, .form-divider, .startup-form-submit');
-                        allGroups.forEach(g => g.style.display = 'none');
-                        formSuccess.classList.add('active');
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    submitBtn.textContent = 'Error, Try Again';
-                    submitBtn.disabled = false;
-                    setTimeout(() => { submitBtn.textContent = originalText; }, 3000);
-                });
-            });
-        }
-    })();
-    </script>
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script><!-- End Cloudflare Web Analytics -->
-</body>
-</html>
+﻿<!DOCTYPE html>
 
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Startup Launchpad | Coastline Digital Solutions</title>
+
+    <meta name="description" content="From idea to market leader. Coastline takes startups from zero to their first unfair advantage: validation, strategy, build, and launch under one roof.">
+
+    <meta property="og:title" content="Startup Launchpad | Coastline Digital Solutions">
+
+    <meta property="og:description" content="One partner from day one. We take startups from zero to market leader.">
+
+    <meta property="og:type" content="website">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        /* FounderMath embedded styles */
+        .foundermath-section{padding:100px 0 140px;border-top:1px solid rgba(255,255,255,.06)}
+        .calc-full-width{max-width:960px;margin:0 auto}
+        .calc-layout{display:grid;grid-template-columns:380px 1fr;gap:48px;align-items:start}
+        .calc-panel{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px;position:sticky;top:100px}
+        .calc-panel-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:28px;display:flex;justify-content:space-between;align-items:center}
+        .calc-group{margin-bottom:24px}
+        .calc-group label{display:flex;justify-content:space-between;align-items:baseline;font-size:.75rem;font-weight:300;color:var(--grey-400);margin-bottom:10px;letter-spacing:.02em}
+        .calc-value{font-weight:500;color:var(--white);font-size:.85rem;font-variant-numeric:tabular-nums}
+        .calc-group select{width:100%;padding:10px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.12);outline:none;-webkit-appearance:none;cursor:pointer}
+        .calc-group select option{background:var(--black);color:var(--white)}
+        input[type="range"]{-webkit-appearance:none;width:100%;height:1px;background:rgba(255,255,255,.15);outline:none;cursor:pointer}
+        input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--white);border:none;cursor:pointer;transition:transform .2s ease}
+        input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.3)}
+        input[type="range"]::-moz-range-thumb{width:16px;height:16px;background:var(--white);border:none;cursor:pointer}
+        .reality-check{display:none;font-size:.7rem;font-weight:300;color:#f5a623;margin-top:6px;padding:6px 10px;border-left:2px solid #f5a623;background:rgba(245,166,35,.05);line-height:1.5}
+        .reality-check.visible{display:block;animation:fadeInUp .3s ease}
+        .calc-results{display:flex;flex-direction:column;gap:32px}
+        .result-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px}
+        .result-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+        .result-card-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500)}
+        .death-clock{text-align:center;padding:40px 32px}
+        .death-verdict{font-size:.65rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:16px}
+        .death-months{font-size:clamp(3rem,8vw,5rem);font-weight:200;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
+        .death-months.danger{color:#ff4444}.death-months.warning{color:#f5a623}.death-months.safe{color:#4ecdc4}.death-months.profit{color:#4ecdc4}
+        .death-label{font-size:.85rem;font-weight:300;color:var(--grey-400)}
+        .death-subtitle{font-size:.8rem;font-weight:300;color:var(--grey-500);margin-top:16px}
+        .metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+        .metric{text-align:center;padding:20px 12px;border:1px solid rgba(255,255,255,.06)}
+        .metric-number{font-size:1.4rem;font-weight:200;display:block;margin-bottom:4px;font-variant-numeric:tabular-nums}
+        .metric-label{font-size:.6rem;font-weight:300;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-500)}
+        .chart-container{position:relative;height:300px;width:100%}
+        .pro-section{position:relative;margin-top:48px}
+        .pro-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;margin-left:8px;vertical-align:middle}
+        .pro-lock{position:relative;overflow:hidden}
+        .pro-lock.locked .pro-lock-content{filter:blur(6px);pointer-events:none;user-select:none}
+        .pro-lock-overlay{display:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px}
+        .pro-lock.locked .pro-lock-overlay{display:flex}
+        .pro-lock-overlay h4{font-size:1.1rem;font-weight:300;margin-bottom:8px}
+        .pro-lock-overlay p{font-size:.8rem;font-weight:300;color:var(--grey-400);margin-bottom:20px;max-width:320px}
+        .pro-unlock-btn{display:inline-block;text-decoration:none;font-family:var(--font);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 28px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;border:none;cursor:pointer;transition:all .3s ease}
+        .pro-unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,.3)}
+        .pro-banner{border:1px solid rgba(245,166,35,.2);background:linear-gradient(135deg,rgba(245,166,35,.05),rgba(232,145,12,.02));padding:32px;text-align:center;margin-bottom:32px}
+        .pro-banner.hidden{display:none}
+        .pro-banner h3{font-size:1.1rem;font-weight:300;margin-bottom:8px}
+        .pro-banner p{font-size:.85rem;font-weight:300;color:var(--grey-400);margin-bottom:20px}
+        .pro-features-list{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px}
+        .pro-feature-tag{font-size:.65rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(245,166,35,.2);color:#f5a623}
+        .stream-list{display:flex;flex-direction:column;gap:16px;margin-bottom:16px}
+        .stream-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);position:relative}
+        .stream-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+        .stream-item-name{font-size:.85rem;font-weight:400;color:var(--white)}
+        .stream-remove{background:none;border:none;color:var(--grey-600);cursor:pointer;font-size:1.2rem;padding:4px 8px;transition:color .2s}
+        .stream-remove:hover{color:#ff4444}
+        .stream-fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .stream-field label{font-size:.65rem;margin-bottom:4px}
+        .stream-field input,.stream-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
+        .add-stream-btn{width:100%;padding:12px;font-family:var(--font);font-size:.75rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;background:transparent;color:var(--grey-500);border:1px dashed rgba(255,255,255,.1);cursor:pointer;transition:all .2s}
+        .add-stream-btn:hover{border-color:rgba(255,255,255,.3);color:var(--white)}
+        .expense-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+        .expense-item{padding:16px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
+        .expense-item label{display:flex;justify-content:space-between;font-size:.7rem;font-weight:300;color:var(--grey-400);margin-bottom:8px}
+        .expense-item input{width:100%;padding:8px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
+        .hire-list{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+        .hire-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
+        .hire-field label{display:block;font-size:.65rem;font-weight:300;color:var(--grey-400);margin-bottom:4px}
+        .hire-field input,.hire-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
+        .pnl-table-wrapper{overflow-x:auto;margin-top:16px}
+        .pnl-table{width:100%;border-collapse:collapse;font-size:.7rem;font-weight:300}
+        .pnl-table th{text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.1);color:var(--grey-500);font-weight:400;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+        .pnl-table td{padding:6px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--grey-300);white-space:nowrap;font-variant-numeric:tabular-nums}
+        .pnl-table .negative{color:#ff4444}.pnl-table .positive{color:#4ecdc4}.pnl-table .row-label{color:var(--grey-400);font-weight:400}
+        .action-bar{display:flex;gap:12px;justify-content:flex-end;margin-bottom:24px;flex-wrap:wrap}
+        .action-bar .btn{font-size:.7rem;padding:10px 20px}
+        .pro-active-badge{display:none;font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#4ecdc4;border:1px solid rgba(78,205,196,.3);padding:3px 8px}
+        body.pro-active .pro-active-badge{display:inline-block}
+        body.pro-active .pro-lock.locked .pro-lock-content{filter:none;pointer-events:all;user-select:auto}
+        body.pro-active .pro-lock.locked .pro-lock-overlay{display:none}
+        body.pro-active .pro-banner{display:none}
+        .fm-cta{text-align:center;padding:48px 32px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+        .fm-cta h3{font-size:1.3rem;font-weight:300;margin-bottom:12px}
+        .fm-cta p{font-size:.9rem;font-weight:300;color:var(--grey-400);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto}
+        @media(max-width:968px){.calc-layout{grid-template-columns:1fr}.calc-panel{position:static}.metrics-row{grid-template-columns:1fr;gap:12px}.stream-fields{grid-template-columns:1fr}.expense-grid{grid-template-columns:1fr}.hire-item{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+    <!-- Particle Canvas Background -->
+
+    <canvas id="particle-canvas"></canvas>
+
+
+
+    <!-- Navigation -->
+
+    <nav id="navbar">
+
+        <div class="nav-container">
+
+            <a href="index.html" class="nav-logo">
+
+                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img">
+
+            </a>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+
+                <span class="hamburger-line"></span>
+
+                <span class="hamburger-line"></span>
+
+                <span class="hamburger-line"></span>
+
+            </button>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active-page">Startups</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+
+    </nav>
+
+
+
+    <!-- Mobile Overlay Menu -->
+
+    <div class="mobile-overlay" id="mobile-overlay">
+
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Startups</a></li>
+            <li><a href="training.html">Training</a></li>
+            <li><a href="#contact" class="nav-cta-mobile">Get Started</a></li>
+        </ul>
+    </div>
+
+
+
+    <!-- Startup Hero -->
+
+    <section id="startup-hero" class="section hero-section startup-hero">
+
+        <div class="hero-content">
+
+            <p class="hero-tagline fade-in">Startup Launchpad</p>
+
+            <h1 class="hero-title fade-in delay-1">From idea to<br><em>market leader</em><span class="accent-dot">.</span></h1>
+
+            <p class="hero-subtitle fade-in delay-2">One partner from day one. We take startups from zero to their first unfair advantage, handling everything so you can focus on building.</p>
+
+            <div class="hero-buttons fade-in delay-3">
+
+                <a href="#contact" class="btn btn-primary">Launch Your Startup</a>
+
+                <a href="#roadmap" class="btn btn-ghost">See the Roadmap</a>
+
+            </div>
+
+        </div>
+
+        <div class="scroll-indicator fade-in delay-4">
+
+            <div class="scroll-line"></div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Value Props -->
+
+    <section id="value" class="section problem-section">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <p class="section-label reveal">Why Coastline</p>
+
+                <h2 class="section-title reveal">Everything your startup needs.<br><em>Under one roof.</em></h2>
+
+            </div>
+
+            <div class="startup-value-props reveal">
+
+                <div class="startup-value-card">
+
+                    <div class="startup-value-icon">
+
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+
+                            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/>
+
+                        </svg>
+
+                    </div>
+
+                    <h4>One Partner, Every Stage</h4>
+
+                    <p>No juggling 5 agencies. We cover strategy, build, and launch under one roof.</p>
+
+                </div>
+
+                <div class="startup-value-card">
+
+                    <div class="startup-value-icon">
+
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+
+                        </svg>
+
+                    </div>
+
+                    <h4>Market-First Approach</h4>
+
+                    <p>We validate with real data before you invest a single dollar in building.</p>
+
+                </div>
+
+                <div class="startup-value-card">
+
+                    <div class="startup-value-icon">
+
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+
+                        </svg>
+
+                    </div>
+
+                    <h4>Built for Founders</h4>
+
+                    <p>Lean, fast, no enterprise overhead. Startup-friendly pricing with enterprise-grade quality.</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- Roadmap -->
+
+    <section id="roadmap" class="section method-section">
+
+        <div class="container">
+
+            <div class="section-header">
+
+                <p class="section-label reveal">The Roadmap</p>
+
+                <h2 class="section-title reveal">Six phases from<br>idea to growth.</h2>
+
+            </div>
+
+            <div class="startup-roadmap">
+
+                <div class="roadmap-phase reveal">
+
+                    <div class="phase-number">01</div>
+
+                    <div class="phase-content">
+
+                        <div class="phase-tag">Market Analysis</div>
+
+                        <h3>Validate</h3>
+
+                        <p>We research your market, mine real customer frustrations, and confirm there's a gap worth filling before you build anything.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="roadmap-connector reveal"></div>
+
+                <div class="roadmap-phase reveal">
+
+                    <div class="phase-number">02</div>
+
+                    <div class="phase-content">
+
+                        <div class="phase-tag">Consultancy</div>
+
+                        <h3>Strategize</h3>
+
+                        <p>Business model, pricing strategy, competitive positioning, and a clear roadmap, so you know exactly where you're going and how to get there.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="roadmap-connector reveal"></div>
+
+                <div class="roadmap-phase reveal">
+
+                    <div class="phase-number">03</div>
+
+                    <div class="phase-content">
+
+                        <div class="phase-tag">Digital Solutions</div>
+
+                        <h3>Brand</h3>
+
+                        <p>Visual identity guidance, market positioning, and messaging that sets you apart from day one. Your brand becomes your first competitive advantage.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="roadmap-connector reveal"></div>
+
+                <div class="roadmap-phase reveal">
+
+                    <div class="phase-number">04</div>
+
+                    <div class="phase-content">
+
+                        <div class="phase-tag">Digital Solutions</div>
+
+                        <h3>Build</h3>
+
+                        <p>MVP development: website, web app, or custom tool built to solve your market's #1 frustration. Lean, functional, and ready for real users.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="roadmap-connector reveal"></div>
+
+                <div class="roadmap-phase reveal">
+
+                    <div class="phase-number">05</div>
+
+                    <div class="phase-content">
+
+                        <div class="phase-tag">Consultancy + Digital</div>
+
+                        <h3>Launch</h3>
+
+                        <p>Go-to-market strategy, landing pages, and digital presence to attract your first customers. We get you in front of the right people, fast.</p>
+
+                    </div>
+
+                </div>
+
+                <div class="roadmap-connector reveal"></div>
+
+                <div class="roadmap-phase reveal">
+
+                    <div class="phase-number">06</div>
+
+                    <div class="phase-content">
+
+                        <div class="phase-tag">Training + Advisory</div>
+
+                        <h3>Grow</h3>
+
+                        <p>Founder training, sales fundamentals, and ongoing advisory to scale what's working. We stay in your corner as you grow.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="startup-cta reveal">
+
+                <a href="#contact" class="btn btn-primary">Launch Your Startup</a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FounderMath Section -->
+    <section id="foundermath" class="foundermath-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">FounderMath</p>
+                <h2 class="section-title reveal">Will your startup<br><em>survive?</em></h2>
+                <p class="section-subtitle reveal">Move the sliders. See your future. The interactive reality check every founder needs before they spend a dollar.</p>
+            </div>
+
+            <div class="action-bar" id="action-bar">
+                <span class="pro-active-badge">Pro Unlocked</span>
+                <button class="btn btn-ghost" id="btn-save" title="Save model to browser">Save Model</button>
+                <button class="btn btn-ghost" id="btn-export-xlsx" style="display:none">Download Model (.xlsx)</button>
+                <button class="btn btn-ghost" id="btn-export-pdf" style="display:none">Export PDF</button>
+            </div>
+
+            <div class="calc-layout">
+                <div class="calc-panel">
+                    <p class="calc-panel-title">Your Numbers</p>
+                    <div class="calc-group">
+                        <label for="model-select">Business Model</label>
+                        <select id="model-select">
+                            <option value="saas">SaaS / Subscription</option>
+                            <option value="marketplace">Marketplace</option>
+                            <option value="ecommerce">E-Commerce</option>
+                            <option value="service">Service / Agency</option>
+                            <option value="freemium">Freemium / Ad-supported</option>
+                        </select>
+                    </div>
+                    <div class="calc-group"><label>Starting Capital <span class="calc-value" id="val-capital">$50,000</span></label><input type="range" id="slider-capital" min="1000" max="500000" value="50000" step="1000"></div>
+                    <div class="calc-group"><label>Monthly Costs <span class="calc-value" id="val-costs">$5,000</span></label><input type="range" id="slider-costs" min="500" max="100000" value="5000" step="500"></div>
+                    <div class="calc-group"><label>Price per Customer/mo <span class="calc-value" id="val-price">$29</span></label><input type="range" id="slider-price" min="1" max="500" value="29" step="1"></div>
+                    <div class="calc-group"><label>New Customers / Month <span class="calc-value" id="val-customers">20</span></label><input type="range" id="slider-customers" min="1" max="500" value="20" step="1"><div class="reality-check" id="rc-customers"></div></div>
+                    <div class="calc-group"><label>Monthly Churn Rate <span class="calc-value" id="val-churn">5%</span></label><input type="range" id="slider-churn" min="0" max="30" value="5" step="0.5"><div class="reality-check" id="rc-churn"></div></div>
+                    <div class="calc-group"><label>Conversion Rate <span class="calc-value" id="val-conversion">3%</span></label><input type="range" id="slider-conversion" min="0.5" max="30" value="3" step="0.5"><div class="reality-check" id="rc-conversion"></div></div>
+                    <div class="calc-group"><label>Projection Length <span class="calc-value" id="val-months">24 months</span></label><input type="range" id="slider-months" min="12" max="36" value="24" step="6"></div>
+                </div>
+
+                <div class="calc-results">
+                    <div class="result-card death-clock">
+                        <p class="death-verdict" id="death-verdict">Your Runway</p>
+                        <p class="death-months safe" id="death-months">-</p>
+                        <p class="death-label" id="death-label">months until lights out</p>
+                        <p class="death-subtitle" id="death-subtitle"></p>
+                    </div>
+                    <div class="metrics-row">
+                        <div class="metric"><span class="metric-number" id="m-breakeven">-</span><span class="metric-label">Months to Break-Even</span></div>
+                        <div class="metric"><span class="metric-number" id="m-customers-needed">-</span><span class="metric-label">Customers to Break-Even</span></div>
+                        <div class="metric"><span class="metric-number" id="m-burn">-</span><span class="metric-label">Monthly Burn Rate</span></div>
+                    </div>
+                    <div class="result-card"><div class="result-card-header"><span class="result-card-title">Revenue vs Costs</span></div><div class="chart-container"><canvas id="chart-revenue"></canvas></div></div>
+                    <div class="result-card"><div class="result-card-header"><span class="result-card-title">Cash Balance Over Time</span></div><div class="chart-container"><canvas id="chart-cash"></canvas></div></div>
+                    <div class="result-card"><div class="result-card-header"><span class="result-card-title">Customer Growth (with Churn)</span></div><div class="chart-container"><canvas id="chart-customers"></canvas></div></div>
+                </div>
+            </div>
+
+            <div class="pro-section">
+                <div class="pro-banner" id="pro-banner">
+                    <h3>Unlock the Full Financial Modeler <span class="pro-badge">PRO</span></h3>
+                    <p>Go beyond the basics - model multiple revenue streams, plan hiring, break down expenses, and export investor-ready reports.</p>
+                    <div class="pro-features-list">
+                        <span class="pro-feature-tag">Multiple Revenue Streams</span>
+                        <span class="pro-feature-tag">Expense Breakdown</span>
+                        <span class="pro-feature-tag">Hiring Timeline</span>
+                        <span class="pro-feature-tag">Sensitivity Analysis</span>
+                        <span class="pro-feature-tag">P&amp;L Summary</span>
+                        <span class="pro-feature-tag">PDF Export</span>
+                    </div>
+                    <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a>
+                </div>
+
+                <div class="pro-lock locked" id="pro-streams">
+                    <div class="pro-lock-overlay"><h4>Multiple Revenue Streams <span class="pro-badge">PRO</span></h4><p>Model different products, plans, and pricing tiers side by side.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
+                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Revenue Streams <span class="pro-badge">PRO</span></span></div>
+                    <div class="stream-list" id="stream-list">
+                        <div class="stream-item" data-stream="0"><div class="stream-item-header"><span class="stream-item-name">Stream 1: Basic Plan</span><button class="stream-remove" onclick="removeStream(0)">x</button></div><div class="stream-fields"><div class="stream-field"><label>Name</label><input type="text" value="Basic Plan" onchange="updateStreamName(0,this.value)"></div><div class="stream-field"><label>Price/mo</label><input type="number" value="19" data-field="price" onchange="calcPro()"></div><div class="stream-field"><label>New customers/mo</label><input type="number" value="15" data-field="customers" onchange="calcPro()"></div><div class="stream-field"><label>Monthly churn %</label><input type="number" value="5" data-field="churn" onchange="calcPro()" step="0.5"></div></div></div>
+                        <div class="stream-item" data-stream="1"><div class="stream-item-header"><span class="stream-item-name">Stream 2: Pro Plan</span><button class="stream-remove" onclick="removeStream(1)">x</button></div><div class="stream-fields"><div class="stream-field"><label>Name</label><input type="text" value="Pro Plan" onchange="updateStreamName(1,this.value)"></div><div class="stream-field"><label>Price/mo</label><input type="number" value="49" data-field="price" onchange="calcPro()"></div><div class="stream-field"><label>New customers/mo</label><input type="number" value="8" data-field="customers" onchange="calcPro()"></div><div class="stream-field"><label>Monthly churn %</label><input type="number" value="3" data-field="churn" onchange="calcPro()" step="0.5"></div></div></div>
+                    </div>
+                    <button class="add-stream-btn" onclick="addStream()">+ Add Revenue Stream</button></div></div>
+                </div>
+
+                <div class="pro-lock locked" id="pro-expenses">
+                    <div class="pro-lock-overlay"><h4>Expense Breakdown <span class="pro-badge">PRO</span></h4><p>Break down costs by category.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
+                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Monthly Expenses <span class="pro-badge">PRO</span></span></div>
+                    <div class="expense-grid" id="expense-grid">
+                        <div class="expense-item"><label>Team &amp; Salaries <span class="calc-value exp-val" id="exp-team-val">$3,000</span></label><input type="range" min="0" max="50000" value="3000" step="500" data-exp="team" oninput="calcPro()"></div>
+                        <div class="expense-item"><label>Marketing <span class="calc-value exp-val" id="exp-marketing-val">$1,000</span></label><input type="range" min="0" max="20000" value="1000" step="100" data-exp="marketing" oninput="calcPro()"></div>
+                        <div class="expense-item"><label>Tools &amp; Software <span class="calc-value exp-val" id="exp-tools-val">$500</span></label><input type="range" min="0" max="5000" value="500" step="50" data-exp="tools" oninput="calcPro()"></div>
+                        <div class="expense-item"><label>Operations <span class="calc-value exp-val" id="exp-ops-val">$300</span></label><input type="range" min="0" max="10000" value="300" step="100" data-exp="ops" oninput="calcPro()"></div>
+                        <div class="expense-item"><label>Office / Rent <span class="calc-value exp-val" id="exp-rent-val">$0</span></label><input type="range" min="0" max="10000" value="0" step="100" data-exp="rent" oninput="calcPro()"></div>
+                        <div class="expense-item"><label>Other <span class="calc-value exp-val" id="exp-other-val">$200</span></label><input type="range" min="0" max="10000" value="200" step="100" data-exp="other" oninput="calcPro()"></div>
+                    </div>
+                    <div style="margin-top:16px;text-align:right;font-size:.85rem;color:var(--grey-400)">Total: <strong id="exp-total" style="color:var(--white)">$5,000</strong>/mo</div></div></div>
+                </div>
+
+                <div class="pro-lock locked" id="pro-hiring">
+                    <div class="pro-lock-overlay"><h4>Hiring Timeline <span class="pro-badge">PRO</span></h4><p>Plan when to hire and see the impact on your runway.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
+                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Hiring Plan <span class="pro-badge">PRO</span></span></div>
+                    <div class="hire-list" id="hire-list"><div class="hire-item" data-hire="0"><div class="hire-field"><label>Role</label><input type="text" value="Developer" data-h="role" onchange="calcPro()"></div><div class="hire-field"><label>Monthly Salary</label><input type="number" value="6000" data-h="salary" onchange="calcPro()"></div><div class="hire-field"><label>Start Month</label><input type="number" value="4" min="1" max="36" data-h="month" onchange="calcPro()"></div><button class="stream-remove" onclick="removeHire(0)">x</button></div></div>
+                    <button class="add-stream-btn" onclick="addHire()">+ Add Hire</button></div></div>
+                </div>
+
+                <div class="pro-lock locked" id="pro-sensitivity">
+                    <div class="pro-lock-overlay"><h4>Sensitivity Analysis <span class="pro-badge">PRO</span></h4><p>Best-case and worst-case scenarios side by side.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
+                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Sensitivity Analysis <span class="pro-badge">PRO</span></span></div><div class="chart-container" style="height:350px"><canvas id="chart-sensitivity"></canvas></div></div></div>
+                </div>
+
+                <div class="pro-lock locked" id="pro-pnl">
+                    <div class="pro-lock-overlay"><h4>P&amp;L Summary Table <span class="pro-badge">PRO</span></h4><p>Month-by-month profit &amp; loss - investor-ready.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
+                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Profit &amp; Loss Summary <span class="pro-badge">PRO</span></span></div><div class="pnl-table-wrapper"><table class="pnl-table" id="pnl-table"></table></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Startup Contact Form -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+
+            <div class="section-header">
+
+                <p class="section-label reveal">Get Started</p>
+
+                <h2 class="section-title reveal">Ready to launch?<br><em>Tell us about your idea.</em></h2>
+
+                <p class="section-subtitle reveal">Fill out the form below and we'll get back to you within 24 hours with a tailored plan for your startup.</p>
+
+            </div>
+
+            <div class="form-wrapper reveal">
+
+                <form id="contact-form" action="#" method="POST">
+
+                    <input type="hidden" name="service" value="startup">
+
+
+
+                    <!-- About You -->
+
+                    <h3 class="form-step-title">About You</h3>
+
+                    <div class="form-group">
+
+                        <label for="name">Full Name</label>
+
+                        <input type="text" id="name" name="name" required placeholder="John Smith">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="email">Email Address</label>
+
+                        <input type="email" id="email" name="email" required placeholder="john@startup.com">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="company">Company / Startup Name</label>
+
+                        <input type="text" id="company" name="company" placeholder="Your Startup Inc.">
+
+                    </div>
+
+
+
+                    <!-- Startup Diagnostic -->
+
+                    <div class="form-divider"></div>
+
+                    <h3 class="form-step-title">Your Startup</h3>
+
+
+
+                    <div class="form-group">
+
+                        <label for="su-stage">What stage is your startup?</label>
+
+                        <select id="su-stage" name="su_stage" required>
+
+                            <option value="" disabled selected>Select one</option>
+
+                            <option value="idea">Idea only, haven't started yet</option>
+
+                            <option value="researching">Researching the market</option>
+
+                            <option value="mvp">Have an MVP or prototype</option>
+
+                            <option value="launched">Launched but struggling</option>
+
+                            <option value="scaling">Ready to scale</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="su-idea">Describe your business idea in one sentence</label>
+
+                        <input type="text" id="su-idea" name="su_idea" required placeholder="e.g., A platform that helps strata councils track rental compliance">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="su-market">What industry or market are you targeting?</label>
+
+                        <input type="text" id="su-market" name="su_market" required placeholder="e.g., Property Management, HealthTech, E-commerce...">
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="su-problem">What's the #1 problem you're solving for customers?</label>
+
+                        <textarea id="su-problem" name="su_problem" required rows="3" placeholder="Describe the frustration or gap you want to address..."></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="su-validated">Have you validated this with real customers?</label>
+
+                        <select id="su-validated" name="su_validated" required>
+
+                            <option value="" disabled selected>Select one</option>
+
+                            <option value="yes-data">Yes, with data and research</option>
+
+                            <option value="some-feedback">Some informal feedback</option>
+
+                            <option value="not-yet">Not yet</option>
+
+                            <option value="not-sure-how">Not sure how to validate</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="su-help">What do you need help with most right now?</label>
+
+                        <select id="su-help" name="su_help" required>
+
+                            <option value="" disabled selected>Select one</option>
+
+                            <option value="validation">Market validation & research</option>
+
+                            <option value="strategy">Business strategy & planning</option>
+
+                            <option value="mvp">Building an MVP or product</option>
+
+                            <option value="branding">Branding & identity</option>
+
+                            <option value="website">Website & digital presence</option>
+
+                            <option value="go-to-market">Go-to-market plan</option>
+
+                            <option value="training">Founder training & skills</option>
+
+                            <option value="everything">All of the above, full launchpad</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="su-timeline">What's your timeline?</label>
+
+                        <select id="su-timeline" name="su_timeline">
+
+                            <option value="" disabled selected>Select one</option>
+
+                            <option value="ready-now">Ready to start now</option>
+
+                            <option value="1-3-months">Within 1-3 months</option>
+
+                            <option value="3-6-months">3-6 months</option>
+
+                            <option value="exploring">Just exploring options</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="su-funding">How are you currently funded?</label>
+
+                        <select id="su-funding" name="su_funding">
+
+                            <option value="" disabled selected>Select one</option>
+
+                            <option value="bootstrapped">Bootstrapped / self-funded</option>
+
+                            <option value="seed-angel">Seed / Angel investment</option>
