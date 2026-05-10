@@ -3,6 +3,144 @@
    Navigation, scroll reveals, form logic, stat counters
    ══════════════════════════════════════════════════════════════════════ */
 
+/* ══════════════════════════════════════════════════════════════════════
+   SPLASH SCREEN — Time Portal
+   Runs once per browser session (sessionStorage gate)
+   ══════════════════════════════════════════════════════════════════════ */
+(function initSplash() {
+    'use strict';
+
+    const splash      = document.getElementById('splash-screen');
+    const splashCanvas = document.getElementById('splash-canvas');
+    const logoWrap    = document.getElementById('splash-logo-wrap');
+    const portalRing  = document.getElementById('splash-portal-ring');
+
+    // Skip splash if already seen this session OR elements missing
+    if (!splash || !splashCanvas || sessionStorage.getItem('splashSeen')) {
+        if (splash) splash.classList.add('splash-hidden');
+        return;
+    }
+
+    // Lock body scroll while splash is active
+    document.body.classList.add('splash-active');
+
+    // ── Mini particle system on the splash canvas ────────────────────
+    const ctx = splashCanvas.getContext('2d');
+    let W = splashCanvas.width  = window.innerWidth;
+    let H = splashCanvas.height = window.innerHeight;
+    let rafId;
+    let splashDone = false;
+
+    const PARTICLE_COUNT = 60;
+    const particles = [];
+
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+
+    function createParticle() {
+        return {
+            x: rand(0, W),
+            y: rand(0, H),
+            r: rand(0.4, 1.6),
+            vx: rand(-0.15, 0.15),
+            vy: rand(-0.15, 0.15),
+            alpha: rand(0.1, 0.5)
+        };
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(createParticle());
+    }
+
+    function drawSplashParticles() {
+        if (splashDone) return;
+        ctx.clearRect(0, 0, W, H);
+
+        // Draw faint connection lines
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 140) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - dist / 140)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // Draw particles
+        particles.forEach(p => {
+            p.x += p.vx;
+            p.y += p.vy;
+            if (p.x < 0) p.x = W;
+            if (p.x > W) p.x = 0;
+            if (p.y < 0) p.y = H;
+            if (p.y > H) p.y = 0;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+            ctx.fill();
+        });
+
+        rafId = requestAnimationFrame(drawSplashParticles);
+    }
+
+    drawSplashParticles();
+
+    // Handle resize during splash
+    window.addEventListener('resize', function onSplashResize() {
+        W = splashCanvas.width  = window.innerWidth;
+        H = splashCanvas.height = window.innerHeight;
+        if (splashDone) window.removeEventListener('resize', onSplashResize);
+    });
+
+    // ── Animation sequence ───────────────────────────────────────────
+    // Phase 1 (0 ms)    : Logo fades in
+    // Phase 2 (900 ms)  : Portal rings appear — hold moment
+    // Phase 3 (1700 ms) : Portal zoom begins
+    // Phase 4 (2800 ms) : Overlay removed; hero animations released
+
+    // Phase 1 — logo fade in
+    setTimeout(function() {
+        logoWrap.classList.add('splash-logo-in');
+    }, 80); // tiny delay so CSS is ready
+
+    // Phase 2 — portal ring glow
+    setTimeout(function() {
+        portalRing.classList.add('ring-visible');
+    }, 900);
+
+    // Phase 3 — ZOOM
+    setTimeout(function() {
+        portalRing.classList.remove('ring-visible');
+        splash.classList.add('portal-zoom');
+    }, 1750);
+
+    // Phase 4 — remove splash, unlock page
+    setTimeout(function() {
+        splashDone = true;
+        cancelAnimationFrame(rafId);
+
+        splash.classList.add('splash-hidden');
+        document.body.classList.remove('splash-active');
+
+        // Resume hero fade-in animations
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+            el.style.animationPlayState = 'running';
+        });
+
+        // Mark session so splash doesn't replay
+        sessionStorage.setItem('splashSeen', '1');
+    }, 2850);
+
+})();
+
+
 (function () {
     'use strict';
 
