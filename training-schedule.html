@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Training Calendar | Coastline Digital Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ─────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --gold:       #c8a96e;
+            --gold-light: #dfc18d;
+            --gold-pale:  #f5ead8;
+            --blue:       #7eb8d4;
+            --blue-light: #a2cfe3;
+            --blue-pale:  #e8f4fa;
+            --dark:       #0d0d0d;
+            --mid:        #1a1a1a;
+            --text:       #1a1a1a;
+            --muted:      #6b7280;
+            --rule:       #e5e7eb;
+            --white:      #ffffff;
+            --font:       'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            background: #f8f7f5;
+            color: var(--text);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── Screen-only wrapper ──────────────────────────────────── */
+        .screen-toolbar {
+            background: var(--dark);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .screen-toolbar a {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .screen-toolbar a:hover { color: #fff; }
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold);
+            color: var(--dark) !important;
+            font-size: 0.72rem !important;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .download-btn:hover { background: var(--gold-light) !important; }
+        .download-btn svg { width: 14px; height: 14px; }
+
+        /* ── Document wrapper ─────────────────────────────────────── */
+        .document {
+            max-width: 794px; /* A4 width at 96dpi */
+            margin: 40px auto;
+            background: var(--white);
+            box-shadow: 0 4px 48px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        /* ── COVER HEADER ─────────────────────────────────────────── */
+        .doc-header {
+            background: var(--dark);
+            padding: 48px 56px 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        .doc-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(255,255,255,0.012) 40px,
+                    rgba(255,255,255,0.012) 41px
+                );
+            pointer-events: none;
+        }
+        .doc-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--blue) 100%);
+        }
+        .header-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .header-logo-area {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .logo-wordmark {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #fff;
+            letter-spacing: 0.06em;
+        }
+        .logo-wordmark span { color: var(--gold); }
+        .header-meta {
+            text-align: right;
+        }
+        .header-meta-label {
+            font-size: 0.58rem;
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 4px;
+        }
+        .header-meta-value {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+        }
+        .header-main {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 32px;
+        }
+        .header-title-block { flex: 1; }
+        .header-eyebrow {
+            font-size: 0.62rem;
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .header-title {
+            font-size: 2.4rem;
+            font-weight: 200;
+            color: #fff;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 4px;
+        }
+        .header-title em {
+            font-style: italic;
+            font-weight: 200;
+            color: rgba(255,255,255,0.7);
+        }
+        .header-subtitle {
+            font-size: 0.82rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+        .header-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .stat-item { }
+        .stat-num {
+            font-size: 1.8rem;
+            font-weight: 200;
+            color: var(--gold);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.58rem;
+            font-weight: 300;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ── TRACK LEGEND ─────────────────────────────────────────── */
+        .track-legend {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--rule);
+        }
+        .track-legend-item {
+            flex: 1;
+            padding: 16px 56px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .track-legend-item:first-child { border-right: 1px solid var(--rule); }
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .legend-dot.startup  { background: var(--gold); }
+        .legend-dot.corporate { background: var(--blue); }
+        .legend-label {
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .legend-label.startup  { color: var(--gold); }
+        .legend-label.corporate { color: var(--blue); }
+        .legend-count {
+            margin-left: auto;
+            font-size: 0.65rem;
+            font-weight: 300;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+        }
+
+        /* ── BODY / TIMELINE ──────────────────────────────────────── */
+        .doc-body {
+            padding: 48px 56px;
+        }
+
+        .body-intro {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--rule);
+        }
+        .body-intro p {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 560px;
+        }
+
+        /* Two-column grid */
+        .timeline-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+        .timeline-col {
+            padding-right: 32px;
+        }
+        .timeline-col.corporate {
+            padding-right: 0;
+            padding-left: 32px;
+            border-left: 1px solid var(--rule);
+        }
+        .col-header {
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+        }
+        .col-header-label {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .col-header-label.startup  { color: var(--gold); }
+        .col-header-label.corporate { color: var(--blue); }
+        .col-header-title {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+        .col-header-rule {
+            height: 2px;
+            margin-top: 12px;
+            border-radius: 2px;
+        }
+        .col-header-rule.startup  { background: linear-gradient(90deg, var(--gold), transparent); }
+        .col-header-rule.corporate { background: linear-gradient(90deg, var(--blue), transparent); }
+
+        /* Course Row */
+        .course-row {
+            display: flex;
+            gap: 14px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--rule);
+            position: relative;
+        }
+        .course-row:last-child { border-bottom: none; }
+
+        .month-pill {
+            flex-shrink: 0;
+            width: 52px;
+            text-align: center;
+        }
+        .month-pill-inner {
+            display: inline-block;
+            padding: 4px 6px;
+            font-size: 0.56rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            white-space: nowrap;
+        }
+        .month-pill-inner.startup {
+            background: var(--gold-pale);
+            color: #7a5c1e;
+        }
+        .month-pill-inner.corporate {
+            background: var(--blue-pale);
+            color: #1e5a7a;
+        }
+
+        .course-info { flex: 1; min-width: 0; }
+        .course-info-title {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.35;
+            margin-bottom: 4px;
+        }
+        .course-info-desc {
+            font-size: 0.72rem;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+        .course-badges {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .format-badge {
+            font-size: 0.56rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 2px 7px;
+            border: 1px solid;
+            border-radius: 1px;
+        }
+        .format-badge.startup  { color: var(--gold); border-color: rgba(200,169,110,0.35); }
+        .format-badge.corporate { color: var(--blue); border-color: rgba(126,184,212,0.35); }
+        .seats-badge {
+            font-size: 0.54rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .seats-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #d97706;
+            flex-shrink: 0;
+        }
+
+        /* ── PAGE BREAK ──────────────────────────────────────────── */
+        .page-break { page-break-after: always; break-after: always; height: 0; }
+
+        /* ── HOW TO RESERVE ──────────────────────────────────────── */
+        .reserve-section {
+            margin-top: 48px;
+            padding-top: 40px;
+            border-top: 2px solid var(--rule);
+        }
+        .reserve-eyebrow {
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        .reserve-title {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: var(--text);
+            letter-spacing: -0.01em;
+            margin-bottom: 32px;
+        }
+        .reserve-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .reserve-step {
+            padding: 20px;
+            border: 1px solid var(--rule);
+            background: #fafaf9;
+            position: relative;
+        }
+        .step-num {
+            font-size: 1.6rem;
+            font-weight: 200;
+            color: var(--gold);
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .step-title {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+        .step-desc {
+            font-size: 0.72rem;
+            font-weight: 300;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* ── CONTACT BAR ──────────────────────────────────────────── */
+        .contact-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 24px 32px;
+            background: var(--dark);
+            margin-top: 0;
+        }
+        .contact-bar-brand {
+            font-size: 0.78rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.8);
+            letter-spacing: 0.04em;
+        }
+        .contact-bar-brand strong {
+            font-weight: 500;
+            color: #fff;
+        }
+        .contact-bar-details {
+            display: flex;
+            gap: 32px;
+        }
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .contact-item-label {
+            font-size: 0.55rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+        }
+        .contact-item-value {
+            font-size: 0.72rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* ── QR / URL BLOCK ──────────────────────────────────────── */
+        .url-block {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 32px;
+            background: var(--gold-pale);
+            border-top: 2px solid var(--gold);
+        }
+        .url-icon {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+        }
+        .url-icon svg { width: 100%; height: 100%; }
+        .url-text { }
+        .url-label {
+            font-size: 0.58rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #7a5c1e;
+            margin-bottom: 2px;
+        }
+        .url-value {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #5a3e0e;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── DOC FOOTER ──────────────────────────────────────────── */
+        .doc-footer {
+            padding: 14px 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--rule);
+            background: #fafaf9;
+        }
+        .doc-footer p {
+            font-size: 0.6rem;
+            font-weight: 300;
+            color: #9ca3af;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── PRINT STYLES ─────────────────────────────────────────── */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            body {
+                background: #fff;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .screen-toolbar { display: none !important; }
+
+            .document {
+                max-width: 100%;
+                margin: 0;
+                box-shadow: none;
+            }
+
+            .doc-header { padding: 36px 48px 36px; }
+            .doc-body { padding: 36px 48px; }
+            .header-title { font-size: 2rem; }
+
+            .course-row { padding: 12px 0; }
+            .course-info-title { font-size: 0.78rem; }
+            .course-info-desc { font-size: 0.68rem; }
+        }
+
+        /* ── Screen preview helpers ──────────────────────────────── */
+        @media screen {
+            .document { margin: 40px auto 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Screen-only toolbar -->
+    <div class="screen-toolbar">
+        <a href="training.html">← Back to Training</a>
+        <a href="#" class="download-btn" id="download-btn" onclick="downloadPDF();return false;">
+            <svg id="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+            <span id="dl-label">Download PDF</span>
+        </a>
+    </div>
+
+    <!-- ══ DOCUMENT ════════════════════════════════════════════════ -->
+    <div class="document">
+
+        <!-- COVER HEADER -->
+        <header class="doc-header">
+            <div class="header-top">
+                <div class="header-logo-area">
+                    <img src="Coastline Logo.png" alt="Coastline Digital Solutions" style="height:40px;width:auto;object-fit:contain;display:block;margin-bottom:6px">
+                    <div style="font-size:0.6rem;font-weight:300;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">coastlinedigitalsolutions.com</div>
+                </div>
+                <div class="header-meta">
+                    <div class="header-meta-label">Document</div>
+                    <div class="header-meta-value">2026 Training Calendar</div>
+                    <div class="header-meta-label" style="margin-top:8px">Issued</div>
+                    <div class="header-meta-value">May 2026 Edition</div>
+                </div>
+            </div>
+            <div class="header-main">
+                <div class="header-title-block">
+                    <p class="header-eyebrow">Business Training — 2026</p>
+                    <h1 class="header-title">2026 Training<br><em>Calendar</em></h1>
+                    <p class="header-subtitle">MBA-level training in intensive 1-week sprints.<br>Two professional tracks. 14 courses. May to December.</p>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">14</span>
+                        <span class="stat-label">Courses</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">2</span>
+                        <span class="stat-label">Tracks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num">8</span>
+                        <span class="stat-label">Months</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- TRACK LEGEND -->
+        <div class="track-legend">
+            <div class="track-legend-item">
+                <span class="legend-dot startup"></span>
+                <span class="legend-label startup">Startup &amp; Entrepreneur Track</span>
+                <span class="legend-count">7 courses · May – November</span>
+            </div>
+            <div class="track-legend-item">
+                <span class="legend-dot corporate"></span>
+                <span class="legend-label corporate">Corporate &amp; Professional Track</span>
+                <span class="legend-count">7 courses · June – December</span>
+            </div>
+        </div>
+
+        <!-- BODY -->
+        <div class="doc-body">
+
+            <div class="body-intro">
+                <p>Select your track. All courses are delivered with hybrid and online live attendance options. Seats are limited per cohort. Reserve early to secure your place.</p>
+            </div>
+
+            <!-- Two-Column Timeline -->
+            <div class="timeline-columns">
+
+                <!-- STARTUP TRACK -->
+                <div class="timeline-col startup">
+                    <div class="col-header">
+                        <div class="col-header-label startup">Startup Track</div>
+                        <div class="col-header-title">Fuelling Canada's Startup Ecosystem</div>
+                        <div class="col-header-rule startup"></div>
+                    </div>
+
+                    <!-- Course 1 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner startup">May<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Competitive Intelligence Mastery</div>
+                            <div class="course-info-desc">Map, monitor &amp; exploit market gaps with a live CI system and blue ocean positioning.</div>
+                            <div class="course-badges">
+                                <span class="format-badge startup">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner startup">Jun<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Venture Architecture</div>
+                            <div class="course-info-desc">Design scalable business models using Jobs-to-be-Done, unit economics &amp; pricing power.</div>
+                            <div class="course-badges">
+                                <span class="format-badge startup">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner startup">Jul<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">The Fundraising Playbook</div>
+                            <div class="course-info-desc">From pitch deck to term sheet — cap tables, SAFE notes, investor narrative &amp; negotiation.</div>
+                            <div class="course-badges">
+                                <span class="format-badge startup">Online Live</span>
+                                <span class="seats-badge"><span class="seats-dot"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 4 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner startup">Aug<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Product-Market Fit Engineering</div>
+                            <div class="course-info-desc">Sean Ellis PMF testing, NPS cohort models, retention analysis &amp; pivot-vs-persevere framework.</div>
+                            <div class="course-badges">
+                                <span class="format-badge startup">Online Live</span>
+                                <span class="seats-badge"><span class="seats-dot"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 5 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner startup">Sep<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Strategic Risk Intelligence</div>
+                            <div class="course-info-desc">Monte Carlo scenario modelling, black swan planning &amp; operational resilience for founders.</div>
+                            <div class="course-badges">
+                                <span class="format-badge startup">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 6 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner startup">Oct<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Growth Architecture</div>
+                            <div class="course-info-desc">Build scalable acquisition &amp; retention systems: growth loops, CAC/LTV optimisation &amp; referral engines.</div>
+                            <div class="course-badges">
+                                <span class="format-badge startup">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 7 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner startup">Nov<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Exit Strategy &amp; Valuation Mastery</div>
+                            <div class="course-info-desc">Valuation multiples, M&amp;A readiness, EBITDA optimisation &amp; strategic acquirer mapping.</div>
+                            <div class="course-badges">
+                                <span class="format-badge startup">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CORPORATE TRACK -->
+                <div class="timeline-col corporate">
+                    <div class="col-header">
+                        <div class="col-header-label corporate">Corporate Track</div>
+                        <div class="col-header-title">Certification-Grade Career Advancement</div>
+                        <div class="col-header-rule corporate"></div>
+                    </div>
+
+                    <!-- Course 8 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner corporate">Jun<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">PMP® Exam Prep Intensive</div>
+                            <div class="course-info-desc">All 3 PMP domains, 200+ practice questions &amp; exam technique drills. Pass on your first attempt.</div>
+                            <div class="course-badges">
+                                <span class="format-badge corporate">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot" style="background:#3b82f6"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 9 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner corporate">Jul<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Business Analysis Mastery</div>
+                            <div class="course-info-desc">PMI-PBA® aligned: elicitation techniques, traceability matrix, stakeholder analysis &amp; solution evaluation.</div>
+                            <div class="course-badges">
+                                <span class="format-badge corporate">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot" style="background:#3b82f6"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 10 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner corporate">Aug<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Enterprise Risk Management</div>
+                            <div class="course-info-desc">ISO 31000, PMBOK risk management &amp; quantitative analysis using real enterprise case studies.</div>
+                            <div class="course-badges">
+                                <span class="format-badge corporate">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot" style="background:#3b82f6"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 11 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner corporate">Sep<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Agile Project Delivery</div>
+                            <div class="course-info-desc">PMI-ACP® aligned: Scrum, Kanban, hybrid frameworks &amp; making Agile work in real organisations.</div>
+                            <div class="course-badges">
+                                <span class="format-badge corporate">Online Live</span>
+                                <span class="seats-badge"><span class="seats-dot" style="background:#3b82f6"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 12 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner corporate">Oct<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Stakeholder Management &amp; Influence</div>
+                            <div class="course-info-desc">Influence without authority: stakeholder mapping, political navigation &amp; high-stakes decision leadership.</div>
+                            <div class="course-badges">
+                                <span class="format-badge corporate">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot" style="background:#3b82f6"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 13 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner corporate">Nov<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Strategic Business Analysis</div>
+                            <div class="course-info-desc">Link projects to corporate value: benefits realisation, value stream mapping &amp; C-suite presentation.</div>
+                            <div class="course-badges">
+                                <span class="format-badge corporate">Hybrid</span>
+                                <span class="seats-badge"><span class="seats-dot" style="background:#3b82f6"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 14 -->
+                    <div class="course-row">
+                        <div class="month-pill"><span class="month-pill-inner corporate">Dec<br>2026</span></div>
+                        <div class="course-info">
+                            <div class="course-info-title">Year-End Leadership Intensive</div>
+                            <div class="course-info-desc">Lead high-performance teams into 2027: OKRs, performance culture, talent retention &amp; decision frameworks.</div>
+                            <div class="course-badges">
+                                <span class="format-badge corporate">In-Person</span>
+                                <span class="seats-badge"><span class="seats-dot" style="background:#3b82f6"></span>Limited Seats</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /timeline-columns -->
+
+            <!-- HOW TO RESERVE -->
+            <div class="reserve-section">
+                <p class="reserve-eyebrow">Reserve Your Seat</p>
+                <h2 class="reserve-title">Three steps to securing your place</h2>
+                <div class="reserve-steps">
+                    <div class="reserve-step">
+                        <div class="step-num">01</div>
+                        <div class="step-title">Submit Your Reservation</div>
+                        <div class="step-desc">Visit coastlinedigitalsolutions.com/training and click "Reserve My Seat" on your chosen course.</div>
+                    </div>
+                    <div class="reserve-step">
+                        <div class="step-num">02</div>
+                        <div class="step-title">Receive Pricing &amp; Details</div>
+                        <div class="step-desc">A Coastline team member contacts you within 24 hours with pricing, schedule &amp; pre-reading materials.</div>
+                    </div>
+                    <div class="reserve-step">
+                        <div class="step-num">03</div>
+                        <div class="step-title">Confirm Your Place</div>
+                        <div class="step-desc">Complete payment to lock in your seat. Group bookings (3+) qualify for corporate pricing.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /doc-body -->
+
+        <!-- URL BLOCK -->
+        <div class="url-block">
+            <div class="url-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#7a5c1e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+            </div>
+            <div class="url-text">
+                <div class="url-label">Reserve Online</div>
+                <div class="url-value">coastlinedigitalsolutions.com/training</div>
+            </div>
+            <div style="margin-left:auto;text-align:right">
+                <div class="url-label">Email Us</div>
+                <div class="url-value" style="font-size:0.75rem">info@coastlinedigitalsolutions.com</div>
+            </div>
+        </div>
+
+        <!-- CONTACT BAR -->
+        <div class="contact-bar">
+            <div class="contact-bar-brand">
+                <strong>Coastline Digital Solutions</strong><br>
+                Business Training Division
+            </div>
+            <div class="contact-bar-details">
+                <div class="contact-item">
+                    <span class="contact-item-label">Delivery</span>
+                    <span class="contact-item-value">Hybrid · Online Live · In-Person</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-item-label">Schedule</span>
+                    <span class="contact-item-value">May – December 2026</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-item-label">Tracks</span>
+                    <span class="contact-item-value">Startup &amp; Corporate</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DOC FOOTER -->
+        <div class="doc-footer">
+            <p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p>
+            <p>Dates subject to change. Availability not guaranteed until seat is confirmed.</p>
+        </div>
+
+    </div><!-- /document -->
+
+    <!-- PDF generation libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+    async function downloadPDF() {
+        const btn = document.getElementById('download-btn');
+        const label = document.getElementById('dl-label');
+        const icon = document.getElementById('dl-icon');
+
+        // Show loading state
+        label.textContent = 'Generating…';
+        btn.style.pointerEvents = 'none';
+        btn.style.opacity = '0.7';
+
+        try {
+            const element = document.querySelector('.document');
+
+            // Capture the document as a high-resolution canvas
+            const canvas = await html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+                logging: false,
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight
+            });
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({
+                orientation: 'portrait',
+                unit: 'mm',
+                format: 'a4'
+            });
+
+            const pdfWidth  = pdf.internal.pageSize.getWidth();   // 210mm
+            const pdfHeight = pdf.internal.pageSize.getHeight();  // 297mm
+            const imgWidth  = pdfWidth;
+            const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
+
+            // Multi-page support: slice canvas into A4 pages
+            let position = 0;
+            let remainingHeight = imgHeight;
+
+            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+            remainingHeight -= pdfHeight;
+
+            while (remainingHeight > 0) {
+                position -= pdfHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+                remainingHeight -= pdfHeight;
+            }
+
+            pdf.save('Coastline-2026-Training-Calendar.pdf');
+
+        } catch (err) {
+            console.error('PDF generation failed:', err);
+            label.textContent = 'Error — Try Again';
+        } finally {
+            setTimeout(() => {
+                label.textContent = 'Download PDF';
+                btn.style.pointerEvents = '';
+                btn.style.opacity = '';
+            }, 2000);
+        }
+    }
+    </script>
+</body>
+</html>
