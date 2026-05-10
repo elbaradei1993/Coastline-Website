@@ -63,11 +63,16 @@
         /* ── Ecosystem Banner ─────────────────────────────────────────── */
         .ecosystem-banner{border:1px solid rgba(200,169,110,0.2);background:linear-gradient(135deg,rgba(200,169,110,0.05),rgba(200,169,110,0.02));padding:32px;margin-bottom:40px;position:relative;overflow:hidden}
         .ecosystem-banner::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#c8a96e,rgba(200,169,110,0.2))}
+        .corporate-banner{border:1px solid rgba(126,184,212,0.2);background:linear-gradient(135deg,rgba(126,184,212,0.05),rgba(126,184,212,0.02));padding:32px;margin-bottom:40px;position:relative;overflow:hidden;display:none}
+        .corporate-banner::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#7eb8d4,rgba(126,184,212,0.2))}
         .ecosystem-tag{font-size:0.6rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#c8a96e;margin-bottom:12px}
+        .corporate-tag{font-size:0.6rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:#7eb8d4;margin-bottom:12px}
         .ecosystem-title{font-size:1.1rem;font-weight:300;letter-spacing:-0.01em;margin-bottom:10px;line-height:1.3}
         .ecosystem-desc{font-size:0.85rem;font-weight:300;color:var(--grey-400);line-height:1.7;max-width:700px}
         .ecosystem-stats{display:flex;gap:40px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(200,169,110,0.15)}
+        .corporate-stats{display:flex;gap:40px;margin-top:20px;padding-top:20px;border-top:1px solid rgba(126,184,212,0.15)}
         .ecosystem-stat-num{font-size:1.4rem;font-weight:200;color:#c8a96e;display:block;letter-spacing:-0.02em}
+        .corporate-stat-num{font-size:1.4rem;font-weight:200;color:#7eb8d4;display:block;letter-spacing:-0.02em}
         .ecosystem-stat-label{font-size:0.6rem;font-weight:300;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey-600)}
 
         /* ── Booking Modal ────────────────────────────────────────────── */
@@ -245,8 +250,29 @@
                         <span class="ecosystem-stat-label">2026 Cohorts</span>
                     </div>
                     <div>
-                        <span class="ecosystem-stat-num">CA + NA</span>
-                        <span class="ecosystem-stat-label">Audience</span>
+                        <span class="ecosystem-stat-num">Online</span>
+                        <span class="ecosystem-stat-label">Live Sessions</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corporate Track Banner -->
+            <div class="corporate-banner reveal" id="corporate-banner">
+                <p class="corporate-tag">Corporate &amp; Professional Track</p>
+                <h3 class="ecosystem-title">Certification-Grade Training for Career Advancement.</h3>
+                <p class="ecosystem-desc">Coastline's Corporate Track delivers practitioner-led certification preparation and professional development for project managers, business analysts, and team leaders. Intensive 1-week sprints designed to advance your career and unlock the next level.</p>
+                <div class="corporate-stats">
+                    <div>
+                        <span class="corporate-stat-num">7</span>
+                        <span class="ecosystem-stat-label">Corporate Courses</span>
+                    </div>
+                    <div>
+                        <span class="corporate-stat-num">Jun–Dec</span>
+                        <span class="ecosystem-stat-label">2026 Cohorts</span>
+                    </div>
+                    <div>
+                        <span class="corporate-stat-num">Online</span>
+                        <span class="ecosystem-stat-label">Live Sessions</span>
                     </div>
                 </div>
             </div>
@@ -1200,7 +1226,9 @@
             btn.classList.add('active');
             const f=btn.dataset.filter;
             courseCards.forEach(card=>{card.classList.toggle('hidden',f!=='all'&&card.dataset.track!==f)});
+            const corpBanner=document.getElementById('corporate-banner');
             if(ecosystemBanner) ecosystemBanner.style.display=(f==='corporate')?'none':'';
+            if(corpBanner) corpBanner.style.display=(f==='startup')?'none':(f==='corporate'?'block':'none');
         }));
 
         /* ── Brochure Toggle ──────────────────────────────────────────── */
