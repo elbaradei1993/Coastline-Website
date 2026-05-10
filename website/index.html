@@ -1,824 +1,824 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coastline Digital Solutions | Your Market's Missing Piece</title>
-    <meta name="description" content="Coastline Digital Solutions helps businesses turn unsolved market frustrations into tailored solutions. Market analysis, digital solutions, consultancy, and training.">
-    <meta property="og:title" content="Coastline Digital Solutions | Your Market's Missing Piece">
-    <meta property="og:description" content="We find what your market hates. Then we deliver the fix.">
-    <meta property="og:type" content="website">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <!-- Particle Canvas Background -->
-    <canvas id="particle-canvas"></canvas>
-
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress"><div id="scroll-progress-bar"></div></div>
-
-    <!-- Section Dot Navigation -->
-    <nav id="dot-nav" aria-label="Section navigation">
-        <a href="#hero" class="dot-nav-item active" data-section="hero"><span class="dot-nav-label">Home</span><span class="dot-nav-dot"></span></a>
-        <a href="#about" class="dot-nav-item" data-section="about"><span class="dot-nav-label">About</span><span class="dot-nav-dot"></span></a>
-        <a href="#method" class="dot-nav-item" data-section="method"><span class="dot-nav-label">Method</span><span class="dot-nav-dot"></span></a>
-        <a href="#services" class="dot-nav-item" data-section="services"><span class="dot-nav-label">Services</span><span class="dot-nav-dot"></span></a>
-        <a href="#clients" class="dot-nav-item" data-section="clients"><span class="dot-nav-label">Clients</span><span class="dot-nav-dot"></span></a>
-        <a href="#work" class="dot-nav-item" data-section="work"><span class="dot-nav-label">Work</span><span class="dot-nav-dot"></span></a>
-        <a href="#contact" class="dot-nav-item" data-section="contact"><span class="dot-nav-label">Contact</span><span class="dot-nav-dot"></span></a>
-    </nav>
-
-    <!-- Back to Top Button -->
-    <button id="back-to-top" aria-label="Back to top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="18 15 12 9 6 15"/>
-        </svg>
-    </button>
-
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo">
-                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img">
-            </a>
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#method">Method</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="startup.html">Startups</a></li>
-                <li><a href="calculator.html">FounderMath</a></li>
-                <li><a href="training.html">Training</a></li>
-                <li><a href="#contact" class="nav-cta">Get Started</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Mobile Overlay Menu -->
-    <div class="mobile-overlay" id="mobile-overlay">
-        <ul class="mobile-nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#method">Method</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="startup.html">Startups</a></li>
-                <li><a href="calculator.html">FounderMath</a></li>
-                <li><a href="training.html">Training</a></li>
-                <li><a href="#contact" class="nav-cta-mobile">Get Started</a></li>
-        </ul>
-    </div>
-
-    <!-- Hero Section -->
-    <section id="hero" class="section hero-section">
-        <div class="hero-content">
-            <div class="hero-logo-wrapper fade-in">
-                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="hero-logo">
-            </div>
-            <p class="hero-tagline fade-in">Coastline Digital Solutions</p>
-            <h1 class="hero-title fade-in delay-1">Your market's<br>missing piece<span class="accent-dot">.</span></h1>
-            <p class="hero-subtitle fade-in delay-2">We uncover what your market is missing, then deliver the solution that makes you the default choice in your niche.</p>
-            <div class="hero-buttons fade-in delay-3">
-                <a href="#contact" class="btn btn-primary">Get Started</a>
-                <a href="#method" class="btn btn-ghost">See How It Works</a>
-            </div>
-        </div>
-        <div class="scroll-indicator fade-in delay-4">
-            <div class="scroll-line"></div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section id="about" class="section problem-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">The Problem</p>
-                <h2 class="section-title reveal">Most agencies build what you ask for.<br>We build what your market <em>needs</em>.</h2>
-            </div>
-            <div class="problem-grid">
-                <div class="problem-card reveal">
-                    <div class="problem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M8 15h8M9 9h.01M15 9h.01"/>
-                        </svg>
-                    </div>
-                    <h3>Guessing what customers want</h3>
-                    <p>You're making product decisions based on assumptions, not data. Every guess is a gamble with your budget.</p>
-                </div>
-                <div class="problem-card reveal">
-                    <div class="problem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                            <line x1="8" y1="21" x2="16" y2="21"/>
-                            <line x1="12" y1="17" x2="12" y2="21"/>
-                        </svg>
-                    </div>
-                    <h3>Competitors all look the same</h3>
-                    <p>When everyone offers the same features, customers choose on price. You need an advantage they can't copy.</p>
-                </div>
-                <div class="problem-card reveal">
-                    <div class="problem-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                        </svg>
-                    </div>
-                    <h3>Building what nobody uses</h3>
-                    <p>You've invested in features, tools, or processes that missed the mark. The real problem was never addressed.</p>
-                </div>
-            </div>
-            <p class="problem-transition reveal">There's a better way.</p>
-        </div>
-    </section>
-
-    <!-- Method Section -->
-    <section id="method" class="section method-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">The Coastline Method</p>
-                <h2 class="section-title reveal">From frustration to solution<br>in four steps.</h2>
-            </div>
-            <div class="method-timeline">
-                <div class="method-step reveal">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>Listen</h3>
-                        <p>We mine hundreds of real customer complaints, reviews, and feedback across your market to surface what's truly broken.</p>
-                    </div>
-                </div>
-                <div class="method-connector reveal"></div>
-                <div class="method-step reveal">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>Analyse</h3>
-                        <p>AI-powered clustering identifies patterns and ranks frustrations. We find the #1 gap, the one nobody is solving.</p>
-                    </div>
-                </div>
-                <div class="method-connector reveal"></div>
-                <div class="method-step reveal">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>Design</h3>
-                        <p>We map the solution your competitors missed, whether it's a process change, a strategy shift, or a custom-built tool.</p>
-                    </div>
-                </div>
-                <div class="method-connector reveal"></div>
-                <div class="method-step reveal">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3>Deliver</h3>
-                        <p>We deliver tailored solutions that close the gap, making you the default choice in your niche before competitors even see it.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section services-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">What We Do</p>
-                <h2 class="section-title reveal">Four pillars.<br>One mission.</h2>
-            </div>
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="18" y1="20" x2="18" y2="10"/>
-                            <line x1="12" y1="20" x2="12" y2="4"/>
-                            <line x1="6" y1="20" x2="6" y2="14"/>
-                        </svg>
-                    </div>
-                    <h3>Market Analysis</h3>
-                    <p>Uncover the gaps your competitors can't see. Data-driven frustration mining and competitive intelligence that reveals exactly where the opportunity is.</p>
-                    <a href="#contact" class="btn btn-outline" data-pillar="market-analysis">Contact Us</a>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="16 18 22 12 16 6"/>
-                            <polyline points="8 6 2 12 8 18"/>
-                        </svg>
-                    </div>
-                    <h3>Digital Solutions</h3>
-                    <p>Custom-built tools to solve your #1 frustration. From web applications to process automation, engineered to close the gap that matters most.</p>
-                    <a href="#contact" class="btn btn-outline" data-pillar="digital-solutions">Contact Us</a>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                        </svg>
-                    </div>
-                    <h3>Business Consultancy</h3>
-                    <p>Expert guidance and strategic advice to grow your business. We help you navigate challenges, optimise operations, and turn market insights into action.</p>
-                    <a href="#contact" class="btn btn-outline" data-pillar="consultancy">Contact Us</a>
-                </div>
-                <div class="service-card reveal">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                            <path d="M6 12v5c3 3 12 3 12 0v-5"/>
-                        </svg>
-                    </div>
-                    <h3>Business Training</h3>
-                    <p>Fundamental business courses and on-demand training tailored to your needs. Equip your team with the knowledge to identify opportunities and drive results.</p>
-                    <a href="#contact" class="btn btn-outline" data-pillar="training">Contact Us</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Who We Help Section -->
-    <section id="clients" class="section clients-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">Who We Help</p>
-                <h2 class="section-title reveal">From startups to<br>established enterprises.</h2>
-            </div>
-            <div class="clients-grid">
-                <div class="client-card reveal">
-                    <div class="client-type">Startups & SMEs</div>
-                    <p>You have a product or an idea, but you're not sure which gap to fill next. We bring data-driven clarity so you invest in what actually matters to your customers.</p>
-                    <ul class="client-benefits">
-                        <li>Validate your next move with real market data</li>
-                        <li>Build solutions customers are already asking for</li>
-                        <li>Stand out in crowded markets</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline">Get Started</a>
-                </div>
-                <div class="client-card reveal">
-                    <div class="client-type">Corporations & Enterprises</div>
-                    <p>You need a competitive intelligence capability without the overhead of building it in-house. We become your external gap intelligence unit.</p>
-                    <ul class="client-benefits">
-                        <li>Continuous competitive monitoring</li>
-                        <li>Enterprise-grade solutions and training</li>
-                        <li>Strategic advisory at the executive level</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-outline">Get Started</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof Section -->
-    <section id="work" class="section work-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">Our Work</p>
-                <h2 class="section-title reveal">Real solutions.<br><em>Real results.</em></h2>
-                <p class="section-subtitle reveal">From gap analysis to launch, here's what the Coastline Method delivers.</p>
-            </div>
-
-            <div class="project-card reveal">
-                <div class="project-card-header">
-                    <span class="project-label">Featured Project</span>
-                    <div class="project-tags">
-                        <span class="project-tag">Digital Solutions</span>
-                        <span class="project-tag">Market Analysis</span>
-                    </div>
-                </div>
-                <div class="project-card-body">
-                    <img src="Stratakey-logo-png.png" alt="StrataKey" class="project-logo">
-                    <h3 class="project-title">StrataKey</h3>
-                    <p class="project-tagline">Property Management & Compliance Made Simple</p>
-                    <p class="project-description">We identified a critical gap in BC's strata management market: no simple way to track short-term rental compliance and enforce by-laws. StrataKey was the answer: a full compliance platform built from the ground up with booking approvals, night tracking, real-time notifications, and audit-ready reporting.</p>
-                    <div class="project-highlights">
-                        <div class="project-highlight">
-                            <span class="highlight-number">6</span>
-                            <span class="highlight-label">Core Modules</span>
-                        </div>
-                        <div class="project-highlight">
-                            <span class="highlight-number">&lt;10</span>
-                            <span class="highlight-label">Min Setup</span>
-                        </div>
-                        <div class="project-highlight">
-                            <span class="highlight-number">$0</span>
-                            <span class="highlight-label">For Hosts</span>
-                        </div>
-                    </div>
-                    <a href="https://www.stratakey.ca" target="_blank" rel="noopener noreferrer" class="project-cta">
-                        Visit StrataKey
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="proof-stats">
-                <div class="stat reveal">
-                    <span class="stat-number" data-target="4">0</span>
-                    <span class="stat-label">Service Pillars</span>
-                </div>
-                <div class="stat reveal">
-                    <span class="stat-number" data-target="500">0</span><span class="stat-plus">+</span>
-                    <span class="stat-label">Complaints Analysed Per Audit</span>
-                </div>
-                <div class="stat reveal">
-                    <span class="stat-number" data-target="1">0</span>
-                    <span class="stat-label">Focus: The #1 Gap</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Form Section -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">Get In Touch</p>
-                <h2 class="section-title reveal" id="contact-title">Let's find your<br>market's missing piece.</h2>
-                <p class="section-subtitle reveal" id="contact-subtitle">Select a service below and tell us about your challenge. We'll get back to you within 24 hours.</p>
-            </div>
-            <div class="form-wrapper reveal">
-                <div class="form-progress">
-                    <div class="progress-bar" id="progress-bar"></div>
-                    <div class="progress-steps">
-                        <div class="progress-step active" data-step="1">1</div>
-                        <div class="progress-step" data-step="2">2</div>
-                        <div class="progress-step" data-step="3">3</div>
-                    </div>
-                </div>
-                <form id="contact-form" action="#" method="POST">
-                    <input type="hidden" id="selected-service" name="service" value="">
-
-                    <!-- Step 1: Choose Your Service -->
-                    <div class="form-step active" data-step="1">
-                        <h3 class="form-step-title">Choose Your Service</h3>
-                        <div class="pillar-selector">
-                            <button type="button" class="pillar-card" data-pillar="market-analysis">
-                                <div class="pillar-card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-                                    </svg>
-                                </div>
-                                <span class="pillar-card-title">Market Analysis</span>
-                                <span class="pillar-card-desc">Uncover gaps & opportunities</span>
-                            </button>
-                            <button type="button" class="pillar-card" data-pillar="digital-solutions">
-                                <div class="pillar-card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-                                    </svg>
-                                </div>
-                                <span class="pillar-card-title">Digital Solutions</span>
-                                <span class="pillar-card-desc">Custom tools & automation</span>
-                            </button>
-                            <button type="button" class="pillar-card" data-pillar="consultancy">
-                                <div class="pillar-card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                                    </svg>
-                                </div>
-                                <span class="pillar-card-title">Business Consultancy</span>
-                                <span class="pillar-card-desc">Strategy & growth guidance</span>
-                            </button>
-                            <button type="button" class="pillar-card" data-pillar="training">
-                                <div class="pillar-card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 12 3 12 0v-5"/>
-                                    </svg>
-                                </div>
-                                <span class="pillar-card-title">Business Training</span>
-                                <span class="pillar-card-desc">Courses & team upskilling</span>
-                            </button>
-                            <button type="button" class="pillar-card pillar-card-startup" data-pillar="startup">
-                                <div class="pillar-card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-                                    </svg>
-                                </div>
-                                <span class="pillar-card-title">Startup Launchpad</span>
-                                <span class="pillar-card-desc">Idea to market, A to Z</span>
-                            </button>
-                            <button type="button" class="pillar-card pillar-card-general" data-pillar="general">
-                                <div class="pillar-card-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-                                    </svg>
-                                </div>
-                                <span class="pillar-card-title">Not Sure Yet</span>
-                                <span class="pillar-card-desc">Help me decide</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: About You (shared) -->
-                    <div class="form-step" data-step="2">
-                        <h3 class="form-step-title">About You</h3>
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required placeholder="John Smith">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required placeholder="john@company.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company Name</label>
-                            <input type="text" id="company" name="company" placeholder="Your Company Ltd.">
-                        </div>
-                        <div class="form-group">
-                            <label for="type">What best describes you?</label>
-                            <select id="type" name="type" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="startup">Startup (0–10 employees)</option>
-                                <option value="sme">Small/Medium Business (10–50 employees)</option>
-                                <option value="corporation">Corporation (50+ employees)</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-nav">
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-                            <button type="button" class="btn btn-primary form-next">Next</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Pillar-Specific Diagnostic -->
-                    <!-- Market Analysis Intake -->
-                    <div class="form-step pillar-step" data-step="3" data-pillar="market-analysis">
-                        <h3 class="form-step-title">Market Analysis Diagnostic</h3>
-                        <p class="form-step-intro">Help us understand your competitive landscape so we can identify the #1 gap your market is missing.</p>
-                        <div class="form-group">
-                            <label for="ma-industry">What industry or market segment do you operate in?</label>
-                            <input type="text" id="ma-industry" name="ma_industry" required placeholder="e.g., Property Management, SaaS, Retail...">
-                        </div>
-                        <div class="form-group">
-                            <label for="ma-competitors">Who are your top 3 competitors?</label>
-                            <input type="text" id="ma-competitors" name="ma_competitors" placeholder="e.g., Company A, Company B, Company C">
-                        </div>
-                        <div class="form-group">
-                            <label for="ma-complaints">What do your customers complain about most?</label>
-                            <textarea id="ma-complaints" name="ma_complaints" rows="3" placeholder="e.g., Slow response times, lack of transparency, hidden fees..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="ma-feedback">How do you currently gather customer feedback?</label>
-                            <select id="ma-feedback" name="ma_feedback" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="reviews">Online Reviews</option>
-                                <option value="surveys">Customer Surveys</option>
-                                <option value="social">Social Media Monitoring</option>
-                                <option value="none">We don't currently</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="ma-decision">What business decision will this analysis inform?</label>
-                            <select id="ma-decision" name="ma_decision" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="new-product">New product or service launch</option>
-                                <option value="new-market">Entering a new market</option>
-                                <option value="improve-existing">Improving an existing offering</option>
-                                <option value="understand-competitors">Understanding competitors better</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="ma-urgency">How urgently do you need results?</label>
-                            <select id="ma-urgency" name="ma_urgency">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="asap">ASAP</option>
-                                <option value="1-3-months">Within 1–3 months</option>
-                                <option value="3-6-months">3–6 months</option>
-                                <option value="exploring">Just exploring options</option>
-                            </select>
-                        </div>
-                        <div class="form-nav">
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                    <!-- Digital Solutions Intake -->
-                    <div class="form-step pillar-step" data-step="3" data-pillar="digital-solutions">
-                        <h3 class="form-step-title">Digital Solutions Diagnostic</h3>
-                        <p class="form-step-intro">Help us understand your operational pain point so we can design the right technology to solve it.</p>
-                        <div class="form-group">
-                            <label for="ds-problem">What process or problem are you trying to solve with technology?</label>
-                            <textarea id="ds-problem" name="ds_problem" required rows="3" placeholder="e.g., Manual invoice processing takes 3 hours daily..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="ds-current">How is this problem currently handled?</label>
-                            <select id="ds-current" name="ds_current" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="manual">Manual processes / pen & paper</option>
-                                <option value="spreadsheets">Spreadsheets</option>
-                                <option value="outdated-software">Outdated software</option>
-                                <option value="no-system">No current system</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="ds-affected">How many people are affected by this problem daily?</label>
-                            <select id="ds-affected" name="ds_affected">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="1-5">1–5 people</option>
-                                <option value="5-20">5–20 people</option>
-                                <option value="20-50">20–50 people</option>
-                                <option value="50+">50+ people</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="ds-integrations">Do you have existing tools or systems we'd need to integrate with?</label>
-                            <input type="text" id="ds-integrations" name="ds_integrations" placeholder="e.g., CRM, accounting software, ERP...">
-                        </div>
-                        <div class="form-group">
-                            <label for="ds-success">What does success look like for you?</label>
-                            <textarea id="ds-success" name="ds_success" rows="3" placeholder="e.g., 50% faster turnaround, zero manual data entry, real-time dashboard..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="ds-budget">What's your estimated budget range?</label>
-                            <select id="ds-budget" name="ds_budget">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="under-5k">Under $5,000</option>
-                                <option value="5k-15k">$5,000 – $15,000</option>
-                                <option value="15k-50k">$15,000 – $50,000</option>
-                                <option value="50k+">$50,000+</option>
-                                <option value="not-sure">Not sure yet</option>
-                            </select>
-                        </div>
-                        <div class="form-nav">
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                    <!-- Business Consultancy Intake -->
-                    <div class="form-step pillar-step" data-step="3" data-pillar="consultancy">
-                        <h3 class="form-step-title">Business Consultancy Diagnostic</h3>
-                        <p class="form-step-intro">Help us understand your strategic challenge so we can guide you toward the right next step.</p>
-                        <div class="form-group">
-                            <label for="bc-area">What area of your business needs the most attention right now?</label>
-                            <select id="bc-area" name="bc_area" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="operations">Operations</option>
-                                <option value="sales-marketing">Sales & Marketing</option>
-                                <option value="financial">Financial Performance</option>
-                                <option value="strategy-growth">Strategy & Growth</option>
-                                <option value="team-leadership">Team & Leadership</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bc-challenge">Describe the core challenge you're facing.</label>
-                            <textarea id="bc-challenge" name="bc_challenge" required rows="3" placeholder="Tell us what's holding your business back..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bc-tried">What have you already tried to address this?</label>
-                            <textarea id="bc-tried" name="bc_tried" rows="3" placeholder="e.g., Hired a consultant, restructured team, changed pricing..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bc-goals">What are your key business goals for the next 12 months?</label>
-                            <textarea id="bc-goals" name="bc_goals" rows="3" placeholder="e.g., Increase revenue by 30%, expand to new market, streamline operations..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bc-kpis">Are there specific KPIs or metrics you want to improve?</label>
-                            <input type="text" id="bc-kpis" name="bc_kpis" placeholder="e.g., Revenue, customer retention, conversion rate...">
-                        </div>
-                        <div class="form-group">
-                            <label for="bc-stage">How would you describe your business stage?</label>
-                            <select id="bc-stage" name="bc_stage">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="early-stage">Early-stage</option>
-                                <option value="growing">Growing</option>
-                                <option value="established">Established</option>
-                                <option value="pivoting">Pivoting</option>
-                                <option value="scaling">Scaling</option>
-                            </select>
-                        </div>
-                        <div class="form-nav">
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                    <!-- Business Training Intake -->
-                    <div class="form-step pillar-step" data-step="3" data-pillar="training">
-                        <h3 class="form-step-title">Business Training Diagnostic</h3>
-                        <p class="form-step-intro">Help us understand your team's learning needs so we can design the most impactful training programme.</p>
-                        <div class="form-group">
-                            <label for="bt-skills">What skills or topics does your team need training in?</label>
-                            <textarea id="bt-skills" name="bt_skills" required rows="3" placeholder="e.g., Sales fundamentals, market analysis, digital tools, leadership..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="bt-team-size">How many team members need training?</label>
-                            <select id="bt-team-size" name="bt_team_size" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="1-5">1–5</option>
-                                <option value="5-15">5–15</option>
-                                <option value="15-50">15–50</option>
-                                <option value="50+">50+</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bt-level">What is their current experience level?</label>
-                            <select id="bt-level" name="bt_level">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="beginner">Beginner</option>
-                                <option value="intermediate">Intermediate</option>
-                                <option value="advanced">Advanced</option>
-                                <option value="mixed">Mixed levels</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bt-driver">What's driving the need for training?</label>
-                            <select id="bt-driver" name="bt_driver" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="new-hires">New hires onboarding</option>
-                                <option value="performance-gaps">Performance gaps</option>
-                                <option value="business-pivot">Business pivot or change</option>
-                                <option value="upskilling">Upskilling initiative</option>
-                                <option value="compliance">Compliance requirements</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bt-format">Preferred training format?</label>
-                            <select id="bt-format" name="bt_format">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="online-self-paced">Online self-paced</option>
-                                <option value="live-virtual">Live virtual sessions</option>
-                                <option value="in-person">In-person workshops</option>
-                                <option value="hybrid">Hybrid</option>
-                                <option value="no-preference">No preference</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bt-outcome">What does a successful training outcome look like?</label>
-                            <textarea id="bt-outcome" name="bt_outcome" rows="3" placeholder="e.g., Team can independently run market analysis, improved sales conversion..."></textarea>
-                        </div>
-                        <div class="form-nav">
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                    <!-- Startup Launchpad Intake -->
-                    <div class="form-step pillar-step" data-step="3" data-pillar="startup">
-                        <h3 class="form-step-title">Startup Launchpad Diagnostic</h3>
-                        <p class="form-step-intro">Tell us about your startup so we can design the right launchpad. From validation to growth, we'll map out exactly what you need.</p>
-                        <div class="form-group">
-                            <label for="su-stage">What stage is your startup?</label>
-                            <select id="su-stage" name="su_stage" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="idea">Idea only, haven't started yet</option>
-                                <option value="researching">Researching the market</option>
-                                <option value="mvp">Have an MVP or prototype</option>
-                                <option value="launched">Launched but struggling</option>
-                                <option value="scaling">Ready to scale</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="su-idea">Describe your business idea in one sentence</label>
-                            <input type="text" id="su-idea" name="su_idea" required placeholder="e.g., A platform that helps strata councils track rental compliance">
-                        </div>
-                        <div class="form-group">
-                            <label for="su-market">What industry or market are you targeting?</label>
-                            <input type="text" id="su-market" name="su_market" required placeholder="e.g., Property Management, HealthTech, E-commerce...">
-                        </div>
-                        <div class="form-group">
-                            <label for="su-problem">What's the #1 problem you're solving for customers?</label>
-                            <textarea id="su-problem" name="su_problem" required rows="3" placeholder="Describe the frustration or gap you want to address..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="su-validated">Have you validated this with real customers?</label>
-                            <select id="su-validated" name="su_validated" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="yes-data">Yes, with data and research</option>
-                                <option value="some-feedback">Some informal feedback</option>
-                                <option value="not-yet">Not yet</option>
-                                <option value="not-sure-how">Not sure how to validate</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="su-help">What do you need help with most right now?</label>
-                            <select id="su-help" name="su_help" required>
-                                <option value="" disabled selected>Select one</option>
-                                <option value="validation">Market validation & research</option>
-                                <option value="strategy">Business strategy & planning</option>
-                                <option value="mvp">Building an MVP or product</option>
-                                <option value="branding">Branding & identity</option>
-                                <option value="website">Website & digital presence</option>
-                                <option value="go-to-market">Go-to-market plan</option>
-                                <option value="training">Founder training & skills</option>
-                                <option value="everything">All of the above, full launchpad</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="su-timeline">What's your timeline?</label>
-                            <select id="su-timeline" name="su_timeline">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="ready-now">Ready to start now</option>
-                                <option value="1-3-months">Within 1–3 months</option>
-                                <option value="3-6-months">3–6 months</option>
-                                <option value="exploring">Just exploring options</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="su-funding">How are you currently funded?</label>
-                            <select id="su-funding" name="su_funding">
-                                <option value="" disabled selected>Select one</option>
-                                <option value="bootstrapped">Bootstrapped / self-funded</option>
-                                <option value="seed-angel">Seed / Angel investment</option>
-                                <option value="vc">VC funded</option>
-                                <option value="grant">Grant funded</option>
-                                <option value="seeking">Seeking funding</option>
-                            </select>
-                        </div>
-                        <div class="form-nav">
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                    <!-- General / Not Sure Intake -->
-                    <div class="form-step pillar-step" data-step="3" data-pillar="general">
-                        <h3 class="form-step-title">Tell Us More</h3>
-                        <p class="form-step-intro">Not sure which service is right for you? No problem. Tell us about your situation and we'll help you find the best path forward.</p>
-                        <div class="form-group">
-                            <label for="gen-challenge">What's the biggest challenge your business is facing right now?</label>
-                            <textarea id="gen-challenge" name="gen_challenge" required rows="4" placeholder="Tell us what's keeping you up at night..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="gen-industry">What industry are you in?</label>
-                            <input type="text" id="gen-industry" name="gen_industry" placeholder="e.g., Property Management, Construction, Retail...">
-                        </div>
-                        <div class="form-group">
-                            <label for="gen-outcome">What outcome are you hoping to achieve?</label>
-                            <textarea id="gen-outcome" name="gen_outcome" rows="3" placeholder="e.g., More customers, better tools, smarter strategy..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="gen-anything">Is there anything else you'd like us to know?</label>
-                            <textarea id="gen-anything" name="gen_anything" rows="3" placeholder="Optional: timeline, budget, specific goals..."></textarea>
-                        </div>
-                        <div class="form-nav">
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-
-                    <!-- Success Message -->
-                    <div class="form-success" id="form-success">
-                        <div class="success-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22 4 12 14.01 9 11.01"/>
-                            </svg>
-                        </div>
-                        <h3>Thank you!</h3>
-                        <p>We've received your inquiry and will get back to you within 24 hours.</p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="footer-logo-img">
-                    <p class="footer-motto">Your market's missing piece.</p>
-                    <a href="mailto:info@coastlinedigitalsolutions.com" class="footer-email">info@coastlinedigitalsolutions.com</a>
-                    <p class="footer-location">BC, Canada</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#about">About</a>
-                    <a href="#method">Method</a>
-                    <a href="#services">Services</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#" aria-label="LinkedIn" class="social-link">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                        </svg>
-                    </a>
-                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                            <polyline points="22,6 12,13 2,6"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/particles.js"></script>
-    <script src="js/main.js"></script>
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script><!-- End Cloudflare Web Analytics -->
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coastline Digital Solutions | Your Market's Missing Piece</title>
+    <meta name="description" content="Coastline Digital Solutions helps businesses turn unsolved market frustrations into tailored solutions. Market analysis, digital solutions, consultancy, and training.">
+    <meta property="og:title" content="Coastline Digital Solutions | Your Market's Missing Piece">
+    <meta property="og:description" content="We find what your market hates. Then we deliver the fix.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"><div id="scroll-progress-bar"></div></div>
+
+    <!-- Section Dot Navigation -->
+    <nav id="dot-nav" aria-label="Section navigation">
+        <a href="#hero" class="dot-nav-item active" data-section="hero"><span class="dot-nav-label">Home</span><span class="dot-nav-dot"></span></a>
+        <a href="#about" class="dot-nav-item" data-section="about"><span class="dot-nav-label">About</span><span class="dot-nav-dot"></span></a>
+        <a href="#method" class="dot-nav-item" data-section="method"><span class="dot-nav-label">Method</span><span class="dot-nav-dot"></span></a>
+        <a href="#services" class="dot-nav-item" data-section="services"><span class="dot-nav-label">Services</span><span class="dot-nav-dot"></span></a>
+        <a href="#clients" class="dot-nav-item" data-section="clients"><span class="dot-nav-label">Clients</span><span class="dot-nav-dot"></span></a>
+        <a href="#work" class="dot-nav-item" data-section="work"><span class="dot-nav-label">Work</span><span class="dot-nav-dot"></span></a>
+        <a href="#contact" class="dot-nav-item" data-section="contact"><span class="dot-nav-label">Contact</span><span class="dot-nav-dot"></span></a>
+    </nav>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#method">Method</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="startup.html">Startups</a></li>
+                <li><a href="calculator.html">FounderMath</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Overlay Menu -->
+    <div class="mobile-overlay" id="mobile-overlay">
+        <ul class="mobile-nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#method">Method</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="startup.html">Startups</a></li>
+                <li><a href="calculator.html">FounderMath</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="#contact" class="nav-cta-mobile">Get Started</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section hero-section">
+        <div class="hero-content">
+            <div class="hero-logo-wrapper fade-in">
+                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="hero-logo">
+            </div>
+            <p class="hero-tagline fade-in">Coastline Digital Solutions</p>
+            <h1 class="hero-title fade-in delay-1">Your market's<br>missing piece<span class="accent-dot">.</span></h1>
+            <p class="hero-subtitle fade-in delay-2">We uncover what your market is missing, then deliver the solution that makes you the default choice in your niche.</p>
+            <div class="hero-buttons fade-in delay-3">
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <a href="#method" class="btn btn-ghost">See How It Works</a>
+            </div>
+        </div>
+        <div class="scroll-indicator fade-in delay-4">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="about" class="section problem-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">The Problem</p>
+                <h2 class="section-title reveal">Most agencies build what you ask for.<br>We build what your market <em>needs</em>.</h2>
+            </div>
+            <div class="problem-grid">
+                <div class="problem-card reveal">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 15h8M9 9h.01M15 9h.01"/>
+                        </svg>
+                    </div>
+                    <h3>Guessing what customers want</h3>
+                    <p>You're making product decisions based on assumptions, not data. Every guess is a gamble with your budget.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Competitors all look the same</h3>
+                    <p>When everyone offers the same features, customers choose on price. You need an advantage they can't copy.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <div class="problem-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h3>Building what nobody uses</h3>
+                    <p>You've invested in features, tools, or processes that missed the mark. The real problem was never addressed.</p>
+                </div>
+            </div>
+            <p class="problem-transition reveal">There's a better way.</p>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section id="method" class="section method-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">The Coastline Method</p>
+                <h2 class="section-title reveal">From frustration to solution<br>in four steps.</h2>
+            </div>
+            <div class="method-timeline">
+                <div class="method-step reveal">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Listen</h3>
+                        <p>We mine hundreds of real customer complaints, reviews, and feedback across your market to surface what's truly broken.</p>
+                    </div>
+                </div>
+                <div class="method-connector reveal"></div>
+                <div class="method-step reveal">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Analyse</h3>
+                        <p>AI-powered clustering identifies patterns and ranks frustrations. We find the #1 gap, the one nobody is solving.</p>
+                    </div>
+                </div>
+                <div class="method-connector reveal"></div>
+                <div class="method-step reveal">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Design</h3>
+                        <p>We map the solution your competitors missed, whether it's a process change, a strategy shift, or a custom-built tool.</p>
+                    </div>
+                </div>
+                <div class="method-connector reveal"></div>
+                <div class="method-step reveal">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Deliver</h3>
+                        <p>We deliver tailored solutions that close the gap, making you the default choice in your niche before competitors even see it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">What We Do</p>
+                <h2 class="section-title reveal">Four pillars.<br>One mission.</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                    </div>
+                    <h3>Market Analysis</h3>
+                    <p>Uncover the gaps your competitors can't see. Data-driven frustration mining and competitive intelligence that reveals exactly where the opportunity is.</p>
+                    <a href="#contact" class="btn btn-outline" data-pillar="market-analysis">Contact Us</a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"/>
+                            <polyline points="8 6 2 12 8 18"/>
+                        </svg>
+                    </div>
+                    <h3>Digital Solutions</h3>
+                    <p>Custom-built tools to solve your #1 frustration. From web applications to process automation, engineered to close the gap that matters most.</p>
+                    <a href="#contact" class="btn btn-outline" data-pillar="digital-solutions">Contact Us</a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Business Consultancy</h3>
+                    <p>Expert guidance and strategic advice to grow your business. We help you navigate challenges, optimise operations, and turn market insights into action.</p>
+                    <a href="#contact" class="btn btn-outline" data-pillar="consultancy">Contact Us</a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c3 3 12 3 12 0v-5"/>
+                        </svg>
+                    </div>
+                    <h3>Business Training</h3>
+                    <p>Fundamental business courses and on-demand training tailored to your needs. Equip your team with the knowledge to identify opportunities and drive results.</p>
+                    <a href="#contact" class="btn btn-outline" data-pillar="training">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Help Section -->
+    <section id="clients" class="section clients-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">Who We Help</p>
+                <h2 class="section-title reveal">From startups to<br>established enterprises.</h2>
+            </div>
+            <div class="clients-grid">
+                <div class="client-card reveal">
+                    <div class="client-type">Startups & SMEs</div>
+                    <p>You have a product or an idea, but you're not sure which gap to fill next. We bring data-driven clarity so you invest in what actually matters to your customers.</p>
+                    <ul class="client-benefits">
+                        <li>Validate your next move with real market data</li>
+                        <li>Build solutions customers are already asking for</li>
+                        <li>Stand out in crowded markets</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Get Started</a>
+                </div>
+                <div class="client-card reveal">
+                    <div class="client-type">Corporations & Enterprises</div>
+                    <p>You need a competitive intelligence capability without the overhead of building it in-house. We become your external gap intelligence unit.</p>
+                    <ul class="client-benefits">
+                        <li>Continuous competitive monitoring</li>
+                        <li>Enterprise-grade solutions and training</li>
+                        <li>Strategic advisory at the executive level</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section id="work" class="section work-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">Our Work</p>
+                <h2 class="section-title reveal">Real solutions.<br><em>Real results.</em></h2>
+                <p class="section-subtitle reveal">From gap analysis to launch, here's what the Coastline Method delivers.</p>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-card-header">
+                    <span class="project-label">Featured Project</span>
+                    <div class="project-tags">
+                        <span class="project-tag">Digital Solutions</span>
+                        <span class="project-tag">Market Analysis</span>
+                    </div>
+                </div>
+                <div class="project-card-body">
+                    <img src="Stratakey-logo-png.png" alt="StrataKey" class="project-logo">
+                    <h3 class="project-title">StrataKey</h3>
+                    <p class="project-tagline">Property Management & Compliance Made Simple</p>
+                    <p class="project-description">We identified a critical gap in BC's strata management market: no simple way to track short-term rental compliance and enforce by-laws. StrataKey was the answer: a full compliance platform built from the ground up with booking approvals, night tracking, real-time notifications, and audit-ready reporting.</p>
+                    <div class="project-highlights">
+                        <div class="project-highlight">
+                            <span class="highlight-number">6</span>
+                            <span class="highlight-label">Core Modules</span>
+                        </div>
+                        <div class="project-highlight">
+                            <span class="highlight-number">&lt;10</span>
+                            <span class="highlight-label">Min Setup</span>
+                        </div>
+                        <div class="project-highlight">
+                            <span class="highlight-number">$0</span>
+                            <span class="highlight-label">For Hosts</span>
+                        </div>
+                    </div>
+                    <a href="https://www.stratakey.ca" target="_blank" rel="noopener noreferrer" class="project-cta">
+                        Visit StrataKey
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="proof-stats">
+                <div class="stat reveal">
+                    <span class="stat-number" data-target="4">0</span>
+                    <span class="stat-label">Service Pillars</span>
+                </div>
+                <div class="stat reveal">
+                    <span class="stat-number" data-target="500">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Complaints Analysed Per Audit</span>
+                </div>
+                <div class="stat reveal">
+                    <span class="stat-number" data-target="1">0</span>
+                    <span class="stat-label">Focus: The #1 Gap</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">Get In Touch</p>
+                <h2 class="section-title reveal" id="contact-title">Let's find your<br>market's missing piece.</h2>
+                <p class="section-subtitle reveal" id="contact-subtitle">Select a service below and tell us about your challenge. We'll get back to you within 24 hours.</p>
+            </div>
+            <div class="form-wrapper reveal">
+                <div class="form-progress">
+                    <div class="progress-bar" id="progress-bar"></div>
+                    <div class="progress-steps">
+                        <div class="progress-step active" data-step="1">1</div>
+                        <div class="progress-step" data-step="2">2</div>
+                        <div class="progress-step" data-step="3">3</div>
+                    </div>
+                </div>
+                <form id="contact-form" action="#" method="POST">
+                    <input type="hidden" id="selected-service" name="service" value="">
+
+                    <!-- Step 1: Choose Your Service -->
+                    <div class="form-step active" data-step="1">
+                        <h3 class="form-step-title">Choose Your Service</h3>
+                        <div class="pillar-selector">
+                            <button type="button" class="pillar-card" data-pillar="market-analysis">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Market Analysis</span>
+                                <span class="pillar-card-desc">Uncover gaps & opportunities</span>
+                            </button>
+                            <button type="button" class="pillar-card" data-pillar="digital-solutions">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Digital Solutions</span>
+                                <span class="pillar-card-desc">Custom tools & automation</span>
+                            </button>
+                            <button type="button" class="pillar-card" data-pillar="consultancy">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Business Consultancy</span>
+                                <span class="pillar-card-desc">Strategy & growth guidance</span>
+                            </button>
+                            <button type="button" class="pillar-card" data-pillar="training">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 12 3 12 0v-5"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Business Training</span>
+                                <span class="pillar-card-desc">Courses & team upskilling</span>
+                            </button>
+                            <button type="button" class="pillar-card pillar-card-startup" data-pillar="startup">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Startup Launchpad</span>
+                                <span class="pillar-card-desc">Idea to market, A to Z</span>
+                            </button>
+                            <button type="button" class="pillar-card pillar-card-general" data-pillar="general">
+                                <div class="pillar-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                                    </svg>
+                                </div>
+                                <span class="pillar-card-title">Not Sure Yet</span>
+                                <span class="pillar-card-desc">Help me decide</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: About You (shared) -->
+                    <div class="form-step" data-step="2">
+                        <h3 class="form-step-title">About You</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Smith">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="john@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company" placeholder="Your Company Ltd.">
+                        </div>
+                        <div class="form-group">
+                            <label for="type">What best describes you?</label>
+                            <select id="type" name="type" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="startup">Startup (0-10 employees)</option>
+                                <option value="sme">Small/Medium Business (10-50 employees)</option>
+                                <option value="corporation">Corporation (50+ employees)</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="button" class="btn btn-primary form-next">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Pillar-Specific Diagnostic -->
+                    <!-- Market Analysis Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="market-analysis">
+                        <h3 class="form-step-title">Market Analysis Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your competitive landscape so we can identify the #1 gap your market is missing.</p>
+                        <div class="form-group">
+                            <label for="ma-industry">What industry or market segment do you operate in?</label>
+                            <input type="text" id="ma-industry" name="ma_industry" required placeholder="e.g., Property Management, SaaS, Retail...">
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-competitors">Who are your top 3 competitors?</label>
+                            <input type="text" id="ma-competitors" name="ma_competitors" placeholder="e.g., Company A, Company B, Company C">
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-complaints">What do your customers complain about most?</label>
+                            <textarea id="ma-complaints" name="ma_complaints" rows="3" placeholder="e.g., Slow response times, lack of transparency, hidden fees..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-feedback">How do you currently gather customer feedback?</label>
+                            <select id="ma-feedback" name="ma_feedback" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="reviews">Online Reviews</option>
+                                <option value="surveys">Customer Surveys</option>
+                                <option value="social">Social Media Monitoring</option>
+                                <option value="none">We don't currently</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-decision">What business decision will this analysis inform?</label>
+                            <select id="ma-decision" name="ma_decision" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="new-product">New product or service launch</option>
+                                <option value="new-market">Entering a new market</option>
+                                <option value="improve-existing">Improving an existing offering</option>
+                                <option value="understand-competitors">Understanding competitors better</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ma-urgency">How urgently do you need results?</label>
+                            <select id="ma-urgency" name="ma_urgency">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="asap">ASAP</option>
+                                <option value="1-3-months">Within 1-3 months</option>
+                                <option value="3-6-months">3-6 months</option>
+                                <option value="exploring">Just exploring options</option>
+                            </select>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Digital Solutions Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="digital-solutions">
+                        <h3 class="form-step-title">Digital Solutions Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your operational pain point so we can design the right technology to solve it.</p>
+                        <div class="form-group">
+                            <label for="ds-problem">What process or problem are you trying to solve with technology?</label>
+                            <textarea id="ds-problem" name="ds_problem" required rows="3" placeholder="e.g., Manual invoice processing takes 3 hours daily..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-current">How is this problem currently handled?</label>
+                            <select id="ds-current" name="ds_current" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="manual">Manual processes / pen & paper</option>
+                                <option value="spreadsheets">Spreadsheets</option>
+                                <option value="outdated-software">Outdated software</option>
+                                <option value="no-system">No current system</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-affected">How many people are affected by this problem daily?</label>
+                            <select id="ds-affected" name="ds_affected">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="1-5">1-5 people</option>
+                                <option value="5-20">5-20 people</option>
+                                <option value="20-50">20-50 people</option>
+                                <option value="50+">50+ people</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-integrations">Do you have existing tools or systems we'd need to integrate with?</label>
+                            <input type="text" id="ds-integrations" name="ds_integrations" placeholder="e.g., CRM, accounting software, ERP...">
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-success">What does success look like for you?</label>
+                            <textarea id="ds-success" name="ds_success" rows="3" placeholder="e.g., 50% faster turnaround, zero manual data entry, real-time dashboard..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="ds-budget">What's your estimated budget range?</label>
+                            <select id="ds-budget" name="ds_budget">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="under-5k">Under $5,000</option>
+                                <option value="5k-15k">$5,000 - $15,000</option>
+                                <option value="15k-50k">$15,000 - $50,000</option>
+                                <option value="50k+">$50,000+</option>
+                                <option value="not-sure">Not sure yet</option>
+                            </select>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Business Consultancy Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="consultancy">
+                        <h3 class="form-step-title">Business Consultancy Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your strategic challenge so we can guide you toward the right next step.</p>
+                        <div class="form-group">
+                            <label for="bc-area">What area of your business needs the most attention right now?</label>
+                            <select id="bc-area" name="bc_area" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="operations">Operations</option>
+                                <option value="sales-marketing">Sales & Marketing</option>
+                                <option value="financial">Financial Performance</option>
+                                <option value="strategy-growth">Strategy & Growth</option>
+                                <option value="team-leadership">Team & Leadership</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-challenge">Describe the core challenge you're facing.</label>
+                            <textarea id="bc-challenge" name="bc_challenge" required rows="3" placeholder="Tell us what's holding your business back..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-tried">What have you already tried to address this?</label>
+                            <textarea id="bc-tried" name="bc_tried" rows="3" placeholder="e.g., Hired a consultant, restructured team, changed pricing..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-goals">What are your key business goals for the next 12 months?</label>
+                            <textarea id="bc-goals" name="bc_goals" rows="3" placeholder="e.g., Increase revenue by 30%, expand to new market, streamline operations..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-kpis">Are there specific KPIs or metrics you want to improve?</label>
+                            <input type="text" id="bc-kpis" name="bc_kpis" placeholder="e.g., Revenue, customer retention, conversion rate...">
+                        </div>
+                        <div class="form-group">
+                            <label for="bc-stage">How would you describe your business stage?</label>
+                            <select id="bc-stage" name="bc_stage">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="early-stage">Early-stage</option>
+                                <option value="growing">Growing</option>
+                                <option value="established">Established</option>
+                                <option value="pivoting">Pivoting</option>
+                                <option value="scaling">Scaling</option>
+                            </select>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Business Training Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="training">
+                        <h3 class="form-step-title">Business Training Diagnostic</h3>
+                        <p class="form-step-intro">Help us understand your team's learning needs so we can design the most impactful training programme.</p>
+                        <div class="form-group">
+                            <label for="bt-skills">What skills or topics does your team need training in?</label>
+                            <textarea id="bt-skills" name="bt_skills" required rows="3" placeholder="e.g., Sales fundamentals, market analysis, digital tools, leadership..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-team-size">How many team members need training?</label>
+                            <select id="bt-team-size" name="bt_team_size" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="1-5">1-5</option>
+                                <option value="5-15">5-15</option>
+                                <option value="15-50">15-50</option>
+                                <option value="50+">50+</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-level">What is their current experience level?</label>
+                            <select id="bt-level" name="bt_level">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="mixed">Mixed levels</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-driver">What's driving the need for training?</label>
+                            <select id="bt-driver" name="bt_driver" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="new-hires">New hires onboarding</option>
+                                <option value="performance-gaps">Performance gaps</option>
+                                <option value="business-pivot">Business pivot or change</option>
+                                <option value="upskilling">Upskilling initiative</option>
+                                <option value="compliance">Compliance requirements</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-format">Preferred training format?</label>
+                            <select id="bt-format" name="bt_format">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="online-self-paced">Online self-paced</option>
+                                <option value="live-virtual">Live virtual sessions</option>
+                                <option value="in-person">In-person workshops</option>
+                                <option value="hybrid">Hybrid</option>
+                                <option value="no-preference">No preference</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bt-outcome">What does a successful training outcome look like?</label>
+                            <textarea id="bt-outcome" name="bt_outcome" rows="3" placeholder="e.g., Team can independently run market analysis, improved sales conversion..."></textarea>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Startup Launchpad Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="startup">
+                        <h3 class="form-step-title">Startup Launchpad Diagnostic</h3>
+                        <p class="form-step-intro">Tell us about your startup so we can design the right launchpad. From validation to growth, we'll map out exactly what you need.</p>
+                        <div class="form-group">
+                            <label for="su-stage">What stage is your startup?</label>
+                            <select id="su-stage" name="su_stage" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="idea">Idea only, haven't started yet</option>
+                                <option value="researching">Researching the market</option>
+                                <option value="mvp">Have an MVP or prototype</option>
+                                <option value="launched">Launched but struggling</option>
+                                <option value="scaling">Ready to scale</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-idea">Describe your business idea in one sentence</label>
+                            <input type="text" id="su-idea" name="su_idea" required placeholder="e.g., A platform that helps strata councils track rental compliance">
+                        </div>
+                        <div class="form-group">
+                            <label for="su-market">What industry or market are you targeting?</label>
+                            <input type="text" id="su-market" name="su_market" required placeholder="e.g., Property Management, HealthTech, E-commerce...">
+                        </div>
+                        <div class="form-group">
+                            <label for="su-problem">What's the #1 problem you're solving for customers?</label>
+                            <textarea id="su-problem" name="su_problem" required rows="3" placeholder="Describe the frustration or gap you want to address..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-validated">Have you validated this with real customers?</label>
+                            <select id="su-validated" name="su_validated" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="yes-data">Yes, with data and research</option>
+                                <option value="some-feedback">Some informal feedback</option>
+                                <option value="not-yet">Not yet</option>
+                                <option value="not-sure-how">Not sure how to validate</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-help">What do you need help with most right now?</label>
+                            <select id="su-help" name="su_help" required>
+                                <option value="" disabled selected>Select one</option>
+                                <option value="validation">Market validation & research</option>
+                                <option value="strategy">Business strategy & planning</option>
+                                <option value="mvp">Building an MVP or product</option>
+                                <option value="branding">Branding & identity</option>
+                                <option value="website">Website & digital presence</option>
+                                <option value="go-to-market">Go-to-market plan</option>
+                                <option value="training">Founder training & skills</option>
+                                <option value="everything">All of the above, full launchpad</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-timeline">What's your timeline?</label>
+                            <select id="su-timeline" name="su_timeline">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="ready-now">Ready to start now</option>
+                                <option value="1-3-months">Within 1-3 months</option>
+                                <option value="3-6-months">3-6 months</option>
+                                <option value="exploring">Just exploring options</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="su-funding">How are you currently funded?</label>
+                            <select id="su-funding" name="su_funding">
+                                <option value="" disabled selected>Select one</option>
+                                <option value="bootstrapped">Bootstrapped / self-funded</option>
+                                <option value="seed-angel">Seed / Angel investment</option>
+                                <option value="vc">VC funded</option>
+                                <option value="grant">Grant funded</option>
+                                <option value="seeking">Seeking funding</option>
+                            </select>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- General / Not Sure Intake -->
+                    <div class="form-step pillar-step" data-step="3" data-pillar="general">
+                        <h3 class="form-step-title">Tell Us More</h3>
+                        <p class="form-step-intro">Not sure which service is right for you? No problem. Tell us about your situation and we'll help you find the best path forward.</p>
+                        <div class="form-group">
+                            <label for="gen-challenge">What's the biggest challenge your business is facing right now?</label>
+                            <textarea id="gen-challenge" name="gen_challenge" required rows="4" placeholder="Tell us what's keeping you up at night..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="gen-industry">What industry are you in?</label>
+                            <input type="text" id="gen-industry" name="gen_industry" placeholder="e.g., Property Management, Construction, Retail...">
+                        </div>
+                        <div class="form-group">
+                            <label for="gen-outcome">What outcome are you hoping to achieve?</label>
+                            <textarea id="gen-outcome" name="gen_outcome" rows="3" placeholder="e.g., More customers, better tools, smarter strategy..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="gen-anything">Is there anything else you'd like us to know?</label>
+                            <textarea id="gen-anything" name="gen_anything" rows="3" placeholder="Optional: timeline, budget, specific goals..."></textarea>
+                        </div>
+                        <div class="form-nav">
+                            <button type="button" class="btn btn-ghost form-prev">Back</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div class="form-success" id="form-success">
+                        <div class="success-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <h3>Thank you!</h3>
+                        <p>We've received your inquiry and will get back to you within 24 hours.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="footer-logo-img">
+                    <p class="footer-motto">Your market's missing piece.</p>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" class="footer-email">info@coastlinedigitalsolutions.com</a>
+                    <p class="footer-location">BC, Canada</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#about">About</a>
+                    <a href="#method">Method</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="LinkedIn" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
