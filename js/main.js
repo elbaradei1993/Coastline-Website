@@ -13,8 +13,15 @@
     var splash = document.getElementById('splash-screen');
     if (!splash) return;
 
-    // NOTE: sessionStorage gate temporarily disabled — re-enable below:
-    // if (sessionStorage.getItem('splashSeen')) { splash.classList.add('splash-hidden'); return; }
+    // Show once per browser (localStorage persists across tabs & sessions)
+    if (localStorage.getItem('splashSeen')) {
+        splash.classList.add('splash-hidden');
+        document.body.classList.remove('splash-active');   // release body lock
+        document.querySelectorAll('.fade-in').forEach(function(el){
+            el.style.animationPlayState = 'running';       // resume hero animations
+        });
+        return;
+    }
 
     document.body.classList.add('splash-active');
 
@@ -94,7 +101,7 @@
         document.querySelectorAll('.fade-in').forEach(function(el){
             el.style.animationPlayState = 'running';
         });
-        sessionStorage.setItem('splashSeen', '1');
+        localStorage.setItem('splashSeen', '1');
     }, T6+2000);   // T6+2000 = 7750ms total
 
 })();
