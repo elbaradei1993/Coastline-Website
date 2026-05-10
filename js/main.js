@@ -15,11 +15,14 @@
     const logoWrap    = document.getElementById('splash-logo-wrap');
     const portalRing  = document.getElementById('splash-portal-ring');
 
-    // Skip splash if already seen this session OR elements missing
-    if (!splash || !splashCanvas || sessionStorage.getItem('splashSeen')) {
+    // Skip if elements missing
+    if (!splash || !splashCanvas) {
         if (splash) splash.classList.add('splash-hidden');
         return;
     }
+    // NOTE: sessionStorage gate temporarily disabled for testing
+    // Re-enable by un-commenting the line below:
+    // if (sessionStorage.getItem('splashSeen')) { splash.classList.add('splash-hidden'); return; }
 
     // Lock body scroll while splash is active
     document.body.classList.add('splash-active');
