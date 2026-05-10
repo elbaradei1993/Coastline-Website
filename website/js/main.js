@@ -30,70 +30,62 @@
         if (el) el.style.opacity = '0';
     }
 
-    // Materialise: emerge from blur + scale
+    // ── Icon animation helpers (slower = premium feel) ────────────────
     function appear(id) {
-        var el = $id(id);
-        if (!el) return;
-        el.style.animation = 'siAppear 0.48s cubic-bezier(0.22,1,0.36,1) forwards';
+        var el = $id(id); if (!el) return;
+        el.style.animation = 'siAppear 0.75s cubic-bezier(0.22,1,0.36,1) forwards';
     }
-
-    // Glow pulse: steady brightness breathing
     function glow(id) {
-        var el = $id(id);
-        if (!el) return;
-        el.classList.add('si-on');                      // keep opacity:1 / scale:1
-        el.style.animation = 'siGlow 0.55s ease-in-out infinite alternate';
+        var el = $id(id); if (!el) return;
+        el.classList.add('si-on');
+        el.style.animation = 'siGlow 0.7s ease-in-out infinite alternate';
     }
-
-    // Blast: scale to 13× and fade — "entering through" the icon
     function blast(id) {
-        var el = $id(id);
-        if (!el) return;
+        var el = $id(id); if (!el) return;
         el.classList.remove('si-on');
-        el.style.animation = 'siBlast 0.44s cubic-bezier(0.4,0,1,1) forwards';
+        el.style.animation = 'siBlast 0.65s cubic-bezier(0.4,0,0.8,1) forwards';
     }
 
-    // ── Scene timings ─────────────────────────────────────────────────
-    // Scene 1: t=0       Growth + Meetings
-    // Scene 2: t=870     Achievement + Intelligence
-    // Scene 3: t=1740    Briefcase solo (Business)
-    // Scene 4: t=2440    Coastline logo — Netflix finale
-    // Hero:    t=4200    Splash done
+    // ── Scene timings — one icon per scene, sequential ────────────────
+    // Each scene: ~1150ms   (appear 0.75s, hold ~300ms, blast 0.65s)
+    // Scene 1: t=0      Growth / Chart
+    // Scene 2: t=1150   Meetings / People
+    // Scene 3: t=2300   Achievement / Trophy
+    // Scene 4: t=3450   Intelligence / Lightbulb
+    // Scene 5: t=4600   Business / Briefcase
+    // Scene 6: t=5750   Logo finale
+    // Hero:    t=7400
 
-    var T1=0, T2=870, T3=1740, T4=2440;
+    var T1=0, T2=1150, T3=2300, T4=3450, T5=4600, T6=5750;
 
-    // ── Scene 1 ───────────────────────────────────────────────────────
-    setTimeout(function(){ showScene('ss1'); }, T1);
-    setTimeout(function(){ appear('si-chart'); }, T1+60);
-    setTimeout(function(){ appear('si-people'); }, T1+190);
-    setTimeout(function(){ glow('si-chart'); glow('si-people'); }, T1+520);
-    setTimeout(function(){ blast('si-chart'); blast('si-people'); }, T1+710);
+    function runScene(sceneId, iconId, tStart, prevId) {
+        setTimeout(function(){
+            if (prevId) hideScene(prevId);
+            showScene(sceneId);
+        }, tStart);
+        setTimeout(function(){ appear(iconId); },   tStart + 60);
+        setTimeout(function(){ glow(iconId); },     tStart + 600);
+        setTimeout(function(){ blast(iconId); },    tStart + 900);
+    }
 
-    // ── Scene 2 ───────────────────────────────────────────────────────
-    setTimeout(function(){ hideScene('ss1'); showScene('ss2'); }, T2);
-    setTimeout(function(){ appear('si-trophy'); }, T2+60);
-    setTimeout(function(){ appear('si-bulb'); }, T2+190);
-    setTimeout(function(){ glow('si-trophy'); glow('si-bulb'); }, T2+520);
-    setTimeout(function(){ blast('si-trophy'); blast('si-bulb'); }, T2+710);
+    runScene('ss1', 'si-chart',  T1, null);
+    runScene('ss2', 'si-people', T2, 'ss1');
+    runScene('ss3', 'si-trophy', T3, 'ss2');
+    runScene('ss4', 'si-bulb',   T4, 'ss3');
+    runScene('ss5', 'si-case',   T5, 'ss4');
 
-    // ── Scene 3 — solo briefcase ──────────────────────────────────────
-    setTimeout(function(){ hideScene('ss2'); showScene('ss3'); }, T3);
-    setTimeout(function(){ appear('si-case'); }, T3+60);
-    setTimeout(function(){ glow('si-case'); }, T3+400);
-    setTimeout(function(){ blast('si-case'); }, T3+590);
-
-    // ── Scene 4 — logo finale ─────────────────────────────────────────
-    setTimeout(function(){ hideScene('ss3'); showScene('ss4'); }, T4);
+    // ── Scene 6 — logo finale ─────────────────────────────────────────
+    setTimeout(function(){ hideScene('ss5'); showScene('ss6'); }, T6);
     setTimeout(function(){
         var lw = $id('splash-logo-wrap');
-        if (lw) lw.style.animation = 'splashLogoIn 0.6s cubic-bezier(0.22,1,0.36,1) forwards';
-    }, T4+80);
+        if (lw) lw.style.animation = 'splashLogoIn 0.75s cubic-bezier(0.22,1,0.36,1) forwards';
+    }, T6+80);
     // Netflix blast
     setTimeout(function(){
-        splash.style.animation = 'splashFade 0.85s cubic-bezier(0.4,0,0.6,1) 0.1s forwards';
+        splash.style.animation = 'splashFade 0.95s cubic-bezier(0.4,0,0.6,1) 0.1s forwards';
         var lw = $id('splash-logo-wrap');
-        if (lw) lw.style.animation = 'logoBlastOut 0.95s cubic-bezier(0.4,0,1,1) forwards';
-    }, T4+720);
+        if (lw) lw.style.animation = 'logoBlastOut 1.0s cubic-bezier(0.4,0,1,1) forwards';
+    }, T6+900);
 
     // ── Reveal hero ───────────────────────────────────────────────────
     setTimeout(function(){
@@ -103,7 +95,7 @@
             el.style.animationPlayState = 'running';
         });
         sessionStorage.setItem('splashSeen', '1');
-    }, T4+1760);   // T4+1760 = 4200ms total
+    }, T6+2000);   // T6+2000 = 7750ms total
 
 })();
 

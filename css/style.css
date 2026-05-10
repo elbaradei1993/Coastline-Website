@@ -53,18 +53,12 @@
     will-change: transform, opacity, filter;
 }
 
-/* Pair icons */
+/* All icons are solo — generous size */
 .si-wrap svg {
     display: block;
-    width: clamp(88px, 21vw, 148px);
-    height: clamp(88px, 21vw, 148px);
+    width: clamp(140px, 32vw, 210px);
+    height: clamp(140px, 32vw, 210px);
     overflow: visible;
-}
-
-/* Solo (briefcase) is larger */
-.si-solo .si-wrap svg {
-    width: clamp(130px, 30vw, 200px);
-    height: clamp(130px, 30vw, 200px);
 }
 
 /* Visible base state (set by JS before glow animation) */
