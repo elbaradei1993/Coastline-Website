@@ -2035,10 +2035,43 @@ body {
     line-height: 1.7;
 }
 
+/* Top-right variant: text anchored top-right, leaves left side of image clear */
+.photo-banner-overlay--top-right {
+    align-items: flex-start;
+    justify-content: flex-end;
+    background: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0.82) 0%,
+        rgba(0, 0, 0, 0.50) 45%,
+        rgba(0, 0, 0, 0.05) 100%
+    );
+}
+
+.photo-banner-overlay--top-right .photo-banner-content {
+    text-align: right;
+    max-width: 460px;
+    padding: 48px 44px 48px 32px;
+}
+
+.photo-banner-overlay--top-right .photo-banner-sub {
+    margin-left: auto;
+}
+
 @media (max-width: 768px) {
     .photo-banner-overlay {
         background: rgba(0, 0, 0, 0.72);
         align-items: flex-end;
+    }
+
+    .photo-banner-overlay--top-right {
+        align-items: flex-end;
+        justify-content: flex-start;
+        background: rgba(0, 0, 0, 0.70);
+    }
+
+    .photo-banner-overlay--top-right .photo-banner-content {
+        text-align: left;
+        padding: 24px 24px 36px;
     }
 
     .photo-banner-content {
