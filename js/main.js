@@ -55,15 +55,14 @@
 
     // ── Scene timings — one icon per scene, sequential ────────────────
     // Each scene: ~1150ms   (appear 0.75s, hold ~300ms, blast 0.65s)
-    // Scene 1: t=0      Growth / Chart
-    // Scene 2: t=1150   Meetings / People
-    // Scene 3: t=2300   Achievement / Trophy
-    // Scene 4: t=3450   Intelligence / Lightbulb
-    // Scene 5: t=4600   Business / Briefcase
-    // Scene 6: t=5750   Logo finale
-    // Hero:    t=7400
+    // Scene 1: t=0      Market Analysis
+    // Scene 2: t=1150   Digital Solutions
+    // Scene 3: t=2300   Business Consultancy
+    // Scene 4: t=3450   Business Training
+    // Scene 5: t=4600   Logo finale
+    // Hero:    t=6600
 
-    var T1=0, T2=1150, T3=2300, T4=3450, T5=4600, T6=5750;
+    var T1=0, T2=1150, T3=2300, T4=3450, T6=4600;
 
     function runScene(sceneId, iconId, tStart, prevId) {
         setTimeout(function(){
@@ -79,10 +78,9 @@
     runScene('ss2', 'si-people', T2, 'ss1');
     runScene('ss3', 'si-trophy', T3, 'ss2');
     runScene('ss4', 'si-bulb',   T4, 'ss3');
-    runScene('ss5', 'si-case',   T5, 'ss4');
 
-    // ── Scene 6 — logo finale ─────────────────────────────────────────
-    setTimeout(function(){ hideScene('ss5'); showScene('ss6'); }, T6);
+    // ── Scene 5 — logo finale ─────────────────────────────────────────
+    setTimeout(function(){ hideScene('ss4'); showScene('ss6'); }, T6);
     setTimeout(function(){
         var lw = $id('splash-logo-wrap');
         if (lw) lw.style.animation = 'splashLogoIn 0.75s cubic-bezier(0.22,1,0.36,1) forwards';
@@ -102,7 +100,7 @@
             el.style.animationPlayState = 'running';
         });
         localStorage.setItem('splashSeen', '1');
-    }, T6+2000);   // T6+2000 = 7750ms total
+    }, T6+2000);   // T6+2000 = 6600ms total
 
 })();
 
