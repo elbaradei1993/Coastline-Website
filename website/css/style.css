@@ -2049,9 +2049,9 @@ body {
 
 .photo-banner-overlay--top-right .photo-banner-content {
     text-align: right;
-    width: auto;           /* let the box shrink to its content */
-    max-width: 520px;      /* wide enough so text doesn't wrap awkwardly */
-    margin: 0;             /* cancel the auto-centering */
+    width: auto;
+    max-width: 640px;         /* wider = fewer line breaks */
+    margin: 0 6% 0 0;         /* pull slightly left of the right edge */
     padding: 48px 40px 48px 24px;
 }
 
