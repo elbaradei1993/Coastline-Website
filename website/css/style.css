@@ -2049,8 +2049,10 @@ body {
 
 .photo-banner-overlay--top-right .photo-banner-content {
     text-align: right;
-    max-width: 460px;
-    padding: 48px 44px 48px 32px;
+    width: auto;           /* let the box shrink to its content */
+    max-width: 360px;      /* narrower column = hugs the right edge */
+    margin: 0;             /* cancel the auto-centering */
+    padding: 48px 40px 48px 24px;
 }
 
 .photo-banner-overlay--top-right .photo-banner-sub {
