@@ -846,39 +846,21 @@
 
                         <div class="pillar-selector">
 
-                            <button type="button" class="pillar-card" data-pillar="market-analysis">
+                            <button type="button" class="pillar-card" data-pillar="training">
 
                                 <div class="pillar-card-icon">
 
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
 
-                                        <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 12 3 12 0v-5"/>
 
                                     </svg>
 
                                 </div>
 
-                                <span class="pillar-card-title">Market Analysis</span>
+                                <span class="pillar-card-title">Business Training</span>
 
-                                <span class="pillar-card-desc">Uncover gaps & opportunities</span>
-
-                            </button>
-
-                            <button type="button" class="pillar-card" data-pillar="digital-solutions">
-
-                                <div class="pillar-card-icon">
-
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-
-                                        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-
-                                    </svg>
-
-                                </div>
-
-                                <span class="pillar-card-title">Digital Solutions</span>
-
-                                <span class="pillar-card-desc">Custom tools & automation</span>
+                                <span class="pillar-card-desc">Courses & team upskilling</span>
 
                             </button>
 
@@ -900,24 +882,6 @@
 
                             </button>
 
-                            <button type="button" class="pillar-card" data-pillar="training">
-
-                                <div class="pillar-card-icon">
-
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-
-                                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 12 3 12 0v-5"/>
-
-                                    </svg>
-
-                                </div>
-
-                                <span class="pillar-card-title">Business Training</span>
-
-                                <span class="pillar-card-desc">Courses & team upskilling</span>
-
-                            </button>
-
                             <button type="button" class="pillar-card pillar-card-startup" data-pillar="startup">
 
                                 <div class="pillar-card-icon">
@@ -933,6 +897,24 @@
                                 <span class="pillar-card-title">Startup Launchpad</span>
 
                                 <span class="pillar-card-desc">Idea to market, A to Z</span>
+
+                            </button>
+
+                            <button type="button" class="pillar-card" data-pillar="digital-solutions">
+
+                                <div class="pillar-card-icon">
+
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+
+                                        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+
+                                    </svg>
+
+                                </div>
+
+                                <span class="pillar-card-title">Digital Solutions</span>
+
+                                <span class="pillar-card-desc">Custom tools & automation</span>
 
                             </button>
 
@@ -1023,114 +1005,6 @@
 
 
                     <!-- Step 3: Pillar-Specific Diagnostic -->
-
-                    <!-- Market Analysis Intake -->
-
-                    <div class="form-step pillar-step" data-step="3" data-pillar="market-analysis">
-
-                        <h3 class="form-step-title">Market Analysis Diagnostic</h3>
-
-                        <p class="form-step-intro">Help us understand your competitive landscape so we can identify the #1 gap your market is missing.</p>
-
-                        <div class="form-group">
-
-                            <label for="ma-industry">What industry or market segment do you operate in?</label>
-
-                            <input type="text" id="ma-industry" name="ma_industry" required placeholder="e.g., Property Management, SaaS, Retail...">
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="ma-competitors">Who are your top 3 competitors?</label>
-
-                            <input type="text" id="ma-competitors" name="ma_competitors" placeholder="e.g., Company A, Company B, Company C">
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="ma-complaints">What do your customers complain about most?</label>
-
-                            <textarea id="ma-complaints" name="ma_complaints" rows="3" placeholder="e.g., Slow response times, lack of transparency, hidden fees..."></textarea>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="ma-feedback">How do you currently gather customer feedback?</label>
-
-                            <select id="ma-feedback" name="ma_feedback" required>
-
-                                <option value="" disabled selected>Select one</option>
-
-                                <option value="reviews">Online Reviews</option>
-
-                                <option value="surveys">Customer Surveys</option>
-
-                                <option value="social">Social Media Monitoring</option>
-
-                                <option value="none">We don't currently</option>
-
-                                <option value="other">Other</option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="ma-decision">What business decision will this analysis inform?</label>
-
-                            <select id="ma-decision" name="ma_decision" required>
-
-                                <option value="" disabled selected>Select one</option>
-
-                                <option value="new-product">New product or service launch</option>
-
-                                <option value="new-market">Entering a new market</option>
-
-                                <option value="improve-existing">Improving an existing offering</option>
-
-                                <option value="understand-competitors">Understanding competitors better</option>
-
-                                <option value="other">Other</option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label for="ma-urgency">How urgently do you need results?</label>
-
-                            <select id="ma-urgency" name="ma_urgency">
-
-                                <option value="" disabled selected>Select one</option>
-
-                                <option value="asap">ASAP</option>
-
-                                <option value="1-3-months">Within 1-3 months</option>
-
-                                <option value="3-6-months">3-6 months</option>
-
-                                <option value="exploring">Just exploring options</option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-nav">
-
-                            <button type="button" class="btn btn-ghost form-prev">Back</button>
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
-
-                        </div>
-
-                    </div>
-
-
 
                     <!-- Digital Solutions Intake -->
 
