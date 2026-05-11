@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Consultancy | Strategy, Growth & Market Intelligence | Coastline Digital Solutions</title>
+    <meta name="description" content="Business consultancy services rooted in market intelligence — not guesswork. We diagnose the real gap in your business, build the strategy, and stay in your corner through execution.">
+    <meta name="keywords" content="business consultancy, business strategy, growth advisory, market intelligence, operations consulting, competitive strategy, business growth, strategic planning">
+    <link rel="canonical" href="https://coastlinedigitalsolutions.com/consultancy.html">
+    <link rel="icon" type="image/png" href="Coastline Logo.png">
+    <link rel="shortcut icon" type="image/png" href="Coastline Logo.png">
+    <link rel="apple-touch-icon" href="Coastline Logo.png">
+    <meta property="og:title" content="Business Consultancy | Coastline Digital Solutions">
+    <meta property="og:description" content="Strategic advisory rooted in market intelligence. We diagnose the gap, build the plan, and stay in your corner through execution.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://coastlinedigitalsolutions.com/consultancy.html">
+    <meta property="og:site_name" content="Coastline Digital Solutions">
+    <meta property="og:image" content="https://coastlinedigitalsolutions.com/Coastline%20Logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Business Consultancy | Coastline Digital Solutions">
+    <meta name="twitter:description" content="Strategic advisory rooted in market intelligence. We diagnose the gap, build the plan, and stay in your corner through execution.">
+    <meta name="twitter:image" content="https://coastlinedigitalsolutions.com/Coastline%20Logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .consultancy-hero { padding: 160px 0 100px; border-bottom: 1px solid rgba(255,255,255,.06); }
+        .consultancy-stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.06); margin: 60px 0 0; }
+        .consultancy-stat { background: var(--black); padding: 40px 32px; text-align: center; }
+        .consultancy-stat-number { font-size: clamp(2rem,5vw,3.5rem); font-weight: 200; letter-spacing: -.03em; display: block; margin-bottom: 8px; }
+        .consultancy-stat-label { font-size: .7rem; font-weight: 300; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-500); }
+        .problem-list { display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,.06); margin-top: 48px; }
+        .problem-list-item { background: var(--black); padding: 28px 32px; display: flex; align-items: flex-start; gap: 20px; }
+        .problem-list-num { font-size: .7rem; font-weight: 400; letter-spacing: .1em; color: var(--grey-600); min-width: 28px; padding-top: 2px; }
+        .problem-list-content h4 { font-size: 1rem; font-weight: 400; margin-bottom: 6px; }
+        .problem-list-content p { font-size: .85rem; font-weight: 300; color: var(--grey-400); line-height: 1.6; }
+        .service-areas-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: rgba(255,255,255,.06); margin-top: 48px; }
+        .service-area { background: var(--black); padding: 40px 32px; border: none; transition: background .3s ease; }
+        .service-area:hover { background: rgba(255,255,255,.02); }
+        .service-area-icon { width: 40px; height: 40px; margin-bottom: 20px; color: rgba(255,255,255,.4); }
+        .service-area h3 { font-size: 1.1rem; font-weight: 400; margin-bottom: 12px; }
+        .service-area p { font-size: .85rem; font-weight: 300; color: var(--grey-400); line-height: 1.7; }
+        .service-area ul { margin-top: 16px; padding: 0; list-style: none; }
+        .service-area ul li { font-size: .8rem; font-weight: 300; color: var(--grey-500); padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.04); display: flex; align-items: center; gap: 10px; }
+        .service-area ul li::before { content: '—'; color: rgba(255,255,255,.2); font-size: .7rem; }
+        .approach-steps { display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,.06); margin-top: 48px; }
+        .approach-step { background: var(--black); padding: 32px; display: grid; grid-template-columns: 60px 1fr; gap: 24px; align-items: start; }
+        .approach-step-num { font-size: 2.5rem; font-weight: 200; letter-spacing: -.04em; color: rgba(255,255,255,.15); line-height: 1; }
+        .approach-step-body h4 { font-size: 1rem; font-weight: 400; margin-bottom: 8px; }
+        .approach-step-body p { font-size: .85rem; font-weight: 300; color: var(--grey-400); line-height: 1.6; }
+        .who-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,.06); margin-top: 48px; }
+        .who-card { background: var(--black); padding: 32px 24px; }
+        .who-card-type { font-size: .65rem; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--grey-500); margin-bottom: 16px; display: block; }
+        .who-card h3 { font-size: .95rem; font-weight: 400; margin-bottom: 12px; line-height: 1.4; }
+        .who-card p { font-size: .82rem; font-weight: 300; color: var(--grey-400); line-height: 1.65; }
+        .cta-block { border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02); padding: 64px 48px; text-align: center; margin-top: 80px; }
+        .cta-block h2 { font-size: clamp(1.5rem,4vw,2.5rem); font-weight: 300; margin-bottom: 16px; }
+        .cta-block p { font-size: .95rem; font-weight: 300; color: var(--grey-400); max-width: 480px; margin: 0 auto 32px; line-height: 1.7; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        @media (max-width: 768px) {
+            .consultancy-stat-row { grid-template-columns: 1fr; }
+            .service-areas-grid { grid-template-columns: 1fr; }
+            .who-grid { grid-template-columns: 1fr; }
+            .approach-step { grid-template-columns: 1fr; gap: 8px; }
+            .approach-step-num { font-size: 1.8rem; }
+            .cta-block { padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="nav-logo-img">
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="startup.html">Startups</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="index.html#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobile-overlay">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="startup.html">Startups</a></li>
+            <li><a href="training.html">Training</a></li>
+            <li><a href="index.html#contact" class="nav-cta-mobile">Get Started</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero -->
+    <section class="section consultancy-hero">
+        <div class="container">
+            <div class="hero-content" style="text-align:left; align-items:flex-start;">
+                <p class="hero-tagline fade-in">Business Consultancy</p>
+                <h1 class="hero-title fade-in delay-1" style="font-size:clamp(2.2rem,6vw,4rem);">Strategy that closes the gap<br>between where you are and<br><em>where the market is going.</em></h1>
+                <p class="hero-subtitle fade-in delay-2" style="max-width:560px;">Most businesses don't fail because of bad products. They fail because they lack a clear strategy for the market they're actually in. We fix that.</p>
+                <div class="hero-buttons fade-in delay-3">
+                    <a href="index.html#contact" class="btn btn-primary">Book a Strategy Session</a>
+                    <a href="#approach" class="btn btn-ghost">Our Approach</a>
+                </div>
+            </div>
+            <div class="consultancy-stat-row fade-in delay-4">
+                <div class="consultancy-stat">
+                    <span class="consultancy-stat-number">82%</span>
+                    <span class="consultancy-stat-label">of businesses that fail cite lack of strategy as a root cause</span>
+                </div>
+                <div class="consultancy-stat">
+                    <span class="consultancy-stat-number">3×</span>
+                    <span class="consultancy-stat-label">faster growth for companies with a defined market intelligence process</span>
+                </div>
+                <div class="consultancy-stat">
+                    <span class="consultancy-stat-number">60%</span>
+                    <span class="consultancy-stat-label">of strategic initiatives fail due to poor diagnosis at the start</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Real Problem -->
+    <section class="section problem-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">The Problem</p>
+                <h2 class="section-title reveal">Most consulting advice<br>is built on <em>assumptions.</em></h2>
+                <p class="section-subtitle reveal">Generic frameworks. Recycled playbooks. Advice that worked in a different industry, a different cycle, for a different company. The result is a strategy that looks good on paper and performs poorly in market.</p>
+            </div>
+            <div class="problem-list reveal">
+                <div class="problem-list-item">
+                    <span class="problem-list-num">01</span>
+                    <div class="problem-list-content">
+                        <h4>Strategy without market grounding</h4>
+                        <p>When consultants don't start with what the market is actually telling you — through complaints, reviews, and competitive gaps — they're building plans on assumptions. Those plans don't survive contact with real customers.</p>
+                    </div>
+                </div>
+                <div class="problem-list-item">
+                    <span class="problem-list-num">02</span>
+                    <div class="problem-list-content">
+                        <h4>Engagement ends at the slide deck</h4>
+                        <p>Many firms deliver a report, then disappear. But implementation is where strategy either lives or dies. A plan that isn't executed is just an expensive document.</p>
+                    </div>
+                </div>
+                <div class="problem-list-item">
+                    <span class="problem-list-num">03</span>
+                    <div class="problem-list-content">
+                        <h4>Solving symptoms, not root causes</h4>
+                        <p>Declining revenue, high churn, weak margins — these are symptoms. The real cause is usually a misalignment between what the business offers and what the market actually values. That gap must be diagnosed before anything else.</p>
+                    </div>
+                </div>
+                <div class="problem-list-item">
+                    <span class="problem-list-num">04</span>
+                    <div class="problem-list-content">
+                        <h4>One-size advice for unique situations</h4>
+                        <p>A growth-stage SaaS, a regional service business, and a product company entering a new market need entirely different strategies. Cookie-cutter consulting ignores this reality.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do -->
+    <section class="section method-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">What We Deliver</p>
+                <h2 class="section-title reveal">Six advisory areas.<br>One coherent strategy.</h2>
+                <p class="section-subtitle reveal">Every engagement starts with market diagnosis. Everything else — positioning, operations, growth — flows from what the data tells us your market actually needs.</p>
+            </div>
+            <div class="service-areas-grid reveal">
+                <div class="service-area">
+                    <div class="service-area-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                    </div>
+                    <h3>Market Intelligence & Competitive Analysis</h3>
+                    <p>We mine your market for the real signal — what customers are complaining about, what competitors are missing, and where the unmet demand is concentrated. This becomes the foundation of every strategic decision.</p>
+                    <ul>
+                        <li>Competitor gap mapping</li>
+                        <li>Customer frustration mining</li>
+                        <li>Demand signal identification</li>
+                        <li>Pricing & positioning benchmarking</li>
+                    </ul>
+                </div>
+                <div class="service-area">
+                    <div class="service-area-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+                        </svg>
+                    </div>
+                    <h3>Business Strategy & Growth Planning</h3>
+                    <p>From market entry to scale, we build strategies that are grounded in real data, specific to your business stage, and designed to be executed — not just approved by a board.</p>
+                    <ul>
+                        <li>Market entry strategy</li>
+                        <li>Revenue model design</li>
+                        <li>12-month growth roadmap</li>
+                        <li>Scenario planning & stress-testing</li>
+                    </ul>
+                </div>
+                <div class="service-area">
+                    <div class="service-area-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+                        </svg>
+                    </div>
+                    <h3>Positioning & Value Proposition Design</h3>
+                    <p>If customers don't immediately understand why you're the better choice, you're competing on price. We clarify your positioning so your offer resonates before you say a word about features.</p>
+                    <ul>
+                        <li>Core value proposition articulation</li>
+                        <li>Competitive differentiation framing</li>
+                        <li>Messaging hierarchy development</li>
+                        <li>Customer-centric narrative design</li>
+                    </ul>
+                </div>
+                <div class="service-area">
+                    <div class="service-area-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h3>Operations & Process Optimisation</h3>
+                    <p>Growth breaks bad processes. Before you scale, the operations that underpin your business need to be tight. We identify the friction points that will bottleneck your next stage of growth and fix them before they cost you.</p>
+                    <ul>
+                        <li>Process bottleneck diagnosis</li>
+                        <li>Workflow redesign & documentation</li>
+                        <li>Team structure & accountability mapping</li>
+                        <li>KPI framework design</li>
+                    </ul>
+                </div>
+                <div class="service-area">
+                    <div class="service-area-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                    <h3>Revenue Growth & Sales Strategy</h3>
+                    <p>Revenue problems are rarely caused by bad salespeople. They're caused by selling the wrong thing, to the wrong audience, with the wrong message. We rebuild the revenue architecture from the ground up.</p>
+                    <ul>
+                        <li>Ideal customer profile (ICP) definition</li>
+                        <li>Sales process architecture</li>
+                        <li>Pricing strategy & packaging</li>
+                        <li>Retention & expansion revenue design</li>
+                    </ul>
+                </div>
+                <div class="service-area">
+                    <div class="service-area-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Executive Advisory & Ongoing Support</h3>
+                    <p>Strategy isn't a one-time deliverable — it's an ongoing conversation with the market. We offer retained advisory engagements so you have a senior strategic partner available as your business evolves.</p>
+                    <ul>
+                        <li>Monthly strategic review sessions</li>
+                        <li>On-demand advisory access</li>
+                        <li>Quarterly market re-assessment</li>
+                        <li>Decision support on critical moves</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach -->
+    <section id="approach" class="section services-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">Our Approach</p>
+                <h2 class="section-title reveal">Diagnosis before prescription.<br><em>Always.</em></h2>
+                <p class="section-subtitle reveal">We don't walk into an engagement with a pre-built answer. Every strategy we build starts by listening to your market — and that discipline is what makes our advice different.</p>
+            </div>
+            <div class="approach-steps reveal">
+                <div class="approach-step">
+                    <div class="approach-step-num">01</div>
+                    <div class="approach-step-body">
+                        <h4>Deep Discovery</h4>
+                        <p>Before we make any recommendations, we understand your business deeply — your financials, your operations, your team, your customers, and your competitive position. We also mine your market for what customers are saying about you and your competitors in the wild: reviews, forums, feedback. This gives us a picture that internal data alone can't provide.</p>
+                    </div>
+                </div>
+                <div class="approach-step">
+                    <div class="approach-step-num">02</div>
+                    <div class="approach-step-body">
+                        <h4>Gap Identification</h4>
+                        <p>The single most important question in any business is: what does the market want that nobody is delivering well? We find that gap — in your industry, relative to your current position — because that gap is the source of your next competitive advantage. Everything we recommend is anchored to it.</p>
+                    </div>
+                </div>
+                <div class="approach-step">
+                    <div class="approach-step-num">03</div>
+                    <div class="approach-step-body">
+                        <h4>Strategy Design</h4>
+                        <p>We build a strategy that is specific enough to be actionable, flexible enough to adapt, and grounded enough to survive contact with the real market. This isn't a 60-slide deck full of 2×2 matrices. It's a clear, prioritised roadmap with decisions, timelines, owners, and success metrics.</p>
+                    </div>
+                </div>
+                <div class="approach-step">
+                    <div class="approach-step-num">04</div>
+                    <div class="approach-step-body">
+                        <h4>Execution Support</h4>
+                        <p>We don't hand over the plan and disappear. We stay involved through execution — reviewing progress, adjusting based on what the market feeds back, and making sure the strategy that was designed gets the chance to actually work. Implementation is where strategy either delivers value or collects dust.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who It's For -->
+    <section class="section clients-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-label reveal">Who This Is For</p>
+                <h2 class="section-title reveal">Business consultancy works<br>when the stakes are real.</h2>
+            </div>
+            <div class="who-grid reveal">
+                <div class="who-card">
+                    <span class="who-card-type">Growth-Stage Business</span>
+                    <h3>You're growing, but the cracks are starting to show</h3>
+                    <p>Revenue is climbing but margins are under pressure. Processes that worked at 10 customers are buckling at 100. You need strategic clarity before you hire, invest, or expand — or you'll scale the wrong thing.</p>
+                </div>
+                <div class="who-card">
+                    <span class="who-card-type">Established Business</span>
+                    <h3>Revenue has plateaued and you're not sure why</h3>
+                    <p>Growth has stalled. The team is working hard but the numbers aren't moving. The cause is rarely obvious from the inside — it usually lives in how you're positioned relative to a market that's moved on without you.</p>
+                </div>
+                <div class="who-card">
+                    <span class="who-card-type">Pivoting or Entering New Market</span>
+                    <h3>You're making a big move and you need it right</h3>
+                    <p>Entering a new market, launching a new product line, or repositioning after a pivot — these are high-stakes decisions. Getting the strategy right from the start avoids the costly correction cycles that follow getting it wrong.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section contact-section">
+        <div class="container">
+            <div class="cta-block reveal">
+                <h2>The gap in your market<br>is already there. <em>Let's find it.</em></h2>
+                <p>Every business has a gap between where it is and where the market is giving it permission to go. Our job is to find it, close it, and build the strategy that makes your growth inevitable.</p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact" class="btn btn-primary">Start a Consultancy Engagement</a>
+                    <a href="index.html" class="btn btn-ghost">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="Coastline Logo.png" alt="Coastline Digital Solutions" class="footer-logo-img">
+                    <p class="footer-motto">Your market's missing piece.</p>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" class="footer-email">info@coastlinedigitalsolutions.com</a>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="training.html">Training</a>
+                    <a href="startup.html">Startups</a>
+                    <a href="digital-solutions.html">Digital Solutions</a>
+                    <a href="index.html#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/company/coastline-digital-solutions" aria-label="LinkedIn" target="_blank" rel="noopener" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="mailto:info@coastlinedigitalsolutions.com" aria-label="Email" class="social-link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Coastline Digital Solutions. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/particles.js"></script>
+    <script>
+    (function () {
+        'use strict';
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+        function handleNavScroll() { navbar.classList.toggle('scrolled', window.scrollY > 50); }
+        window.addEventListener('scroll', handleNavScroll, { passive: true });
+        handleNavScroll();
+        if (navToggle && mobileOverlay) {
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+                document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
+            });
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navToggle.classList.remove('active');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) { const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 60; window.scrollTo({ top: offsetTop, behavior: 'smooth' }); }
+            });
+        });
+    })();
+    </script>
+    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
