@@ -518,6 +518,23 @@
                 });
             }
 
+            // Formspree enhancements: actionable email subject + reply-to
+            const serviceLabels = {
+                'training': 'Business Training',
+                'consultancy': 'Business Consultancy',
+                'startup': 'Startup Launchpad',
+                'digital-solutions': 'Digital Solutions',
+                'general': 'General Inquiry'
+            };
+            const serviceLabel = serviceLabels[selectedPillar] || selectedPillar;
+            const companyEl = form.querySelector('[name="company"]');
+            const emailEl = form.querySelector('[name="email"]');
+            const companyVal = companyEl && companyEl.value ? companyEl.value : 'Unknown Company';
+            formData.append('_subject', `Strategic Audit Request: ${serviceLabel} — ${companyVal}`);
+            if (emailEl && emailEl.value) {
+                formData.append('_replyto', emailEl.value);
+            }
+
             const submitBtn = document.querySelector('.form-step.active [type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
