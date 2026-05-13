@@ -1526,9 +1526,51 @@
 
                         <div class="form-group">
 
+                            <label for="gen-budget">What's your approximate budget for addressing this?</label>
+
+                            <select id="gen-budget" name="gen_budget">
+
+                                <option value="" disabled selected>Select one</option>
+
+                                <option value="under-5k">Under $5,000</option>
+
+                                <option value="5k-15k">$5,000 – $15,000</option>
+
+                                <option value="15k-50k">$15,000 – $50,000</option>
+
+                                <option value="50k+">$50,000+</option>
+
+                                <option value="not-sure">Not sure yet</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="gen-timeline">How urgently do you need to move on this?</label>
+
+                            <select id="gen-timeline" name="gen_timeline">
+
+                                <option value="" disabled selected>Select one</option>
+
+                                <option value="asap">As soon as possible</option>
+
+                                <option value="1-3-months">Within 1–3 months</option>
+
+                                <option value="3-6-months">Within 3–6 months</option>
+
+                                <option value="exploring">Just exploring options</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
                             <label for="gen-anything">Is there anything else you'd like us to know?</label>
 
-                            <textarea id="gen-anything" name="gen_anything" rows="3" placeholder="Optional: timeline, budget, specific goals..."></textarea>
+                            <textarea id="gen-anything" name="gen_anything" rows="3" placeholder="Optional: specific constraints, previous attempts, team size..."></textarea>
 
                         </div>
 
