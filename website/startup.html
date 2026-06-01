@@ -59,94 +59,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        /* FounderMath embedded styles */
-        .foundermath-section{padding:100px 0 140px;border-top:1px solid rgba(255,255,255,.06)}
-        .calc-full-width{max-width:960px;margin:0 auto}
-        .calc-layout{display:grid;grid-template-columns:380px 1fr;gap:48px;align-items:start}
-        .calc-panel{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px;position:sticky;top:100px}
-        .calc-panel-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:28px;display:flex;justify-content:space-between;align-items:center}
-        .calc-group{margin-bottom:24px}
-        .calc-group label{display:flex;justify-content:space-between;align-items:baseline;font-size:.75rem;font-weight:300;color:var(--grey-400);margin-bottom:10px;letter-spacing:.02em}
-        .calc-value{font-weight:500;color:var(--white);font-size:.85rem;font-variant-numeric:tabular-nums}
-        .calc-group select{width:100%;padding:10px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.12);outline:none;-webkit-appearance:none;cursor:pointer}
-        .calc-group select option{background:var(--black);color:var(--white)}
-        input[type="range"]{-webkit-appearance:none;width:100%;height:1px;background:rgba(255,255,255,.15);outline:none;cursor:pointer}
-        input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--white);border:none;cursor:pointer;transition:transform .2s ease}
-        input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.3)}
-        input[type="range"]::-moz-range-thumb{width:16px;height:16px;background:var(--white);border:none;cursor:pointer}
-        .reality-check{display:none;font-size:.7rem;font-weight:300;color:#f5a623;margin-top:6px;padding:6px 10px;border-left:2px solid #f5a623;background:rgba(245,166,35,.05);line-height:1.5}
-        .reality-check.visible{display:block;animation:fadeInUp .3s ease}
-        .calc-results{display:flex;flex-direction:column;gap:32px}
-        .result-card{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);padding:32px}
-        .result-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
-        .result-card-title{font-size:.7rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500)}
-        .death-clock{text-align:center;padding:40px 32px}
-        .death-verdict{font-size:.65rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-500);margin-bottom:16px}
-        .death-months{font-size:clamp(3rem,8vw,5rem);font-weight:200;letter-spacing:-.03em;line-height:1;margin-bottom:8px}
-        .death-months.danger{color:#ff4444}.death-months.warning{color:#f5a623}.death-months.safe{color:#4ecdc4}.death-months.profit{color:#4ecdc4}
-        .death-label{font-size:.85rem;font-weight:300;color:var(--grey-400)}
-        .death-subtitle{font-size:.8rem;font-weight:300;color:var(--grey-500);margin-top:16px}
-        .metrics-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-        .metric{text-align:center;padding:20px 12px;border:1px solid rgba(255,255,255,.06)}
-        .metric-number{font-size:1.4rem;font-weight:200;display:block;margin-bottom:4px;font-variant-numeric:tabular-nums}
-        .metric-label{font-size:.6rem;font-weight:300;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-500)}
-        .chart-container{position:relative;height:300px;width:100%}
-        .pro-section{position:relative;margin-top:48px}
-        .pro-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;margin-left:8px;vertical-align:middle}
-        .pro-lock{position:relative;overflow:hidden}
-        .pro-lock.locked .pro-lock-content{filter:blur(6px);pointer-events:none;user-select:none}
-        .pro-lock-overlay{display:none;position:absolute;top:0;left:0;right:0;bottom:0;z-index:10;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:32px}
-        .pro-lock.locked .pro-lock-overlay{display:flex}
-        .pro-lock-overlay h4{font-size:1.1rem;font-weight:300;margin-bottom:8px}
-        .pro-lock-overlay p{font-size:.8rem;font-weight:300;color:var(--grey-400);margin-bottom:20px;max-width:320px}
-        .pro-unlock-btn{display:inline-block;text-decoration:none;font-family:var(--font);font-size:.75rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 28px;background:linear-gradient(135deg,#f5a623,#e8910c);color:#000;border:none;cursor:pointer;transition:all .3s ease}
-        .pro-unlock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,.3)}
-        .pro-banner{border:1px solid rgba(245,166,35,.2);background:linear-gradient(135deg,rgba(245,166,35,.05),rgba(232,145,12,.02));padding:32px;text-align:center;margin-bottom:32px}
-        .pro-banner.hidden{display:none}
-        .pro-banner h3{font-size:1.1rem;font-weight:300;margin-bottom:8px}
-        .pro-banner p{font-size:.85rem;font-weight:300;color:var(--grey-400);margin-bottom:20px}
-        .pro-features-list{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px}
-        .pro-feature-tag{font-size:.65rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(245,166,35,.2);color:#f5a623}
-        .stream-list{display:flex;flex-direction:column;gap:16px;margin-bottom:16px}
-        .stream-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);position:relative}
-        .stream-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-        .stream-item-name{font-size:.85rem;font-weight:400;color:var(--white)}
-        .stream-remove{background:none;border:none;color:var(--grey-600);cursor:pointer;font-size:1.2rem;padding:4px 8px;transition:color .2s}
-        .stream-remove:hover{color:#ff4444}
-        .stream-fields{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-        .stream-field label{font-size:.65rem;margin-bottom:4px}
-        .stream-field input,.stream-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
-        .add-stream-btn{width:100%;padding:12px;font-family:var(--font);font-size:.75rem;font-weight:400;letter-spacing:.05em;text-transform:uppercase;background:transparent;color:var(--grey-500);border:1px dashed rgba(255,255,255,.1);cursor:pointer;transition:all .2s}
-        .add-stream-btn:hover{border-color:rgba(255,255,255,.3);color:var(--white)}
-        .expense-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-        .expense-item{padding:16px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
-        .expense-item label{display:flex;justify-content:space-between;font-size:.7rem;font-weight:300;color:var(--grey-400);margin-bottom:8px}
-        .expense-item input{width:100%;padding:8px 0;font-family:var(--font);font-size:.85rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
-        .hire-list{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
-        .hire-item{border:1px solid rgba(255,255,255,.06);padding:16px;background:rgba(255,255,255,.02);display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:12px;align-items:end}
-        .hire-field label{display:block;font-size:.65rem;font-weight:300;color:var(--grey-400);margin-bottom:4px}
-        .hire-field input,.hire-field select{width:100%;padding:8px 0;font-family:var(--font);font-size:.8rem;font-weight:300;color:var(--white);background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.08);outline:none}
-        .pnl-table-wrapper{overflow-x:auto;margin-top:16px}
-        .pnl-table{width:100%;border-collapse:collapse;font-size:.7rem;font-weight:300}
-        .pnl-table th{text-align:left;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.1);color:var(--grey-500);font-weight:400;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
-        .pnl-table td{padding:6px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--grey-300);white-space:nowrap;font-variant-numeric:tabular-nums}
-        .pnl-table .negative{color:#ff4444}.pnl-table .positive{color:#4ecdc4}.pnl-table .row-label{color:var(--grey-400);font-weight:400}
-        .action-bar{display:flex;gap:12px;justify-content:flex-end;margin-bottom:24px;flex-wrap:wrap}
-        .action-bar .btn{font-size:.7rem;padding:10px 20px}
-        .pro-active-badge{display:none;font-size:.6rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#4ecdc4;border:1px solid rgba(78,205,196,.3);padding:3px 8px}
-        body.pro-active .pro-active-badge{display:inline-block}
-        body.pro-active .pro-lock.locked .pro-lock-content{filter:none;pointer-events:all;user-select:auto}
-        body.pro-active .pro-lock.locked .pro-lock-overlay{display:none}
-        body.pro-active .pro-banner{display:none}
-        .fm-cta{text-align:center;padding:48px 32px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
-        .fm-cta h3{font-size:1.3rem;font-weight:300;margin-bottom:12px}
-        .fm-cta p{font-size:.9rem;font-weight:300;color:var(--grey-400);margin-bottom:24px;max-width:400px;margin-left:auto;margin-right:auto}
-        @media(max-width:968px){.calc-layout{grid-template-columns:1fr}.calc-panel{position:static}.metrics-row{grid-template-columns:1fr;gap:12px}.stream-fields{grid-template-columns:1fr}.expense-grid{grid-template-columns:1fr}.hire-item{grid-template-columns:1fr}}
-        /* Roadmap grid — hide connectors, style phases */
+        /* Startup page styles */
         .startup-roadmap .roadmap-connector{display:none}
         .startup-roadmap .roadmap-phase{border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);padding:28px 24px}
         @media(max-width:768px){.startup-roadmap{grid-template-columns:repeat(2,1fr) !important}}
@@ -472,122 +386,17 @@
 
 
 
-    <!-- FounderMath Section -->
-    <section id="foundermath" class="foundermath-section">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-label reveal">FounderMath</p>
-                <h2 class="section-title reveal">Will your startup<br><em>survive?</em></h2>
-                <p class="section-subtitle reveal">Move the sliders. See your future. The interactive reality check every founder needs before they spend a dollar.</p>
-            </div>
-
-            <div class="action-bar" id="action-bar">
-                <span class="pro-active-badge">Pro Unlocked</span>
-                <button class="btn btn-ghost" id="btn-save" title="Save model to browser">Save Model</button>
-                <button class="btn btn-ghost" id="btn-export-xlsx" style="display:none">Download Model (.xlsx)</button>
-                <button class="btn btn-ghost" id="btn-export-pdf" style="display:none">Export PDF</button>
-            </div>
-
-            <div class="calc-layout">
-                <div class="calc-panel">
-                    <p class="calc-panel-title">Your Numbers</p>
-                    <div class="calc-group">
-                        <label for="model-select">Business Model</label>
-                        <select id="model-select">
-                            <option value="saas">SaaS / Subscription</option>
-                            <option value="marketplace">Marketplace</option>
-                            <option value="ecommerce">E-Commerce</option>
-                            <option value="service">Service / Agency</option>
-                            <option value="freemium">Freemium / Ad-supported</option>
-                        </select>
-                    </div>
-                    <div class="calc-group"><label>Starting Capital <span class="calc-value" id="val-capital">$50,000</span></label><input type="range" id="slider-capital" min="1000" max="500000" value="50000" step="1000"></div>
-                    <div class="calc-group"><label>Monthly Costs <span class="calc-value" id="val-costs">$5,000</span></label><input type="range" id="slider-costs" min="500" max="100000" value="5000" step="500"></div>
-                    <div class="calc-group"><label>Price per Customer/mo <span class="calc-value" id="val-price">$29</span></label><input type="range" id="slider-price" min="1" max="500" value="29" step="1"></div>
-                    <div class="calc-group"><label>New Customers / Month <span class="calc-value" id="val-customers">20</span></label><input type="range" id="slider-customers" min="1" max="500" value="20" step="1"><div class="reality-check" id="rc-customers"></div></div>
-                    <div class="calc-group"><label>Monthly Churn Rate <span class="calc-value" id="val-churn">5%</span></label><input type="range" id="slider-churn" min="0" max="30" value="5" step="0.5"><div class="reality-check" id="rc-churn"></div></div>
-                    <div class="calc-group"><label>Conversion Rate <span class="calc-value" id="val-conversion">3%</span></label><input type="range" id="slider-conversion" min="0.5" max="30" value="3" step="0.5"><div class="reality-check" id="rc-conversion"></div></div>
-                    <div class="calc-group"><label>Projection Length <span class="calc-value" id="val-months">24 months</span></label><input type="range" id="slider-months" min="12" max="36" value="24" step="6"></div>
-                </div>
-
-                <div class="calc-results">
-                    <div class="result-card death-clock">
-                        <p class="death-verdict" id="death-verdict">Your Runway</p>
-                        <p class="death-months safe" id="death-months">-</p>
-                        <p class="death-label" id="death-label">months until lights out</p>
-                        <p class="death-subtitle" id="death-subtitle"></p>
-                    </div>
-                    <div class="metrics-row">
-                        <div class="metric"><span class="metric-number" id="m-breakeven">-</span><span class="metric-label">Months to Break-Even</span></div>
-                        <div class="metric"><span class="metric-number" id="m-customers-needed">-</span><span class="metric-label">Customers to Break-Even</span></div>
-                        <div class="metric"><span class="metric-number" id="m-burn">-</span><span class="metric-label">Monthly Burn Rate</span></div>
-                    </div>
-                    <div class="result-card"><div class="result-card-header"><span class="result-card-title">Revenue vs Costs</span></div><div class="chart-container"><canvas id="chart-revenue"></canvas></div></div>
-                    <div class="result-card"><div class="result-card-header"><span class="result-card-title">Cash Balance Over Time</span></div><div class="chart-container"><canvas id="chart-cash"></canvas></div></div>
-                    <div class="result-card"><div class="result-card-header"><span class="result-card-title">Customer Growth (with Churn)</span></div><div class="chart-container"><canvas id="chart-customers"></canvas></div></div>
-                </div>
-            </div>
-
-            <div class="pro-section">
-                <div class="pro-banner" id="pro-banner">
-                    <h3>Unlock the Full Financial Modeler <span class="pro-badge">PRO</span></h3>
-                    <p>Go beyond the basics - model multiple revenue streams, plan hiring, break down expenses, and export investor-ready reports.</p>
-                    <div class="pro-features-list">
-                        <span class="pro-feature-tag">Multiple Revenue Streams</span>
-                        <span class="pro-feature-tag">Expense Breakdown</span>
-                        <span class="pro-feature-tag">Hiring Timeline</span>
-                        <span class="pro-feature-tag">Sensitivity Analysis</span>
-                        <span class="pro-feature-tag">P&amp;L Summary</span>
-                        <span class="pro-feature-tag">PDF Export</span>
-                    </div>
-                    <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a>
-                </div>
-
-                <div class="pro-lock locked" id="pro-streams">
-                    <div class="pro-lock-overlay"><h4>Multiple Revenue Streams <span class="pro-badge">PRO</span></h4><p>Model different products, plans, and pricing tiers side by side.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
-                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Revenue Streams <span class="pro-badge">PRO</span></span></div>
-                    <div class="stream-list" id="stream-list">
-                        <div class="stream-item" data-stream="0"><div class="stream-item-header"><span class="stream-item-name">Stream 1: Basic Plan</span><button class="stream-remove" onclick="removeStream(0)">x</button></div><div class="stream-fields"><div class="stream-field"><label>Name</label><input type="text" value="Basic Plan" onchange="updateStreamName(0,this.value)"></div><div class="stream-field"><label>Price/mo</label><input type="number" value="19" data-field="price" onchange="calcPro()"></div><div class="stream-field"><label>New customers/mo</label><input type="number" value="15" data-field="customers" onchange="calcPro()"></div><div class="stream-field"><label>Monthly churn %</label><input type="number" value="5" data-field="churn" onchange="calcPro()" step="0.5"></div></div></div>
-                        <div class="stream-item" data-stream="1"><div class="stream-item-header"><span class="stream-item-name">Stream 2: Pro Plan</span><button class="stream-remove" onclick="removeStream(1)">x</button></div><div class="stream-fields"><div class="stream-field"><label>Name</label><input type="text" value="Pro Plan" onchange="updateStreamName(1,this.value)"></div><div class="stream-field"><label>Price/mo</label><input type="number" value="49" data-field="price" onchange="calcPro()"></div><div class="stream-field"><label>New customers/mo</label><input type="number" value="8" data-field="customers" onchange="calcPro()"></div><div class="stream-field"><label>Monthly churn %</label><input type="number" value="3" data-field="churn" onchange="calcPro()" step="0.5"></div></div></div>
-                    </div>
-                    <button class="add-stream-btn" onclick="addStream()">+ Add Revenue Stream</button></div></div>
-                </div>
-
-                <div class="pro-lock locked" id="pro-expenses">
-                    <div class="pro-lock-overlay"><h4>Expense Breakdown <span class="pro-badge">PRO</span></h4><p>Break down costs by category.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
-                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Monthly Expenses <span class="pro-badge">PRO</span></span></div>
-                    <div class="expense-grid" id="expense-grid">
-                        <div class="expense-item"><label>Team &amp; Salaries <span class="calc-value exp-val" id="exp-team-val">$3,000</span></label><input type="range" min="0" max="50000" value="3000" step="500" data-exp="team" oninput="calcPro()"></div>
-                        <div class="expense-item"><label>Marketing <span class="calc-value exp-val" id="exp-marketing-val">$1,000</span></label><input type="range" min="0" max="20000" value="1000" step="100" data-exp="marketing" oninput="calcPro()"></div>
-                        <div class="expense-item"><label>Tools &amp; Software <span class="calc-value exp-val" id="exp-tools-val">$500</span></label><input type="range" min="0" max="5000" value="500" step="50" data-exp="tools" oninput="calcPro()"></div>
-                        <div class="expense-item"><label>Operations <span class="calc-value exp-val" id="exp-ops-val">$300</span></label><input type="range" min="0" max="10000" value="300" step="100" data-exp="ops" oninput="calcPro()"></div>
-                        <div class="expense-item"><label>Office / Rent <span class="calc-value exp-val" id="exp-rent-val">$0</span></label><input type="range" min="0" max="10000" value="0" step="100" data-exp="rent" oninput="calcPro()"></div>
-                        <div class="expense-item"><label>Other <span class="calc-value exp-val" id="exp-other-val">$200</span></label><input type="range" min="0" max="10000" value="200" step="100" data-exp="other" oninput="calcPro()"></div>
-                    </div>
-                    <div style="margin-top:16px;text-align:right;font-size:.85rem;color:var(--grey-400)">Total: <strong id="exp-total" style="color:var(--white)">$5,000</strong>/mo</div></div></div>
-                </div>
-
-                <div class="pro-lock locked" id="pro-hiring">
-                    <div class="pro-lock-overlay"><h4>Hiring Timeline <span class="pro-badge">PRO</span></h4><p>Plan when to hire and see the impact on your runway.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
-                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Hiring Plan <span class="pro-badge">PRO</span></span></div>
-                    <div class="hire-list" id="hire-list"><div class="hire-item" data-hire="0"><div class="hire-field"><label>Role</label><input type="text" value="Developer" data-h="role" onchange="calcPro()"></div><div class="hire-field"><label>Monthly Salary</label><input type="number" value="6000" data-h="salary" onchange="calcPro()"></div><div class="hire-field"><label>Start Month</label><input type="number" value="4" min="1" max="36" data-h="month" onchange="calcPro()"></div><button class="stream-remove" onclick="removeHire(0)">x</button></div></div>
-                    <button class="add-stream-btn" onclick="addHire()">+ Add Hire</button></div></div>
-                </div>
-
-                <div class="pro-lock locked" id="pro-sensitivity">
-                    <div class="pro-lock-overlay"><h4>Sensitivity Analysis <span class="pro-badge">PRO</span></h4><p>Best-case and worst-case scenarios side by side.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
-                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Sensitivity Analysis <span class="pro-badge">PRO</span></span></div><div class="chart-container" style="height:350px"><canvas id="chart-sensitivity"></canvas></div></div></div>
-                </div>
-
-                <div class="pro-lock locked" id="pro-pnl">
-                    <div class="pro-lock-overlay"><h4>P&amp;L Summary Table <span class="pro-badge">PRO</span></h4><p>Month-by-month profit &amp; loss - investor-ready.</p><a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" class="pro-unlock-btn">Unlock Pro - $29</a></div>
-                    <div class="pro-lock-content"><div class="result-card"><div class="result-card-header"><span class="result-card-title">Profit &amp; Loss Summary <span class="pro-badge">PRO</span></span></div><div class="pnl-table-wrapper"><table class="pnl-table" id="pnl-table"></table></div></div></div>
-                </div>
-            </div>
+    <!-- FounderMath lives at calculator.html (Tools nav link) -->
+    <section id="foundermath" class="section" style="padding:80px 0;text-align:center;">
+        <div class="container reveal">
+            <p class="section-label">Free Tool</p>
+            <h2 class="section-title" style="margin-bottom:16px;">Will your startup survive?</h2>
+            <p class="section-subtitle" style="margin-bottom:40px;">Move the sliders, see your runway, and stress-test your numbers before you spend a dollar.</p>
+            <a href="calculator.html" class="btn btn-primary">Open FounderMath →</a>
         </div>
     </section>
 
-    <!-- Startup Contact Form -->
+        <!-- Startup Contact Form -->
     <section id="contact" class="section contact-section">
         <div class="container">
 
@@ -850,81 +659,7 @@
     <script src="js/particles.js"></script>
     <script src="js/main.js"></script>
     <script>
-    /* ── FounderMath Calculator ───────────────────────────────────────── */
-    (function(){
-        'use strict';
-        let isPro=false;
-        function checkPro(){const params=new URLSearchParams(window.location.search);if(params.get('pro')==='true'){localStorage.setItem('coastline_pro','true');window.history.replaceState({},'',window.location.pathname)}isPro=localStorage.getItem('coastline_pro')==='true';if(isPro){document.body.classList.add('pro-active');document.getElementById('btn-export-xlsx').style.display='';document.getElementById('btn-export-pdf').style.display='';}}
-        checkPro();
-        const benchmarks={saas:{churn:{low:3,avg:5,high:8,warning:'Average B2B SaaS monthly churn is 3-8%.'},conversion:{low:2,avg:5,high:8,warning:'Average SaaS free-to-paid conversion is 2-8%.'},customers:{first_year_avg:15,warning:'Most SaaS startups acquire 10-20 customers/month in year 1.'}},marketplace:{churn:{low:5,avg:8,high:15,warning:'Average marketplace churn is 5-15%.'},conversion:{low:1,avg:3,high:6,warning:'Average marketplace conversion is 1-6%.'},customers:{first_year_avg:25,warning:'Most marketplaces acquire 15-40 new users/month early on.'}},ecommerce:{churn:{low:7,avg:10,high:20,warning:'Average e-commerce churn is 7-20%/month.'},conversion:{low:1.5,avg:3,high:5,warning:'Average e-commerce conversion is 1.5-5%.'},customers:{first_year_avg:30,warning:'Most e-commerce startups get 20-50 orders/month in year 1.'}},service:{churn:{low:2,avg:5,high:10,warning:'Average service churn is 2-10%/month.'},conversion:{low:5,avg:10,high:20,warning:'Average service conversion is 5-20%.'},customers:{first_year_avg:5,warning:'Most agencies land 3-8 new clients/month in year 1.'}},freemium:{churn:{low:5,avg:10,high:20,warning:'Average freemium paid churn is 5-20%/month.'},conversion:{low:1,avg:2.5,high:5,warning:'Average freemium conversion is 1-5%.'},customers:{first_year_avg:10,warning:'Most freemium products convert 5-15 paying users/month early.'}}};
-        const S={capital:document.getElementById('slider-capital'),costs:document.getElementById('slider-costs'),price:document.getElementById('slider-price'),customers:document.getElementById('slider-customers'),churn:document.getElementById('slider-churn'),conversion:document.getElementById('slider-conversion'),months:document.getElementById('slider-months')};
-        const V={capital:document.getElementById('val-capital'),costs:document.getElementById('val-costs'),price:document.getElementById('val-price'),customers:document.getElementById('val-customers'),churn:document.getElementById('val-churn'),conversion:document.getElementById('val-conversion'),months:document.getElementById('val-months')};
-        const modelSelect=document.getElementById('model-select');
-        const fmt=n=>'$'+n.toLocaleString('en-US');
-        const fmtK=n=>n>=1000000?'$'+(n/1000000).toFixed(1)+'M':n>=1000?'$'+(n/1000).toFixed(n>=10000?0:1)+'k':'$'+n.toLocaleString('en-US');
-        const C={white:'rgba(255,255,255,.9)',green:'rgba(78,205,196,.8)',greenF:'rgba(78,205,196,.1)',red:'rgba(255,68,68,.8)',redF:'rgba(255,68,68,.1)'};
-        const cOpts={responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:true,labels:{color:'rgba(255,255,255,.5)',font:{family:'Inter',size:11,weight:300},boxWidth:12,padding:16}},tooltip:{backgroundColor:'rgba(0,0,0,.85)',titleFont:{family:'Inter',weight:400},bodyFont:{family:'Inter',weight:300},borderColor:'rgba(255,255,255,.1)',borderWidth:1,padding:12}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(255,255,255,.3)',font:{family:'Inter',size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'rgba(255,255,255,.3)',font:{family:'Inter',size:10},callback:function(v){return fmtK(v)}}}}};
-        let monthLabels=[];
-        function makeLabels(n){return Array.from({length:n},(_,i)=>'M'+(i+1))}
-        const revChart=new Chart(document.getElementById('chart-revenue'),{type:'line',data:{labels:[],datasets:[{label:'Revenue',data:[],borderColor:C.green,backgroundColor:C.greenF,fill:true,tension:.3,borderWidth:2,pointRadius:0},{label:'Costs',data:[],borderColor:C.red,backgroundColor:C.redF,fill:true,tension:0,borderWidth:2,pointRadius:0,borderDash:[6,4]}]},options:cOpts});
-        const cashOpts=JSON.parse(JSON.stringify(cOpts));cashOpts.plugins.legend={display:false};
-        const cashChart=new Chart(document.getElementById('chart-cash'),{type:'line',data:{labels:[],datasets:[{label:'Cash',data:[],borderColor:C.green,backgroundColor:C.greenF,fill:true,tension:.3,borderWidth:2,pointRadius:0}]},options:cashOpts});
-        const custOpts=JSON.parse(JSON.stringify(cOpts));custOpts.scales.y.ticks.callback=function(v){return v};
-        const custChart=new Chart(document.getElementById('chart-customers'),{type:'line',data:{labels:[],datasets:[{label:'Active Customers',data:[],borderColor:C.white,backgroundColor:'rgba(255,255,255,.05)',fill:true,tension:.3,borderWidth:2,pointRadius:0}]},options:custOpts});
-        const sensChart=new Chart(document.getElementById('chart-sensitivity'),{type:'line',data:{labels:[],datasets:[{label:'Optimistic (+50%)',data:[],borderColor:C.green,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0,borderDash:[4,4]},{label:'Base Case',data:[],borderColor:C.white,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0},{label:'Pessimistic (-50%)',data:[],borderColor:C.red,backgroundColor:'transparent',tension:.3,borderWidth:2,pointRadius:0,borderDash:[4,4]}]},options:cOpts});
-        function calculate(){
-            const capital=+S.capital.value,costs=+S.costs.value,price=+S.price.value,newCust=+S.customers.value,churn=+S.churn.value/100,numMonths=+S.months.value,model=modelSelect.value;
-            V.capital.textContent=fmt(capital);V.costs.textContent=fmt(costs);V.price.textContent='$'+S.price.value;V.customers.textContent=newCust;V.churn.textContent=S.churn.value+'%';V.conversion.textContent=S.conversion.value+'%';V.months.textContent=numMonths+' months';
-            checkReality(model,newCust,+S.churn.value,+S.conversion.value);
-            monthLabels=makeLabels(numMonths);
-            let cash=capital,customers=0;
-            const revD=[],costD=[],cashD=[],custD=[];
-            let breakEven=null,death=null;
-            let cashOpt=capital,cashPes=capital,custOpt=0,custPes=0;
-            const cashOptD=[],cashPesD=[];
-            for(let m=0;m<numMonths;m++){
-                customers+=newCust;customers-=customers*churn;customers=Math.max(0,customers);
-                const rev=customers*price,net=rev-costs;cash+=net;
-                revD.push(Math.round(rev));costD.push(costs);cashD.push(Math.round(cash));custD.push(Math.round(customers));
-                if(!breakEven&&rev>=costs)breakEven=m+1;
-                if(!death&&cash<=0)death=m+1;
-                custOpt+=newCust*1.5;custOpt-=custOpt*churn;custOpt=Math.max(0,custOpt);cashOpt+=(custOpt*price)-costs;cashOptD.push(Math.round(cashOpt));
-                custPes+=newCust*0.5;custPes-=custPes*churn;custPes=Math.max(0,custPes);cashPes+=(custPes*price)-costs;cashPesD.push(Math.round(cashPes));
-            }
-            const custNeeded=Math.ceil(costs/price);
-            const dm=document.getElementById('death-months'),dl=document.getElementById('death-label'),dv=document.getElementById('death-verdict'),ds=document.getElementById('death-subtitle');
-            if(death){dm.textContent=death;dm.className='death-months '+(death<=6?'danger':death<=12?'warning':'safe');dl.textContent='months until you run out of money';dv.textContent=death<=6?'Critical Risk':death<=12?'Tight Runway':'Your Runway';ds.textContent=death<=6?'Cut costs, raise prices, or find funding - fast.':death<=12?'Limited time. Focus on revenue acceleration.':'Some breathing room, but watch burn rate.'}
-            else{dm.textContent='';dm.className='death-months profit';dl.textContent='you reach profitability';dv.textContent='Sustainable';ds.textContent=breakEven?'Break even at month '+breakEven+'. These numbers work.':'Revenue covers costs early. Strong position.'}
-            document.getElementById('m-breakeven').textContent=breakEven?breakEven+' mo':numMonths+'+';
-            document.getElementById('m-customers-needed').textContent=custNeeded.toLocaleString();
-            document.getElementById('m-burn').textContent=fmtK(costs);
-            [revChart,cashChart,custChart,sensChart].forEach(c=>{c.data.labels=monthLabels});
-            revChart.data.datasets[0].data=revD;revChart.data.datasets[1].data=costD;revChart.update('none');
-            cashChart.data.datasets[0].data=cashD;cashChart.update('none');
-            custChart.data.datasets[0].data=custD;custChart.update('none');
-            sensChart.data.datasets[0].data=cashOptD;sensChart.data.datasets[1].data=cashD;sensChart.data.datasets[2].data=cashPesD;sensChart.update('none');
-            buildPnL(revD,costD,cashD,custD);
-        }
-        function checkReality(model,customers,churn,conversion){const b=benchmarks[model];if(!b)return;const rc=document.getElementById('rc-churn'),rcv=document.getElementById('rc-conversion'),rcc=document.getElementById('rc-customers');if(churn<b.churn.low||churn>b.churn.high){rc.textContent=b.churn.warning;rc.classList.add('visible')}else{rc.classList.remove('visible')}if(conversion>b.conversion.high){rcv.textContent=b.conversion.warning;rcv.classList.add('visible')}else{rcv.classList.remove('visible')}if(customers>b.customers.first_year_avg*3){rcc.textContent=b.customers.warning+' Your input of '+customers+'/mo is significantly above average.';rcc.classList.add('visible')}else{rcc.classList.remove('visible')}}
-        function buildPnL(revD,costD,cashD,custD){const t=document.getElementById('pnl-table');let html='<thead><tr><th>Quarter</th><th>Revenue</th><th>Costs</th><th>Net</th><th>Cash</th><th>Customers</th></tr></thead><tbody>';const n=revD.length;for(let q=0;q<Math.ceil(n/3);q++){const m=Math.min((q+1)*3-1,n-1);const rev=revD[m],cost=costD[m],net=rev-cost,cash=cashD[m],cust=custD[m];html+='<tr><td class="row-label">Q'+(q+1)+'</td><td>'+fmtK(rev)+'</td><td>'+fmtK(cost)+'</td><td class="'+(net>=0?'positive':'negative')+'">'+fmtK(net)+'</td><td class="'+(cash>=0?'positive':'negative')+'">'+fmtK(cash)+'</td><td>'+cust.toLocaleString()+'</td></tr>'}html+='</tbody>';t.innerHTML=html}
-        let streamCount=2;
-        window.addStream=function(){streamCount++;const list=document.getElementById('stream-list');const div=document.createElement('div');div.className='stream-item';div.setAttribute('data-stream',streamCount-1);div.innerHTML='<div class="stream-item-header"><span class="stream-item-name">Stream '+streamCount+'</span><button class="stream-remove" onclick="removeStream('+(streamCount-1)+')">x</button></div><div class="stream-fields"><div class="stream-field"><label>Name</label><input type="text" value="Stream '+streamCount+'" onchange="updateStreamName('+(streamCount-1)+',this.value)"></div><div class="stream-field"><label>Price/mo</label><input type="number" value="29" data-field="price" onchange="calcPro()"></div><div class="stream-field"><label>New customers/mo</label><input type="number" value="10" data-field="customers" onchange="calcPro()"></div><div class="stream-field"><label>Monthly churn %</label><input type="number" value="5" data-field="churn" onchange="calcPro()" step="0.5"></div></div>';list.appendChild(div);calcPro()};
-        window.removeStream=function(i){const el=document.querySelector('.stream-item[data-stream="'+i+'"]');if(el)el.remove();calcPro()};
-        window.updateStreamName=function(i,name){const el=document.querySelector('.stream-item[data-stream="'+i+'"] .stream-item-name');if(el)el.textContent=name};
-        let hireCount=1;
-        window.addHire=function(){hireCount++;const list=document.getElementById('hire-list');const div=document.createElement('div');div.className='hire-item';div.setAttribute('data-hire',hireCount-1);div.innerHTML='<div class="hire-field"><label>Role</label><input type="text" value="New Hire" data-h="role" onchange="calcPro()"></div><div class="hire-field"><label>Monthly Salary</label><input type="number" value="5000" data-h="salary" onchange="calcPro()"></div><div class="hire-field"><label>Start Month</label><input type="number" value="6" min="1" max="36" data-h="month" onchange="calcPro()"></div><button class="stream-remove" onclick="removeHire('+(hireCount-1)+')">x</button>';list.appendChild(div);calcPro()};
-        window.removeHire=function(i){const el=document.querySelector('.hire-item[data-hire="'+i+'"]');if(el)el.remove();calcPro()};
-        window.calcPro=function(){document.querySelectorAll('[data-exp]').forEach(s=>{const key=s.getAttribute('data-exp');const valEl=document.getElementById('exp-'+key+'-val');if(valEl)valEl.textContent=fmt(+s.value)});const total=[...document.querySelectorAll('[data-exp]')].reduce((a,s)=>a+(+s.value),0);document.getElementById('exp-total').textContent=fmt(total)+' ';calculate()};
-        document.getElementById('btn-save').addEventListener('click',()=>{const data={};Object.keys(S).forEach(k=>data[k]=S[k].value);data.model=modelSelect.value;localStorage.setItem('coastline_model',JSON.stringify(data));const btn=document.getElementById('btn-save');btn.textContent='Saved!';setTimeout(()=>btn.textContent='Save Model',2000)});
-        function loadModel(){const raw=localStorage.getItem('coastline_model');if(!raw)return;try{const data=JSON.parse(raw);Object.keys(S).forEach(k=>{if(data[k])S[k].value=data[k]});if(data.model)modelSelect.value=data.model}catch(e){}}
-        loadModel();
-        Object.keys(S).forEach(k=>S[k].addEventListener('input',calculate));
-        modelSelect.addEventListener('change',calculate);
-        calculate();
-    })();
-
-    /* ── Startup Page JavaScript ──────────────────────────────────────── */
-    (function () {
+        (function () {
         'use strict';
 
         const navbar = document.getElementById('navbar');
