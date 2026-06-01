@@ -18,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -575,9 +576,12 @@
             <span class="fm-report-feature">Ranked risk & opportunity analysis</span>
             <span class="fm-report-feature">Coastline-branded PDF</span>
         </div>
-        <a href="https://buy.stripe.com/YOUR_STRIPE_19_LINK" target="_blank" rel="noopener" class="btn btn-primary reveal" id="paid-report-btn">
-            Get Investor Report — $19
-        </a>
+        <div class="reveal" style="max-width:700px;margin:0 auto;">
+            <stripe-pricing-table
+                pricing-table-id="prctbl_1TdM1KGY50i6mP3mgBMmKcJU"
+                publishable-key="pk_live_51TAlSBGY50i6mP3mn6Ie7bMcJc3pfRBwxmpuRDIJBC7M1KrCL5SlqhCD12lr5VNbVVlzi7dQQUdHcggdaYoYzY5u00N0ZuV9kJ">
+            </stripe-pricing-table>
+        </div>
         <p class="reveal" style="font-size:0.72rem;color:var(--grey-600);margin-top:16px;">One-time payment. Instant download. Formatted for angel and seed-stage pitches.</p>
     </div>
 </section>
