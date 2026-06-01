@@ -206,9 +206,16 @@ function buildUserEmail({ firstName, score, grade, runway, ltvcac, mrr, arr, chu
 
         <!-- Report upsell -->
         <tr>
-          <td style="padding:24px;background-color:#080808;border-bottom:1px solid #111111;">
-            <p style="margin:0 0 8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:13px;color:#555555;line-height:1.6;">Want an investor-ready PDF? The full FounderMath report includes benchmarks with sources, month-by-month projections, and recommendations formatted for pitch decks.</p>
-            <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:12px;color:#888888;text-decoration:underline;">Get the Full Report &mdash; $29 &rarr;</a>
+          <td style="padding:32px 24px;background-color:#080808;border-bottom:1px solid #111111;">
+            <p style="margin:0 0 8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#555555;">Investor-Ready Report</p>
+            <p style="margin:0 0 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:14px;color:#888888;line-height:1.6;">Full benchmarks, month-by-month projections, and pitch-deck-ready formatting. One-time payment.</p>
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="background-color:#ffffff;">
+                  <a href="https://buy.stripe.com/3cIfZhcuh4lt1lY03l9k400" style="display:inline-block;padding:14px 28px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#000000;text-decoration:none;">Get Full Report &mdash; $29 &rarr;</a>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
 
