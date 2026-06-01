@@ -418,48 +418,7 @@
     </footer>
 
     <script src="js/particles.js"></script>
-    <script>
-    (function () {
-        'use strict';
-        const navbar = document.getElementById('navbar');
-        const navToggle = document.getElementById('nav-toggle');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
-        function handleNavScroll() { navbar.classList.toggle('scrolled', window.scrollY > 50); }
-        window.addEventListener('scroll', handleNavScroll, { passive: true });
-        handleNavScroll();
-        if (navToggle && mobileOverlay) {
-            navToggle.addEventListener('click', () => {
-                navToggle.classList.toggle('active');
-                mobileOverlay.classList.toggle('active');
-                document.body.style.overflow = mobileOverlay.classList.contains('active') ? 'hidden' : '';
-            });
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navToggle.classList.remove('active');
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-        }
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-        revealElements.forEach(el => revealObserver.observe(el));
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) { const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 60; window.scrollTo({ top: offsetTop, behavior: 'smooth' }); }
-            });
-        });
-    })();
-    </script>
+    <script src="js/main.js"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d2147c4ae8ae47f4beb1e48d9e895a31"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

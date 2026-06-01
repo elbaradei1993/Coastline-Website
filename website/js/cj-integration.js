@@ -2,6 +2,8 @@
 (function () {
     'use strict';
 
+    // SECURITY: This token should be moved to a server-side proxy (e.g. a Cloudflare Worker)
+    // before production. Client-side API tokens are publicly visible in the browser.
     const CJ_API = {
         baseUrl: 'https://developers.cjdropshipping.com/api2.0/v1',
         accessToken: '0580277abfe24bcc9fccdc3ede57d334',
@@ -42,6 +44,7 @@
             console.log('✅ CJ Products loaded:', productList.length);
             
             const grid = document.querySelector('#cj-products .services-grid');
+            if (!grid) return;
             grid.innerHTML = productList.map(renderProductCard).join('');
             
             // Re-initialize scroll animations

@@ -98,8 +98,8 @@ class ShoppingCart {
             container.innerHTML = `
                 <div class="empty-cart">
                     <h2>Your cart is empty</h2>
-                    <p style="color: var(--grey-400); margin-bottom: 32px;">Browse our toolkit to find products you need.</p>
-                    <a href="toolkit.html" class="btn btn-primary">Browse Products</a>
+                    <p style="color: var(--grey-400); margin-bottom: 32px;">Browse our services to find what you need.</p>
+                    <a href="index.html" class="btn btn-primary">Back to Home</a>
                 </div>
             `;
             return;
@@ -151,21 +151,17 @@ class ShoppingCart {
     }
 
     checkoutWithAmazon() {
-        // Build Amazon cart URL with all items
-        // This uses Amazon's official Add to Cart link format
         const asins = this.cart.map(item => item.asin).filter(asin => asin);
-        
-        if (asins.length > 0) {
-            // For multiple ASINs we can use Amazon bulk add
-            window.open(`https://www.amazon.com/gp/aws/cart/add.html?ASIN.1=${asins.join('&ASIN.2=')}&Quantity.1=1`, '_blank');
-        } else {
-            // Fallback: open toolkit page
-            window.location.href = 'toolkit.html';
-        }
 
-        // Clear cart after checkout
-        this.cart = [];
-        this.saveCart();
+        if (asins.length > 0) {
+            const params = asins.map((asin, i) =>
+                `ASIN.${i + 1}=${encodeURIComponent(asin)}&Quantity.${i + 1}=1`
+            ).join('&');
+            window.open(`https://www.amazon.com/gp/aws/cart/add.html?${params}`, '_blank');
+        } else {
+            window.location.href = 'index.html';
+        }
+        // Cart preserved in case user doesn't complete the Amazon purchase
     }
 
     init() {
@@ -206,7 +202,7 @@ class ShoppingCart {
 
     setupProductButtons() {
         // Only run on toolkit page
-        if (!window.location.pathname.includes('toolkit.html')) return;
+        if (!window.location.pathname.includes('checkout.html')) return;
 
         document.querySelectorAll('.service-card').forEach(card => {
             const titleElement = card.querySelector('h3');
@@ -271,3 +267,4 @@ style.textContent = `
         to { transform: translateX(0); opacity: 1; }
     }
 `;
+document.head.appendChild(style);
