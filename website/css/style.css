@@ -2096,3 +2096,64 @@ body {
         display: none;
     }
 }
+
+/* ── Business Training note (homepage) ────────────────────────────── */
+.training-note {
+    --coast: #7fb4c4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin-top: 48px;
+    padding: 32px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-left: 2px solid var(--coast);
+    background: rgba(255, 255, 255, 0.02);
+    transition: var(--transition);
+}
+
+.training-note:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    border-left-color: var(--coast);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.training-note-body { max-width: 640px; }
+
+.training-note-pill {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 4px 12px;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--coast);
+    border: 1px solid rgba(127, 180, 196, 0.4);
+    border-radius: 999px;
+}
+
+.training-note h3 {
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.training-note p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--grey-400);
+    line-height: 1.7;
+}
+
+.training-note .btn { flex-shrink: 0; }
+
+@media (max-width: 768px) {
+    .training-note {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px 24px;
+    }
+}
+
