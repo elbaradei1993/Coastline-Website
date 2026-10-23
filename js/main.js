@@ -520,17 +520,17 @@
 
             // Formspree enhancements: actionable email subject + reply-to
             const serviceLabels = {
-                'training': 'Business Training',
-                'consultancy': 'Business Consultancy',
+                'training': 'Team Training (on demand)',
+                'consultancy': 'Operations Review',
                 'startup': 'Startup Launchpad',
-                'digital-solutions': 'Digital Solutions',
+                'digital-solutions': 'Digital Systems',
                 'general': 'General Inquiry'
             };
             const serviceLabel = serviceLabels[selectedPillar] || selectedPillar;
             const companyEl = form.querySelector('[name="company"]');
             const emailEl = form.querySelector('[name="email"]');
             const companyVal = companyEl && companyEl.value ? companyEl.value : 'Unknown Company';
-            formData.append('_subject', `Strategic Audit Request: ${serviceLabel} — ${companyVal}`);
+            formData.append('_subject', `New Enquiry: ${serviceLabel} — ${companyVal}`);
             if (emailEl && emailEl.value) {
                 formData.append('_replyto', emailEl.value);
             }
