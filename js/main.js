@@ -520,7 +520,7 @@
 
             // Formspree enhancements: actionable email subject + reply-to
             const serviceLabels = {
-                'training': 'Team Training (on demand)',
+                'training': 'Business Training',
                 'consultancy': 'Operations Review',
                 'startup': 'Startup Launchpad',
                 'digital-solutions': 'Digital Systems',
